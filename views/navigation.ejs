@@ -1,0 +1,46 @@
+<script src="javascripts/utils.js"></script>
+<script>
+    $('#navigation_bar_items').ready(function () {
+        // Create li element by user 
+        (async function () {
+            let navigation_bar_items = document.getElementById('navigation_bar_items');
+            let currentUser = localStorage.getItem('username');
+            let response = await fetchData('/navigation/data');
+            let items = await response.json();
+            items.forEach(function (item, index) {
+                let li = document.createElement('li');
+                li.className = 'nav-item';
+                let a = document.createElement('a');
+                a.id = item.id;
+                a.className = 'nav-link';
+                a.ariaCurrent = 'page';
+                a.href = item.href;
+                a.url = item.url;
+                a.innerText = item.text;
+
+                // Add user name for load users file 
+                if (item.id == 'users') {
+                    item.url = item.url + '?username=' + localStorage.getItem('username');
+                }
+
+                // Load the view inside body div by attribute 'url' on each nav bar item link
+                a.onclick = function (event) {
+                    $('li a').removeClass('active');
+                    $(this).addClass('active');
+                    $('#body').load(item.url);
+                }
+
+                // Reload handle - load body by the hash in location
+                if (location.hash == item.href) {
+                    a.className = 'nav-link active';
+                    $('#body').load(item.url);
+                }
+
+                li.appendChild(a);
+                navigation_bar_items.appendChild(li);
+            });
+        })();
+    });
+</script>
+
+<ul id="navigation_bar_items" class="navbar-nav mb-2 mb-lg-0"></ul>

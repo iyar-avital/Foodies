@@ -1,11 +1,142 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" />
+  <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css?a=1" />
+  <script src="javascripts/login.js"></script>
+  <script src="javascripts/logout.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Load navigation 
+      $('#navigation_bar').load('/navigation');
+
+      // Load initial body
+      if (!location.hash) {
+        $('#body').load('/about_us');
+      }
+
+      // Initialization login - logout button
+      if (localStorage.getItem('logedin') == 'true') {
+        $('#login_logout_btn').text('Log Out');
+        $('#login_logout_btn').click(logout);
+      } else {
+        $('#login_logout_btn').text('Log In');
+        $('#login_logout_btn').attr('data-bs-toggle', 'modal');
+        $('#login_logout_btn').attr('data-bs-target', '#logInForm');
+        $('#login_logout_btn').attr('data-backdrop', 'static');
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- logo -->
+        <img src="images/logo.png" class="img-fluid">
+
+        <!-- menu -->
+        <div id="navigation_bar" class="me-auto"></div>
+
+        <!-- Login - Logout button -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <button id="login_logout_btn" class="btn custom-outlined-btn"></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Body -->
+  <div id="body"></div>
+
+  <!-- Login modal -->
+  <div class="modal fade" id="logInForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa
+                fa-unlock-alt"></i> Log In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form">
+            <div class="mb-3">
+              <label class="form-label">Email Address</label>
+              <input id="username" type="text" class="form-control" name="username" placeholder="Username" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input id="password" type="password" class="form-control" name="password" placeholder="Password" />
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button type="submit" onclick="login()" class="btn custom-btn">
+                Log In
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Loading modal -->
+<div class="modal" id="loadingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="loadingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" id="loadingBackdrop2">
+    <div class="spinner-border text-dark"></div>
+  </div>
+</div>
+
+<!-- Success modal -->
+<div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="successModalLabel">Success</h5>
+        <i class="fas fa-check-circle text-success"></i>
+      </div>
+      <div class="modal-body">
+        Successfuly preforming the action. <br />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error modal -->
+<div class="modal fade" id="errorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="errorModalLabel">Error</h5>
+        <i class="fas fa-exclamation-circle text-danger"></i>
+      </div>
+      <div class="modal-body">
+        Problem preforming the action. <br />
+        Please refresh and after try again.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" onclick="location.reload();"">
+          Refresh
+          <i class=" fas fa-refresh"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+
 </html>

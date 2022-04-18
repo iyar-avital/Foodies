@@ -1,0 +1,37 @@
+<script src="javascripts/utils.js"></script>
+<script>
+    $('#flowers_cards_div').ready(function () {
+        (async function () {
+            let flowers_cards = document.getElementById('flowers_cards_div');
+            let response = await fetchData('/flowers/data');
+            let flowers = await response.json();
+            flowers.forEach(function (flower, index) {
+                let columnDiv = document.createElement('div');
+                columnDiv.className = 'col';
+                let cardDiv = document.createElement('div');
+                cardDiv.className = 'card text-center h-300';
+                let image = document.createElement('img');
+                image.setAttribute('src', 'images/' + flower.image);
+                image.className = 'card-img-top';
+                let bodyDiv = document.createElement('div');
+                let name = document.createElement('h5');
+                name.className = 'card-title custom-header';
+                name.innerText = flower.name;
+                let price = document.createElement('p');
+                price.innerText = flower.price + '$';
+                price.className = 'custom-btn w-150 mx-auto';
+                let color = document.createElement('span');
+                color.className = 'dot';
+                color.style = 'background-color:' + flower.color;
+
+                bodyDiv.append(name, price, color);
+                cardDiv.append(image, bodyDiv);
+                columnDiv.appendChild(cardDiv);
+                flowers_cards.appendChild(columnDiv);
+            });
+        })();
+    });
+</script>
+
+<div id="flowers_cards_div" class="row row-cols-1 row-cols-md-5 g-4 mx-auto">
+</div>

@@ -7,7 +7,7 @@ const timeout = require("./timeout");
     try {
         users = await User.REQUEST();
         //console.dir(users, { showHidden: true, colors: true });
-        console.log(users);
+        return users;
     } catch (err) { debug(`Failed: ${err}`) }
 
     await timeout(1000);

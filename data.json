@@ -1,0 +1,186 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "iyar.av",
+      "password": "iyar.av.pass",
+      "role": "manager"
+    },
+    {
+      "id": "2",
+      "username": "rivka.zi",
+      "password": "rivka.zi.pass",
+      "role": "manager"
+    },
+    {
+      "id": "3",
+      "username": "georgeKim",
+      "password": "georgeTheBest1",
+      "role": "employee"
+    },
+    {
+      "id": "4",
+      "username": "marta-lol",
+      "password": "martt30495",
+      "role": "employee"
+    },
+    {
+      "id": "5",
+      "username": "dylen",
+      "password": "de09K",
+      "role": "employee"
+    },
+    {
+      "id": "6",
+      "username": "Mike",
+      "password": "mike40",
+      "role": "client"
+    },
+    {
+      "id": "7",
+      "username": "Harvey",
+      "password": "harvey5",
+      "role": "client"
+    },
+    {
+      "id": "8",
+      "username": "Gabriel",
+      "password": "gabriel3",
+      "role": "client"
+    },
+    {
+      "id": "9",
+      "username": "Patrick",
+      "password": "patrick80",
+      "role": "client"
+    },
+    {
+      "id": "10",
+      "username": "Donna",
+      "password": "donna4",
+      "role": "client"
+    }
+  ],
+  "flowers": [
+    {
+      "name": "Carnation",
+      "color": "White",
+      "image": "carnation.jpg",
+      "price": "2.21"
+    },
+    {
+      "name": "Gypsophila",
+      "color": "White",
+      "image": "gypsophila.jpg",
+      "price": "14.79"
+    },
+    {
+      "name": "Tulip",
+      "color": "Pink",
+      "image": "tulip.jpg",
+      "price": "26.33"
+    },
+    {
+      "name": "Hydrangea",
+      "color": "Pink",
+      "image": "hydrangea.jpg",
+      "price": "4.9"
+    },
+    {
+      "name": "Rose",
+      "color": "Red",
+      "image": "rose.jpg",
+      "price": "4.6"
+    },
+    {
+      "name": "Alstroemeria",
+      "color": "Orange",
+      "image": "alstroemeria.jpg",
+      "price": "19.88"
+    },
+    {
+      "name": "Vyking Mum",
+      "color": "Yellow",
+      "image": "vyking_mum.jpg",
+      "price": "15.1"
+    },
+    {
+      "name": "Cushion Pompon",
+      "color": "Yellow",
+      "image": "cushion_pompon.jpg",
+      "price": "13.4"
+    },
+    {
+      "name": "Pompon Button",
+      "color": "Green",
+      "image": "pompon_button.jpg",
+      "price": "11.54"
+    },
+    {
+      "name": "Cornflower",
+      "color": "Blue",
+      "image": "cornflower.jpg",
+      "price": "18.8"
+    },
+    {
+      "name": "Eryngium",
+      "color": "Blue",
+      "image": "eryngium.jpg",
+      "price": "24.49"
+    },
+    {
+      "name": "Statice",
+      "color": "Purple",
+      "image": "statice.jpg",
+      "price": "15.53"
+    },
+    {
+      "name": "Aster",
+      "color": "Purple",
+      "image": "aster.jpg",
+      "price": "21.52"
+    },
+    {
+      "name": "Iris",
+      "color": "Purple",
+      "image": "iris.jpg",
+      "price": "22.65"
+    },
+    {
+      "name": "Dianthus",
+      "color": "Purple",
+      "image": "dianthus.jpg",
+      "price": "17.82"
+    },
+    {
+      "name": "Ranunculus",
+      "color": "Purple",
+      "image": "ranunculus.jpg",
+      "price": "39.81"
+    },
+    {
+      "name": "Dendrobium",
+      "color": "Purple",
+      "image": "dendrobium.jpg",
+      "price": "42.46"
+    },
+    {
+      "name": "Cremon Mum",
+      "color": "DarkGoldenRod",
+      "image": "cremon_mum.jpg",
+      "price": "31.72"
+    },
+    {
+      "name": "Solidago",
+      "color": "Maroon",
+      "image": "solidago.jpg",
+      "price": "10.02"
+    },
+    {
+      "name": "Hypericum",
+      "color": "Maroon",
+      "image": "hypericum.jpg",
+      "price": "26.85"
+    }
+  ]
+}

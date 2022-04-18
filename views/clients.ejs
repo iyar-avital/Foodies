@@ -1,0 +1,144 @@
+<script src="javascripts/utils.js"></script>
+<script src="javascripts/addUser.js"></script>
+<script src="javascripts/deleteUser.js"></script>
+
+<script>
+    function onDelete(userName) {
+        $("#deleteModalBody").html(userName);
+    }
+    $("#deleteButton").click(function () {
+        let userName = document.getElementById("deleteModalBody").innerText;
+        deleteUser(userName);
+    });
+
+    $("#users_cards_div").ready(function () {
+        (async function () {
+            let users_cards = document.getElementById("users_cards_div");
+            let response = await fetchData("/users/data");
+            let users = await response.json();
+            users.forEach(function (user, index) {
+                let columnDiv = document.createElement("div");
+                columnDiv.className = "col-2 text-center";
+                let innerDiv = document.createElement("div");
+                innerDiv.className = "bg-white rounded shadow-sm py-3 border";
+                let icon = document.createElement("i");
+                icon.className = "fas fa-user fa-2x mb-3";
+                let username = document.createElement("h5");
+                username.className = "mb-0";
+                username.innerText = user.username;
+                username.setAttribute("id", "userNameId");
+                let userRole = document.createElement("span");
+                userRole.className = "small text-uppercase text-muted";
+                userRole.innerText = user.role;
+
+                //delete icon button
+                let editorRowDiv = document.createElement("div");
+                editorRowDiv.className = "col text-center mb-1";
+                let deleteBtn = document.createElement("button");
+                deleteBtn.className = "col text-center btn";
+                deleteBtn.setAttribute("data-bs-toggle", "modal");
+                deleteBtn.setAttribute("data-bs-target", "#DeleteUserModal");
+                deleteBtn.addEventListener("click", function () {
+                    onDelete(user.username);
+                });
+                let deleteIcon = document.createElement("i");
+                deleteIcon.className = "fas fa-trash";
+                deleteBtn.appendChild(deleteIcon);
+                editorRowDiv.append(deleteBtn);
+
+                innerDiv.append(icon, username, userRole, editorRowDiv);
+                columnDiv.appendChild(innerDiv);
+                users_cards.appendChild(columnDiv);
+            });
+            users_cards.appendChild(document.getElementById("add_card"));
+        })();
+    });
+</script>
+<!-- Header -->
+<div class="jumbotron text-center">
+    <h3 class="display-6">
+        User Management
+        <button class="btn" onClick="window.location.reload();">
+            <i class="fa fa-refresh"></i>
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#AddUserModal">
+            <i class="fa fa-plus"></i>
+        </button>
+    </h3>
+    <div id="users_cards_div" class="row g-4 mx-auto mt-1 ml-1 mr-1"></div>
+</div>
+
+<!-- Add user button -->
+<button id="add_card" class="col-2 text-center btn" style="padding-top: 0" data-bs-toggle="modal"
+    data-bs-target="#AddUserModal">
+    <div class="bg-white rounded shadow-sm py-4 border">
+        <i class="fas fa-user-plus fa-2x mt-3 mb-4" style="color: #96b75c"></i>
+        <h5 class="mb-0" style="color: #96b75c">Add User</h5>
+        <span class="small text-uppercase text-muted">&nbsp;</span>
+    </div>
+</button>
+
+<!-- Add user Modal -->
+<div class="modal fade" id="AddUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserModal">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input id="username" type="text" class="form-control" name="username" placeholder="Username" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input id="password" type="password" class="form-control" name="password"
+                            placeholder="Password" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select id="role" name="role" class="form-select" aria-label="Default select example">
+                            <option value="client" selected>Client</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="addUser()" data-bs-dismiss="modal" class="btn custom-btn">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete user Modal -->
+<div class="modal fade" id="DeleteUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="deleteUserModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-secondary" id="AttentionToDeleteLabel">
+                    Attention
+                </h5>
+                <i class="fas fa-exclamation-circle text-secondary"></i>
+            </div>
+            <div class="modal-body">
+                <h5>
+                    Are you sure you want <br />
+                    to delete <h7 id="deleteModalBody"></h7>?
+                </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn border" id="cancelButton">
+                    Cancel
+                </button>
+                <button type="button" data-bs-dismiss="modal" class="btn btn-secondary" id="deleteButton">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
