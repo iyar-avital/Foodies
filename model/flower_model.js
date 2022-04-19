@@ -1,4 +1,3 @@
-const debug = require("debug")("mongo:model-flower");
 const mongo = require("mongoose");
 
 module.exports = db => {
@@ -21,14 +20,6 @@ module.exports = db => {
     //     return this.name;
     // };
 
-    schema.statics.CREATE = async function(flower) {
-        return this.create({
-            name: flower[0],
-            image: flower[1],
-            color: flower[2],
-            price: flower[3]
-        });
-    };
 
     // on every save, add the date
     schema.pre('save', function(next) {
@@ -42,11 +33,19 @@ module.exports = db => {
         next();
     });
 
+    schema.statics.CREATE = async function(flower) {
+        return this.create({
+            name: flower[0],
+            image: flower[1],
+            color: flower[2],
+            price: flower[3]
+        });
+    };
+
     schema.statics.REQUEST = async function() {
         // no arguments - bring all at once
         const args =  [...arguments]; // Array.from(arguments);
         if (args.length === 0) {
-            debug("request: no arguments - bring all at once");
             return this.find({}).exec();
         }
 
@@ -54,7 +53,6 @@ module.exports = db => {
         let callback = arguments[arguments.length - 1];
         if (callback instanceof Function) {
             let asynch = callback.constructor.name === 'AsyncFunction';
-            debug(`request: with ${asynch?'async':'sync'} callback`);
             args.pop();
             let cursor, user;
             try {
@@ -77,16 +75,13 @@ module.exports = db => {
 
         // request by id as a hexadecimal string
         if (args.length === 1 && typeof args[0] === "string") {
-            debug("request: by ID");
             return this.findById(args[0]).exec();
         }
 
         // There is no callback - bring requested at once
-        debug(`request: without callback: ${JSON.stringify(args)}`);
         return this.find(...args).exec();
     };
 
     // the schema is useless so far
     db.model('Flower', schema); 
-    debug("Flower model created");
 };
