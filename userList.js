@@ -5,9 +5,21 @@ const timeout = require("./timeout");
 (async () => {
     // Inquire all the users at once and get it as an array
     try {
+        console.log('get users list');
         users = await User.REQUEST();
+        console.log(users);
         //console.dir(users, { showHidden: true, colors: true });
-        return users;
+        // return users;
+    } catch (err) { debug(`Failed: ${err}`) }
+
+    await timeout(1000);
+
+    try {
+        console.log('get one');
+        users = await User.REQUEST('Tom');
+        console.log(users);
+        //console.dir(users, { showHidden: true, colors: true });
+        // return users;
     } catch (err) { debug(`Failed: ${err}`) }
 
     await timeout(1000);

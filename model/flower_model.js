@@ -1,21 +1,16 @@
-const debug = require("debug")("mongo:model-user");
+const debug = require("debug")("mongo:model-flower");
 const mongo = require("mongoose");
 
 module.exports = db => {
     // create a schema
     let schema = new mongo.Schema({
-        name: String,
-        username: { type: String, required: true, unique: true, index: true },
-        password: { type: String, required: true },
-        admin: Boolean,
-        location: String,
-        meta: {
-            age: Number,
-            website: String
-        },
+        name: { type: String, required: true },
+        image:  String,
+        color: String,
+        price: Number,
         created_at: Date,
         updated_at: Date
-    }, { autoIndex: false });
+    });
 
     // custom method to add string to end of name
     // you can create more important methods like name validations or formatting
@@ -26,12 +21,12 @@ module.exports = db => {
     //     return this.name;
     // };
 
-    schema.statics.CREATE = async function(user) {
+    schema.statics.CREATE = async function(flower) {
         return this.create({
-            name: user[0],
-            username: user[1],
-            password: user[2],
-            admin: user[3]
+            name: flower[0],
+            image: flower[1],
+            color: flower[2],
+            price: flower[3]
         });
     };
 
@@ -92,8 +87,6 @@ module.exports = db => {
     };
 
     // the schema is useless so far
-    // we need to create a model using it
-    // db.model('User', schema, 'User'); // (model, schema, collection)
-    db.model('User', schema); // if model name as lowercase with suffix "s" === collection name: User => users
-    debug("User model created");
+    db.model('Flower', schema); 
+    debug("Flower model created");
 };

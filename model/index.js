@@ -9,6 +9,6 @@ let db = mongo.createConnection();
     }
 })();
 debug('Pending DB connection');
-require("./user")(db);
-//require("./flower")(db);	
+require("./user_model")(db);
+require("./flower_model")(db);
 module.exports = model => db.model(model);	

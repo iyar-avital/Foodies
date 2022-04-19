@@ -6,10 +6,12 @@ const navigationView = (req, res) => {
     res.render("navigation");
 }
 
-const navigationData = (req, res) => {
+const navigationData = async (req, res) => {
     var result = nav_service.getDefaultNav();
-    user = user_service.getUserByUsername(req.query.username);
+    user = await user_service.getUserByUsername(req.query.username);
+    console.log(user);
     if (user != undefined) {
+        console.log(user.role);
         if (is_client(user)) {
             result = nav_service.getClientNav();
         }

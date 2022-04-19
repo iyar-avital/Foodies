@@ -1,10 +1,10 @@
 const fs = require("fs");
 const data = require("./data.json");
 
-// get all users
-const getUsers = () => {
-    return data["users"];
-};
+// // get all users
+// const getUsers = () => {
+//     return data["users"];
+// };
 
 // get only client without password
 const getClients = () => {
@@ -122,7 +122,6 @@ const getFlowers = () => {
 };
 
 module.exports = {
-    getUsers,
     getClients,
     getUser,
     getUserByUsername,

@@ -3,9 +3,9 @@ const service = require("../services/users_services.js");
 
 var DELAY_IN_USER_REQUEST = 1000;
 
-const usersView = (req, res) => {
+const usersView = async (req, res) => {
     var result = '';
-    user = service.getUserByUsername(req.query.username);
+    user = await service.getUserByUsername(req.query.username);
     if (user != undefined) {
         if (is_emplyoee(user)) {
             result = 'clients';
@@ -17,30 +17,30 @@ const usersView = (req, res) => {
     res.render(result);
 }
 
-const usersData = (req, res) => {
+const usersData = async (req, res) => {
     var result = [{}];
-    user = service.getUserByUsername(req.query.username);
+    user = await service.getUserByUsername(req.query.username);
     if (user != undefined) {
         if (is_emplyoee(user)) {
             result = service.getClients();
         }
         else if (is_admin(user)) {
-            result = service.getUsers();
+            result = await service.getUsers();
         }
     }
     res.json(result);
 }
 
 // add new user
-const addUser = (req, res) => {
-    setTimeout(function () {
+const addUser = async (req, res) => {
+    setTimeout(async function () {
         body = req.body;
         user = {
             username: body.username,
             password: body.password,
             role: body.role,
         };
-        let newUser = service.addUser(user);
+        let newUser = await service.addUser(user);
         if (typeof newUser !== "string") {
             res.sendStatus(200);
         } else {
@@ -51,10 +51,10 @@ const addUser = (req, res) => {
 
 
 // delete user by id
-const deleteUser = (req, res) => {
-    setTimeout(function () {
+const deleteUser = async (req, res) => {
+    setTimeout(async function () {
         params = req.params;
-        let user = service.getUserByUsername(params.name);
+        let user = await service.getUserByUsername(params.name);
         let newUser = service.deleteUser(user.id);
         if (newUser === user.id) {
             res.sendStatus(200);
@@ -65,10 +65,10 @@ const deleteUser = (req, res) => {
 };
 
 // update user by id
-const updateUser = (req, res) => {
-    setTimeout(function () {
+const updateUser = async (req, res) => {
+    setTimeout(async function () {
         params = req.params;
-        let user = service.getUserByUsername(params.name);
+        let user = await service.getUserByUsername(params.name);
         user.role = params.role;
         let newUser = service.updateUser(user.id, user);
         if (newUser === user.id) {

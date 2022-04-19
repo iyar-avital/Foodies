@@ -1,9 +1,16 @@
 dataManagement = require("../data_management.js");
+const model = require('../model')("User");
+const timeout = require("../timeout");
 
 // get users 
-const getUsers = () => {
-    return dataManagement.getUsers();
-}
+async function getUsers() {
+    try {
+        return await model.REQUEST();
+    } catch (err) {
+        debug(`Failed: ${err}`);
+    }
+};
+
 
 // get clients
 const getClients = () => {
@@ -11,13 +18,22 @@ const getClients = () => {
 }
 
 // get user by name
-const getUserByUsername = (username) => {
-    return dataManagement.getUserByUsername(username);
+const getUserByUsername = async (username) => {
+    try {
+        user = await model.REQUEST(username);
+        return user == [] ? undefined : user[0];
+    } catch (err) {
+        debug(`Failed: ${err}`);
+    }
 }
 
 // add user 
-const addUser = (user) => {
-    return dataManagement.addUser(user);
+const addUser = async (user) => {
+    try {
+        return await model.CREATE(user);
+    } catch (err) {
+        debug(`Failed: ${err}`);
+    }
 }
 
 // delete user
