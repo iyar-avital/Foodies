@@ -35,11 +35,7 @@ const usersData = async (req, res) => {
 const addUser = async (req, res) => {
     setTimeout(async function () {
         body = req.body;
-        user = {
-            username: body.username,
-            password: body.password,
-            role: body.role,
-        };
+        user = [body.username, body.password, body.role];
         let newUser = await service.addUser(user);
         if (typeof newUser !== "string") {
             res.sendStatus(200);
