@@ -51,8 +51,8 @@ const deleteUser = async (req, res) => {
     setTimeout(async function () {
         params = req.params;
         let user = await service.getUserByUsername(params.name);
-        let newUser = service.deleteUser(user.id);
-        if (newUser === user.id) {
+        let deletedUser = await service.deleteUser(user._id);
+        if (deletedUser._id.equals(user._id)) {
             res.sendStatus(200);
         } else {
             res.sendStatus(409);
@@ -65,9 +65,8 @@ const updateUser = async (req, res) => {
     setTimeout(async function () {
         params = req.params;
         let user = await service.getUserByUsername(params.name);
-        user.role = params.role;
-        let newUser = service.updateUser(user.id, user);
-        if (newUser === user.id) {
+        let updatedUser = await service.updateUser(user._id, { role: params.role });
+        if (updatedUser._id.equals(user._id)) {
             res.sendStatus(200);
         } else {
             res.sendStatus(409);

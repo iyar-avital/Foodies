@@ -18,6 +18,9 @@ const timeout = require('./timeout');
         try {
             await User.CREATE(user);
             console.log('User created:' + user);
+            await timeout(10000);
+            await User.DELETE('dd');
+
         } catch (err) { throw err; }
     }
 })();	

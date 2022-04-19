@@ -31,6 +31,14 @@ module.exports = db => {
         });
     };
 
+    schema.statics.DELETE = async function (id) {
+        return this.findByIdAndDelete(id);
+    };
+
+    schema.statics.UPDATE = async function (id, arguments) {
+        return this.findByIdAndUpdate(id, arguments);
+    };
+
     schema.statics.REQUEST = async function () {
         // no arguments - bring all at once
         const args = [...arguments]; // Array.from(arguments);
@@ -75,9 +83,6 @@ module.exports = db => {
         return this.find(...args).exec();
     };
 
-    // the schema is useless so far
-    // we need to create a model using it
-    // db.model('User', schema, 'User'); // (model, schema, collection)
     db.model('User', schema); // if model name as lowercase with suffix "s" === collection name: User => users
     debug("User model created");
 };

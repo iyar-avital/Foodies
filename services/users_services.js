@@ -1,6 +1,4 @@
-dataManagement = require("../data_management.js");
 const model = require('../model')("User");
-const timeout = require("../timeout");
 
 // get users 
 async function getUsers() {
@@ -32,7 +30,7 @@ async function getUserByUsername(username) {
 }
 
 // add user 
-const addUser = async (user) => {
+async function addUser(user) {
     try {
         return await model.CREATE(user);
     } catch (err) {
@@ -41,13 +39,21 @@ const addUser = async (user) => {
 }
 
 // delete user
-const deleteUser = (id) => {
-    return dataManagement.deleteUser(id);
+async function deleteUser(id) {
+    try {
+        return await model.DELETE(id);
+    } catch (err) {
+        debug(`Failed: ${err}`);
+    }
 }
 
 // update user
-const updateUser = (id, user) => {
-    return dataManagement.updateUser(id, user);
+async function updateUser(id, args) {
+    try {
+        return await model.UPDATE(id, args);
+    } catch (err) {
+        debug(`Failed: ${err}`);
+    }
 }
 
 module.exports = {
