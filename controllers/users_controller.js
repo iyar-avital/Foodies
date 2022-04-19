@@ -22,7 +22,7 @@ const usersData = async (req, res) => {
     user = await service.getUserByUsername(req.query.username);
     if (user != undefined) {
         if (is_emplyoee(user)) {
-            result = service.getClients();
+            result = await service.getClients();
         }
         else if (is_admin(user)) {
             result = await service.getUsers();

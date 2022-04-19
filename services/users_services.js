@@ -13,12 +13,16 @@ async function getUsers() {
 
 
 // get clients
-const getClients = () => {
-    return dataManagement.getClients();
+async function getClients() {
+    try {
+        return await model.REQUEST({ 'role': 'client' });
+    } catch (err) {
+        debug(`Failed: ${err}`);
+    }
 }
 
 // get user by name
-const getUserByUsername = async (username) => {
+async function getUserByUsername(username) {
     try {
         user = await model.REQUEST(username);
         return user == [] ? undefined : user[0];
