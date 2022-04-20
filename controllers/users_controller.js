@@ -1,8 +1,6 @@
 require("../utils/manage_access.js");
 const service = require("../services/users_services.js");
 
-var DELAY_IN_USER_REQUEST = 1000;
-
 const usersView = async (req, res) => {
     var result = '';
     user = await service.getUserByUsername(req.query.username);

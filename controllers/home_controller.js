@@ -1,3 +1,5 @@
+DELAY_IN_USER_REQUEST = 1000;
+
 const indexView = (req, res) => {
     res.render("index");
 }

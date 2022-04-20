@@ -13,7 +13,7 @@ const addFlower = async (req, res) => {
     setTimeout(async function () {
         body = req.body;
         flower = [body.name, body.image, body.color, body.price];
-        let newFlower = await service.addFlower(uflowerser);
+        let newFlower = await service.addFlower(flower);
         if (typeof newFlower !== "string") {
             res.sendStatus(200);
         } else {
