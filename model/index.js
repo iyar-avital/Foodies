@@ -1,4 +1,4 @@
-const debug = require("debug")("mongo:model");
+debug = require("debug")("mongo:model");
 const mongo = require("mongoose");
 let db = mongo.createConnection();
 (async () => {
