@@ -11,8 +11,9 @@ const flowersData = async (req, res) => {
 // add new user
 const addFlower = async (req, res) => {
     setTimeout(async function () {
-        body = req.body;
-        flower = [body.name, body.image, body.color, body.price];
+        let body = req.body;
+        let file = req.file;
+        flower = [body.name, file.filename, body.color, body.price];
         let newFlower = await service.addFlower(flower);
         if (typeof newFlower !== "string") {
             res.sendStatus(200);

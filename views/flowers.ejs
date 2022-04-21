@@ -1,4 +1,6 @@
 <script src="javascripts/utils.js"></script>
+<script src="javascripts/addFlower.js"></script>
+
 <script>
     $('#flowers_cards_div').ready(function () {
         (async function () {
@@ -33,5 +35,58 @@
     });
 </script>
 
-<div id="flowers_cards_div" class="row row-cols-1 row-cols-md-5 g-4 mx-auto">
+
+
+<!-- Header -->
+<div class="jumbotron text-center">
+    <h3 class="display-6">
+        Flowers
+        <button class="btn" onClick="window.location.reload();">
+            <i class="fa fa-refresh"></i>
+        </button>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#AddFlowerModal">
+            <i class="fa fa-plus"></i>
+        </button>
+    </h3>
+    <div id="flowers_cards_div" class="row row-cols-1 row-cols-md-5 g-4 mx-auto">
+    </div>
+</div>
+
+<!-- Add Flower Modal -->
+<div class="modal fade" id="AddFlowerModal" tabindex="-1" role="dialog" aria-labelledby="addFlowerModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addFlowerModal">Add Flower</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addFlowerForm">
+                    <div class="mb-4">
+                        <label class="form-label">Name</label>
+                        <input id="name" type="text" class="form-control" name="name" placeholder="Name" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Color</label>
+                        <input id="color" type="text" class="form-control" name="color" placeholder="Color" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Price</label>
+                        <input id="price" type="text" class="form-control" name="price" placeholder="Price" />
+                    </div>
+                    <div class="mb-4 form-group">
+                        <label class="form-label">Image</label>
+                        <input id="image" type="file" accept="image/png, image/jpeg, image/jpg, image/gif"
+                            class="form-control-file" name="image" placeholder="Image" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="addFlower()" data-bs-dismiss="modal" class="btn custom-btn">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
