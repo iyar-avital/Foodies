@@ -1,4 +1,3 @@
-dataManagement = require("../data_management.js");
 const model = require('../model')("Flower");
 
 // get flowers 
