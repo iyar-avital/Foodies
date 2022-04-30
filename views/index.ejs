@@ -12,6 +12,7 @@
   <script src="javascripts/login.js"></script>
   <script src="javascripts/logout.js"></script>
   <script src="javascripts/signup.js"></script>
+  <script src="javascripts/forgotPassword.js"></script>
   <script>
     $(document).ready(function () {
       // Load navigation 
@@ -95,6 +96,13 @@
                 Log In
               </button>
             </div>
+            <div class="d-grid mt-3 float-end">
+              <a id="forgotPasswordBtn" type="link" onclick="showForgotPasswordModal()" data-dismiss="modal"
+                data-toggle="modal" data-bs-target="#forgotPasswordModal" data-backdrop="static"
+                class="custom-text-btn">
+                Forgot your password?
+              </a>
+            </div>
           </form>
         </div>
       </div>
@@ -144,6 +152,58 @@
 </div>
 </body>
 
+<!-- Forgot Password modal -->
+<div class="modal fade" id="forgotPasswordForm" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+  data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgotPasswordModalLabel"><i class="fa fa-cog"></i> Reset Password</h5>
+        <i type="button" class="fa fa-arrow-right" onclick="hideForgotPasswordModal()" data-bs-dismiss="modal"
+          aria-label="Close"></i>
+      </div>
+      <div class="modal-body">
+        <form id="passwordform">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="resetEmail" type="text" class="form-control" name="email" placeholder="Email" />
+              </div>
+              <div class="col align-self-center">
+                <i id="resetEmailButton" class="fa fa-toggle-right fa-2x" onclick="sendEmail()"></i>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form id="resetPasswordForm">
+          <div>
+            <p class="text-muted mb-4">
+              After you will enter your email address and submit,
+              you'll recieve a passcode in order to reset your login password.
+            </p>
+          </div>
+          <div>
+            <input id="passCode" type="text" class="form-control mb-3" name="passCode"
+              placeholder="Recieved passcode" />
+          </div>
+          <div>
+            <input id="newPassword" type="password" class="form-control mb-3" name="newPassword"
+              placeholder="New password" />
+          </div>
+          <div>
+            <input id="repeatNew" type="password" class="form-control mb-4" name="repeatNew"
+              placeholder="Repeat new password" />
+          </div>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" onclick="resetPassword()" class="btn custom-btn">
+              Reset password </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Loading modal -->
 <div class="modal" id="loadingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -183,7 +243,7 @@
         Please refresh and after try again.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" onclick="location.reload();"">
+        <button type="button" class="btn btn-danger" onclick="location.reload();">
           Refresh
           <i class=" fas fa-refresh"></i>
         </button>

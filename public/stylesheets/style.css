@@ -9,6 +9,13 @@
   background-color: #ffffff !important;
 }
 
+.custom-text-btn {
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: #0F52BA;
+}
+
 .custom-header {
   text-overflow: ellipsis;
   white-space: nowrap;
