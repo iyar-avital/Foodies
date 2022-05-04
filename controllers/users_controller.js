@@ -3,28 +3,22 @@ const service = require("../services/users_services.js");
 
 const usersView = async (req, res) => {
     var result = '';
-    user = await service.getUserByUsername(req.query.username);
-    if (user != undefined) {
-        if (is_emplyoee(user)) {
-            result = 'clients';
-        }
-        else if (is_admin(user)) {
-            result = 'users';
-        }
-    }
+    user = req.session.passport.user;
+    if (is_emplyoee(user))
+        result = 'clients';
+    else if (is_admin(user))
+        result = 'users';
     res.render(result);
 }
 
 const usersData = async (req, res) => {
     var result = [{}];
-    user = await service.getUserByUsername(req.query.username);
-    if (user != undefined) {
-        if (is_emplyoee(user)) {
-            result = await service.getClients();
-        }
-        else if (is_admin(user)) {
-            result = await service.getUsers();
-        }
+    user = req.session.passport.user;
+    if (is_emplyoee(user)) {
+        result = await service.getClients();
+    }
+    else if (is_admin(user)) {
+        result = await service.getUsers();
     }
     res.json(result);
 }

@@ -3,13 +3,12 @@ async function login() {
     let data = new URLSearchParams(new FormData(loginForm));
     try {
         let response = await fetch("/login", { method: 'post', body: data });
-        if (response.ok) {
-            localStorage.setItem('username', data.get('username'));
-            localStorage.setItem('logedin', 'true');
-        }
-        else {
-            //TODO: delete user name from url
-        }
+        if (response.ok)
+            return;
+
+        // Romove username and password from the url
+        window.history.pushState({}, document.title, window.location.pathname);
+
     } catch (error) {
         console.error('Error: ', error);
     }

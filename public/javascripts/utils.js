@@ -3,8 +3,7 @@ var TIME_OUT = 5000;
 async function fetchData(url, options = {}, needAck) {
     try {
         if (needAck) { showLoadingModal(); }
-        let currentUser = localStorage.getItem('username');
-        let response = await fetchWithTimeout(url + '?username=' + currentUser, options);
+        let response = await fetchWithTimeout(url, options);
         if (response.ok && needAck) {
             showSuccessActionModal();
             setTimeout(function () {

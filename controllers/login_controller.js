@@ -1,32 +1,16 @@
 const service = require("../services/users_services.js");
 
-const login = async (req, res) => {
-  req.session.username = req.body.username;
-  var users = await service.getUsers();
-  const userExists = (user) =>
-    user.username == req.body.username && user.password == req.body.password;
-  if (users.find(userExists)) {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(404);
-  }
-};
-
 const logout = async (req, res) => {
-  req.session.destroy(err => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect('/');
-    }
-  });
+  req.logOut();
 };
 
+// TODO: change
 const signup = async (req, res) => {
   console.log("in signup func", req.body);
   res.sendStatus(200);
 };
 
+// TODO: change
 const sendEmail = async (req, res) => {
   console.log("in password controller sendemail func");
   console.log(req.body);
@@ -35,6 +19,7 @@ const sendEmail = async (req, res) => {
   res.send({ passCode: passCode });
 };
 
+// TODO: change
 const resetPassword = async (req, res) => {
   console.log("passwords: ", req.body);
   console.log("getPass", passCode);
@@ -47,7 +32,6 @@ const resetPassword = async (req, res) => {
 };
 
 module.exports = {
-  login,
   logout,
   signup,
   sendEmail,
