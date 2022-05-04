@@ -3,12 +3,14 @@ var router = express.Router();
 
 const {
   login,
+  logout,
   signup,
   sendEmail,
   resetPassword,
 } = require("../controllers/login_controller.js");
 
 router.post("/login", login);
+router.post("/logout", logout);
 router.post("/signup", signup);
 router.post("/send_email", sendEmail);
 router.post("/reset_password", resetPassword);
