@@ -8,7 +8,7 @@ async function login() {
             localStorage.setItem('logedin', 'true');
         }
         else {
-            //delete user name from url
+            //TODO: delete user name from url
         }
     } catch (error) {
         console.error('Error: ', error);
