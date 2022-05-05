@@ -20,17 +20,20 @@ async function sendEmail() {
   $("#resetEmailButton").empty();
   $("#resetEmailButton").hide();
 
-  try {
-    let response = await fetch("/send_email", { method: "post", body: data });
-
-    if (response.ok) {
-      console.log("ok");
-    } else {
-      console.log("else");
-    }
-  } catch (error) {
-    console.error("Error: ", error);
-  }
+  let helloStr =
+    "Hello there, \n\nFor changing your email account password,\n\nplease enter the passCode shown below in the right place and choose another password.\n\n";
+  let passCode = "A36yv7d9E5";
+  let thanksStr = "\n\nThanks for your cooperation,\n\nRivka and Iyar. ";
+  var body = `${helloStr}PassCode is: ${passCode}${thanksStr}`;
+  Email.send({
+    Host: "smtp.gmail.com",
+    Username: "internetsoftwareproject@gmail.com",
+    Password: "iyarrivka",
+    To: "zizovirivka@gmail.com, iyaravital@gmail.com",
+    From: "internetsoftwareproject@gmail.com",
+    Subject: "Reset Password request",
+    Body: body,
+  }).then((message) => alert("mail sent successfully"));
 }
 
 async function resetPassword() {
