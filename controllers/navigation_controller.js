@@ -7,7 +7,6 @@ const navigationView = (req, res) => {
 
 const navigationData = async (req, res) => {
     var result = service.getDefaultNav();
-    console.log(req.session);
     if (req.isAuthenticated()) {
         user = req.session.passport.user;
         if (is_client(user))
