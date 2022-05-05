@@ -1,3 +1,19 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<head>
+    <link rel="stylesheet" href="https://www.markuptag.com/bootstrap/5/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css?a=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="text-center d-flex align-items-center justify-content-center error-msg">
+    <div class="col">
+        <i class="fa fa-exclamation-triangle fa-5x mb-5 text-warning bg-dark"></i>
+        <h1 class="mb-4 mt-4">ERROR !</h1>
+        <h3>
+            <%= message %>
+        </h3>
+        <div>
+            <%= error.status %>
+        </div>
+        <pre><%= error.stack %></pre>
+        <button class="btn btn-outline-dark btn-lg back-btn mt-3" onclick="window.history.back()">Go Back</button>
+    </div>
+</div>

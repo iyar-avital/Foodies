@@ -48,3 +48,12 @@
   background-color: #fce4ec;
   color: #000000;
 }
+
+.error-msg {
+  font-family: fantasy;
+  min-height: 80vh;
+}
+
+.back-btn {
+  width: 170px;
+}
