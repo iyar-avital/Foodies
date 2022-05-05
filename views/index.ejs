@@ -19,9 +19,9 @@
       $('#navigation_bar').load('/navigation');
 
       // Load initial body
-      if (!location.hash) 
+      if (!location.hash)
         $('#body').load('/about_us');
-      
+
 
       // Initialization login - logout button, and signUp button handling
       if (sessionStorage.getItem('loggedIn') == 'true') {
@@ -157,8 +157,10 @@
         <form id="passwordform">
           <div class="mb-3">
             <label class="form-label">Username</label>
-            <div class="col-md-10 mb-2">
-              <input id="resetUsername" type="text" class="form-control" name="userName" placeholder="Username" />
+            <div class="row">
+              <div class="col-md-10 mb-2">
+                <input id="resetUsername" type="text" class="form-control" name="userName" placeholder="Username" />
+              </div>
             </div>
             <label class="form-label">Email</label>
             <div class="row">
