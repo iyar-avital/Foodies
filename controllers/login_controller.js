@@ -2,6 +2,7 @@ const service = require("../services/users_services.js");
 
 const logout = async (req, res) => {
   req.logOut();
+  res.sendStatus(200);
 };
 
 // TODO: change

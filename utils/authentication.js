@@ -2,9 +2,6 @@ const service = require("../services/users_services");
 require("./manage_access");
 
 authUser = async (username, password, done) => {
-    console.log(`Value of "User" in authUser function ----> ${username}`);
-    console.log(`Value of "Password" in authUser function ----> ${password}`);
-
     var user = await service.getUserByUsername(username);
     if (user == undefined)
         return done(null, false);
@@ -24,7 +21,11 @@ deserializeUser = (user, done) => {
 checkAuthenticated = (req, res, next) => {
     if (req.isAuthenticated())
         return next()
-    res.send('<h1>You are not logged in</h1>');
+
+    res.locals.message = 'You are not logged in, please login.';
+    res.locals.error = {};
+    res.status(500);
+    res.render('error');
 };
 
 checkStaffAuthenticated = (req, res, next) => {
@@ -32,8 +33,16 @@ checkStaffAuthenticated = (req, res, next) => {
         user = req.session.passport.user;
         if (is_staff(user))
             return next();
+        res.locals.message = 'You have no premission.';
+        res.locals.error = {};
+        res.status(500);
+        res.render('error');
+        return;
     }
-    res.send('<h1>You are not logged in</h1>');
+    res.locals.message = 'You are not logged in, please login.';
+    res.locals.error = {};
+    res.status(500);
+    res.render('error');
 };
 
 module.exports = {
