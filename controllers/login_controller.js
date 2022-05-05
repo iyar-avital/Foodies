@@ -5,10 +5,17 @@ const logout = async (req, res) => {
   res.sendStatus(200);
 };
 
-// TODO: change
 const signup = async (req, res) => {
-  console.log("in signup func", req.body);
-  res.sendStatus(200);
+  setTimeout(async function () {
+    body = req.body;
+    user = [body.username, body.password, body.role];
+    let newUser = await service.addUser(user);
+    if (typeof newUser !== "string") {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(409);
+    }
+  }, DELAY_IN_USER_REQUEST);
 };
 
 // TODO: change
