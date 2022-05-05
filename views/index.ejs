@@ -19,11 +19,10 @@
       $('#navigation_bar').load('/navigation');
 
       // Load initial body
-      if (!location.hash) {
+      if (!location.hash) 
         $('#body').load('/about_us');
-      }
+      
 
-      alert(sessionStorage.getItem('loggedIn'))
       // Initialization login - logout button, and signUp button handling
       if (sessionStorage.getItem('loggedIn') == 'true') {
         $('#logout_btn').show();
