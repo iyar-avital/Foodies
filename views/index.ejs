@@ -168,33 +168,17 @@
               <div class="col-md-10">
                 <input id="resetEmail" type="text" class="form-control" name="email" placeholder="Email" />
               </div>
-              <div class="col align-self-center">
-                <i id="resetEmailButton" onclick="sendEmail()" type="button" class="fa fa-toggle-right fa-2x mt-1"></i>
-              </div>
             </div>
           </div>
-        </form>
-        <form id="resetPasswordForm">
           <div>
             <p class="text-muted mb-4">
               After you will enter your details and submit,
-              you'll recieve a passcode in order to reset your login password.
+              you'll recieve a new login password to our website.
+              You can change in from your personal area.
             </p>
           </div>
-          <div>
-            <input id="passCode" type="text" class="form-control mb-3" name="passCode"
-              placeholder="Recieved passcode" />
-          </div>
-          <div>
-            <input id="newPassword" type="password" class="form-control mb-3" name="newPassword"
-              placeholder="New password" />
-          </div>
-          <div>
-            <input id="repeatNew" type="password" class="form-control mb-4" name="repeatNew"
-              placeholder="Repeat new password" />
-          </div>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" onclick="resetPassword()" class="btn custom-btn">
+            <button type="submit" id="resetEmailButton" onclick="sendEmail()" class="btn custom-btn">
               Reset password </button>
           </div>
         </form>

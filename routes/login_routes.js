@@ -11,13 +11,11 @@ router.post("/login",
 const {
     logout,
     signup,
-    sendEmail,
     resetPassword,
 } = require("../controllers/login_controller.js");
 
 router.delete("/logout", logout);
 router.post("/signup", signup);
-router.post("/send_email", sendEmail);
 router.post("/reset_password", resetPassword);
 
 module.exports = router;
