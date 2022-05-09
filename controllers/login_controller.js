@@ -18,16 +18,7 @@ const signup = async (req, res) => {
   }, DELAY_IN_USER_REQUEST);
 };
 
-const resetPassword = async (req, res) => {
-  console.log(req.body);
-  if (!req.body.password)
-    return res.sendStatus(404);
-
-  res.sendStatus(200);
-};
-
 module.exports = {
   logout,
   signup,
-  resetPassword,
 };
