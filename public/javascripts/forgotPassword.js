@@ -5,6 +5,7 @@ function showForgotPasswordModal() {
   $("#resetEmail").prop("disabled", false);
   $("#resetEmailButton").show();
 }
+
 function hideForgotPasswordModal() {
   $("#forgotPasswordForm").modal("hide");
   $("#logInForm").modal("show");
@@ -26,7 +27,7 @@ async function sendEmail() {
   let thanksStr = "\nThanks for your cooperation,\nRivka and Iyar. ";
   var body = `${helloStr}${passCode}${thanksStr}`;
 
-  Email.send({
+  await Email.send({
     Host: "smtp.gmail.com",
     Username: "internetsoftwareproject@gmail.com",
     Password: "iyarrivka",
@@ -35,11 +36,33 @@ async function sendEmail() {
     Subject: "Reset Password request",
     Body: body,
   }).then((message) => {
-    resetPassword(passCode);
-  }
-  );
+    alert('sended' + data.get('userName'));
+    resetPassword(data.get('userName'), passCode);
+  });
+
 }
 
-async function resetPassword(passCode) {
-  await fetchData("/reset_password", { method: 'post', body: { password: passCode } }, true);
+async function resetPassword(username, passCode) {
+  let data = new URLSearchParams({ password: passCode });
+
+  // npm i node-rsa
+  // const NodeRSA = require('node-rsa');
+  //  const key = new NodeRSA({b: 512}); 
+  // const text = 'Hello RSA!'; 
+ 
+  // const encrypted = key.encrypt(text, 'base64'); 
+  // console.log('encrypted: ', encrypted);
+
+  alert(data);
+  const settings= {
+    method: "put",
+    body: data,
+  };
+  // await fetch( "/users/update/" + "ABC", settings);
+  // await fetchData(
+  //   "/users/update/" + username,
+  //   { method: "put", body: data },
+  //   true
+  // );
 }
+
