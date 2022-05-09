@@ -1,7 +1,7 @@
 DELAY_IN_USER_REQUEST = 1000;
 
 const indexView = (req, res) => {
-    res.render("index", { user: req.session.passport.user });
+    res.render("index");
 }
 
 const aboutUsView = (req, res) => {
