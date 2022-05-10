@@ -23,22 +23,21 @@ async function sendEmail() {
 
   let helloStr =
     "Hello there, \nYour new password to our website is:,\n";
-  var passCode = '123';//(Math.random() + 1).toString(36).substring(2);
+  var passCode = (Math.random() + 1).toString(36).substring(2);
   let thanksStr = "\nThanks for your cooperation,\nRivka and Iyar. ";
   var body = `${helloStr}${passCode}${thanksStr}`;
 
-  alert(data.get('email'));
   await Email.send({
     Host: "smtp.gmail.com",
     Username: "internetsoftwareproject@gmail.com",
     Password: "iyarrivka",
-    To: data.get('email'),
+    To: 'iyaravital@gmail.com, zizovirivka@gmail.com',
     From: "internetsoftwareproject@gmail.com",
     Subject: "Reset Password request",
     Body: body,
-  }).then(async (message) => {
+  }).then((message) => {
     alert('sended' + passCode);
-    await resetPassword(data.get('userName'), passCode);
+    resetPassword(data.get('userName'), passCode);
   });
 
 }
