@@ -11,9 +11,11 @@ router.post("/login",
 const {
     logout,
     signup,
+    resetPassword,
 } = require("../controllers/login_controller.js");
 
 router.delete("/logout", logout);
 router.post("/signup", signup);
+router.put("/reset_password/:name", resetPassword);
 
 module.exports = router;
