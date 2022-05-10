@@ -23,10 +23,11 @@ async function sendEmail() {
 
   let helloStr =
     "Hello there, \nYour new password to our website is:,\n";
-  var passCode = (Math.random() + 1).toString(36).substring(2);
+  var passCode = '123';//(Math.random() + 1).toString(36).substring(2);
   let thanksStr = "\nThanks for your cooperation,\nRivka and Iyar. ";
   var body = `${helloStr}${passCode}${thanksStr}`;
 
+  alert(data.get('email'));
   await Email.send({
     Host: "smtp.gmail.com",
     Username: "internetsoftwareproject@gmail.com",
@@ -36,7 +37,7 @@ async function sendEmail() {
     Subject: "Reset Password request",
     Body: body,
   }).then(async (message) => {
-    alert('sended' + data.get('userName'));
+    alert('sended' + passCode);
     await resetPassword(data.get('userName'), passCode);
   });
 
@@ -44,10 +45,10 @@ async function sendEmail() {
 
 async function resetPassword(username, passCode) {
   var encrypt = new JSEncrypt();
-  encrypt.setPublicKey('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlOJu6TyygqxfWT7eLtGDwajtNFOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76xFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4gwQco1KRMDSmXSMkDwIDAQAB');
+  encrypt.setPublicKey('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCPjcxfYXYkhimFtWrtan1pampQa7Zeggf2W7cwAxJIS4yw51yS35TKNYHg/gDoItLwKVKTkbbjRFcZlSlf3pv/5Gu0UkIrkVJgadriPBDMHVsOOdSg1sp32np2LhABF/xUUP2bIQahiT72/QPoPQyfK1xlOHOvpifPm2P64t6F8wIDAQAB');
   var encrypted = encrypt.encrypt(passCode);
 
-  let data = new URLSearchParams({ password: encrypted });
+  let data = new URLSearchParams({ password: passCode });
   await fetchData(
     "/reset_password/" + username,
     { method: "put", body: data },
