@@ -35,34 +35,22 @@ async function sendEmail() {
     From: "internetsoftwareproject@gmail.com",
     Subject: "Reset Password request",
     Body: body,
-  }).then((message) => {
+  }).then(async (message) => {
     alert('sended' + data.get('userName'));
-    resetPassword(data.get('userName'), passCode);
+    await resetPassword(data.get('userName'), passCode);
   });
 
 }
 
 async function resetPassword(username, passCode) {
-  let data = new URLSearchParams({ password: passCode });
+  var encrypt = new JSEncrypt();
+  encrypt.setPublicKey('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlOJu6TyygqxfWT7eLtGDwajtNFOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76xFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4gwQco1KRMDSmXSMkDwIDAQAB');
+  var encrypted = encrypt.encrypt(passCode);
 
-  // npm i node-rsa
-  // const NodeRSA = require('node-rsa');
-  //  const key = new NodeRSA({b: 512}); 
-  // const text = 'Hello RSA!'; 
- 
-  // const encrypted = key.encrypt(text, 'base64'); 
-  // console.log('encrypted: ', encrypted);
-
-  alert(data);
-  const settings= {
-    method: "put",
-    body: data,
-  };
-  // await fetch( "/users/update/" + "ABC", settings);
-  // await fetchData(
-  //   "/users/update/" + username,
-  //   { method: "put", body: data },
-  //   true
-  // );
+  let data = new URLSearchParams({ password: encrypted });
+  await fetchData(
+    "/reset_password/" + username,
+    { method: "put", body: data },
+    true
+  );
 }
-
