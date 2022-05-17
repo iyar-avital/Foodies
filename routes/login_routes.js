@@ -16,15 +16,11 @@ router.post(
 const {
   logout,
   signup,
-  resetPassword,
-  personalAreaView,
-  personalAreaData,
+  resetPassword
 } = require("../controllers/login_controller.js");
 
 router.delete("/logout", logout);
 router.post("/signup", signup);
 router.put("/reset_password/:name", resetPassword);
-router.get("/personal_area", personalAreaView);
-router.get("/personal_area/data", personalAreaData);
 
 module.exports = router;

@@ -12,9 +12,7 @@
   <script src="javascripts/login.js"></script>
   <script src="javascripts/logout.js"></script>
   <script src="javascripts/signup.js"></script>
-  <script src="javascripts/personal_area.js"></script>
   <script src="javascripts/forgotPassword.js"></script>
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script src="javascripts/utils/jsencrypt.min.js"></script>
   <script src="javascripts/utils/encryption.js"></script>
 
@@ -26,7 +24,6 @@
       // Load initial body
       if (!location.hash)
         $('#body').load('/about_us');
-
 
       // Initialization login - logout button, and signUp button handling
       if (sessionStorage.getItem('loggedIn') == 'true') {
@@ -68,7 +65,8 @@
             <button class="btn custom-outlined-btn" onclick=logout()>Log Out</button>
           </li>
           <li id="personal_area_btn" class="nav-item me-3">
-            <button class="btn custom-outlined-btn" onclick=loadPersonalArea()><i class="fa fa-user"></i></button>
+            <button class="btn custom-outlined-btn" onclick="$('#body').load('users/personal_area')">
+              <i class="fa fa-user"></i></button>
           </li>
         </ul>
 
@@ -153,49 +151,49 @@
 </div>
 </body>
 
-<!-- Forgot Password modal --> 
-<div class="modal fade" id="forgotPasswordForm" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" 
-  data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true"> 
-  <div class="modal-dialog"> 
-    <div class="modal-content"> 
-      <div class="modal-header"> 
-        <h5 class="modal-title" id="forgotPasswordModalLabel"><i class="fa fa-cog"></i> Reset Password</h5> 
-        <i type="button" class="fa fa-arrow-right" onclick="hideForgotPasswordModal()" data-bs-dismiss="modal" 
-          aria-label="Close"></i> 
-      </div> 
-      <div class="modal-body"> 
-        <form id="passwordform"> 
-          <div class="mb-3"> 
-            <label class="form-label">Username</label> 
-            <div class="row"> 
-              <div class="col-md-10 mb-2"> 
-                <input id="resetUsername" type="text" class="form-control" name="userName" placeholder="Username" /> 
-              </div> 
-            </div> 
-            <label class="form-label">Email</label> 
-            <div class="row"> 
-              <div class="col-md-10"> 
-                <input id="resetEmail" type="text" class="form-control" name="email" placeholder="Email" /> 
-              </div> 
+<!-- Forgot Password modal -->
+<div class="modal fade" id="forgotPasswordForm" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+  data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgotPasswordModalLabel"><i class="fa fa-cog"></i> Reset Password</h5>
+        <i type="button" class="fa fa-arrow-right" onclick="hideForgotPasswordModal()" data-bs-dismiss="modal"
+          aria-label="Close"></i>
+      </div>
+      <div class="modal-body">
+        <form id="passwordform">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <div class="row">
+              <div class="col-md-10 mb-2">
+                <input id="resetUsername" type="text" class="form-control" name="userName" placeholder="Username" />
+              </div>
+            </div>
+            <label class="form-label">Email</label>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="resetEmail" type="text" class="form-control" name="email" placeholder="Email" />
+              </div>
               <!-- <div class="col align-self-center"> 
                 <i id="resetEmailButton" onclick="sendEmail()" type="button" class="fa fa-toggle-right fa-2x mt-1"></i> 
               </div>  -->
-            </div> 
-          </div> 
-          <div> 
-            <p class="text-muted mb-4"> 
-              After you will enter your details and submit, 
-              you'll recieve a passcode in order to reset your login password. 
-            </p> 
-          </div> 
-          <div class="d-grid gap-2 col-6 mx-auto"> 
-            <button type="button" onclick="sendEmail()" class="btn custom-btn"> 
-              Reset password </button> 
-          </div> 
-        </form> 
-      </div> 
-    </div> 
-  </div> 
+            </div>
+          </div>
+          <div>
+            <p class="text-muted mb-4">
+              After you will enter your details and submit,
+              you'll recieve a passcode in order to reset your login password.
+            </p>
+          </div>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="button" onclick="sendEmail()" class="btn custom-btn">
+              Reset password </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Loading modal -->
@@ -245,4 +243,5 @@
   </div>
 </div>
 <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+
 </html>

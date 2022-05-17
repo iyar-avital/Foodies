@@ -3,13 +3,8 @@
 <script>
     $('#personalFormid').ready(function () {
         (async function () {
-            console.log('hello');
-            let navigation_bar_items = document.getElementById('navigation_bar_items');
-            let response = await fetchData('/personal_area/data');
-            let items = await response.json();
-            
-            alert(item);
-
+            let response = await fetchData('users/personal_area/data');
+            let user = await response.json();
         })();
     });
 </script>
