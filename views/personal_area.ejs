@@ -15,10 +15,11 @@
             let pass = $('#inputPassword').val();
             let passConfirm = $('#inputPasswordConfirm').val();
 
-            if (pass == passConfirm)
-                return updateUser(userName, { password: pass });
+            if (pass != passConfirm)
+                return $('#inputPasswordConfirm').addClass(' is-invalid');
 
-            $('#inputPasswordConfirm').addClass(' is-invalid');
+            const encrypted = encrypt(pass);
+            updateUser(userName, { password: encrypted });
         });
     });
 </script>

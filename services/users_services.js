@@ -1,4 +1,5 @@
 const model = require('../model')("User");
+const { decrypt } = require("../utils/decryption.js");
 
 // get users 
 async function getUsers() {
@@ -50,6 +51,12 @@ async function deleteUser(id) {
 // update user
 async function updateUser(id, args) {
     try {
+        if (args.password == undefined)
+            return await model.UPDATE(id, args);
+
+        // Decrypt password before saving in DB
+        const decrypted = decrypt(args.password);
+        args.password = decrypted;
         return await model.UPDATE(id, args);
     } catch (err) {
         debug(`Failed: ${err}`);
