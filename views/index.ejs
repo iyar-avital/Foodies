@@ -12,6 +12,7 @@
   <script src="javascripts/login.js"></script>
   <script src="javascripts/logout.js"></script>
   <script src="javascripts/signup.js"></script>
+  <script src="javascripts/personal_area.js"></script>
   <script src="javascripts/forgotPassword.js"></script>
   <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script src="javascripts/jsencrypt.min.js"></script>
@@ -29,12 +30,14 @@
       // Initialization login - logout button, and signUp button handling
       if (sessionStorage.getItem('loggedIn') == 'true') {
         $('#logout_btn').show();
+        $('#personal_area_btn').show();
         $('#signup_btn').hide();
         $('#login_btn').hide();
       } else {
         $('#logout_btn').hide();
         $('#signup_btn').show();
         $('#login_btn').show();
+        $('#personal_area_btn').hide();
       }
     });
   </script>
@@ -62,6 +65,9 @@
           </li>
           <li id="logout_btn" class="nav-item me-3">
             <button class="btn custom-outlined-btn" onclick=logout()>Log Out</button>
+          </li>
+          <li id="personal_area_btn" class="nav-item me-3">
+            <button class="btn custom-outlined-btn" onclick=loadPersonalArea()><i class="fa fa-user"></i></button>
           </li>
         </ul>
 
@@ -237,8 +243,5 @@
     </div>
   </div>
 </div>
-
-
 <script src="https://www.markuptag.com/bootstrap/5/js/bootstrap.bundle.min.js"></script>
-
 </html>

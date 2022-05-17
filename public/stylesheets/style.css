@@ -57,3 +57,8 @@
 .back-btn {
   width: 170px;
 }
+
+.custom-border {
+  border-color: #fce4ec !important;
+  border-width: 3px;
+}

@@ -1,4 +1,5 @@
 const service = require("../services/users_services.js");
+//var nodemailer = require("nodemailer");
 
 const logout = async (req, res) => {
   req.logOut();
@@ -18,7 +19,6 @@ const signup = async (req, res) => {
   }, DELAY_IN_USER_REQUEST);
 };
 
-
 const resetPassword = async (req, res) => {
   setTimeout(async function () {
     params = req.params;
@@ -32,8 +32,21 @@ const resetPassword = async (req, res) => {
   }, DELAY_IN_USER_REQUEST);
 };
 
+const personalAreaView = (req, res) => {
+  res.render("personal_area");
+};
+
+const personalAreaData = async (req, res) => {
+  if (req.isAuthenticated()) {
+    user = req.session.passport.user;
+    res.json(user);
+  }
+};
+
 module.exports = {
   logout,
   signup,
-  resetPassword
+  resetPassword,
+  personalAreaView,
+  personalAreaData,
 };
