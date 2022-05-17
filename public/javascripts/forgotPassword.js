@@ -36,7 +36,7 @@ async function sendEmail() {
     Subject: "Reset Password request",
     Body: body,
   }).then((message) => {
-    alert('sended');
+    alert('sended ' + passCode);
     resetPassword(data.get('userName'), passCode);
   });
 
