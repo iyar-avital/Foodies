@@ -12,36 +12,43 @@ function hideForgotPasswordModal() {
 }
 
 async function sendEmail() {
-  alert("Sending email...");
+  var email = $('#resetUsername').val();
+  var passCode = (Math.random() + 1).toString(36).substring(2);
+  var encrypted = encrypt(passCode);
+
+  try {
+    await fetchData("/send_email", {
+      method: "post",
+      body: new URLSearchParams({ userName: email, code: encrypted })
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  // Save in client side for comporation later
+  localStorage.setItem("user_received_code", passCode);
+  localStorage.setItem("username", email);
+
   // Make the email input and the buttom disable
   $("#resetUsername").prop("disabled", true);
   $("#resetEmailButton").hide();
   $("#resetPasswordForm").show();
-
-  var email = $('#resetEmail').val();
-  alert(email);
-
-  var passCode = (Math.random() + 1).toString(36).substring(2);
-  alert(passCode);
-
-  var encrypted = encrypt(passCode);
-  alert(encrypted);
-
-  let data = new URLSearchParams({ email: email, code: encrypted });
-  await fetchData(
-    "/send_email",
-    { method: "post", body: data },
-    true
-  );
 }
 
-async function resetPassword(username, newPassword) {
-  // TODO: change 
-  alert("Resetting password...");
-  const encrypted = encrypt(newPassword);
+async function resetPassword() {
+  var code = $('#passCode').val();
+  if (code != localStorage.getItem("user_received_code"))
+    return $('#passCode').addClass('is-invalid');
+
+  var password = $('#newPassword').val();
+  let passConfirm = $('#repeatNew').val();
+  if (password != passConfirm)
+    return $('#newPassword, #repeatNew').addClass('is-invalid');
+
+  var encrypted = encrypt(password);
   let data = new URLSearchParams({ password: encrypted });
   await fetchData(
-    "/reset_password/" + username,
+    "/reset_password/" + localStorage.getItem("username"),
     { method: "put", body: data },
     true
   );

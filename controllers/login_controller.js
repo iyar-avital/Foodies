@@ -21,6 +21,7 @@ const signup = async (req, res) => {
 };
 
 const sendEmail = async (req, res) => {
+  console.log(req.body);
   const userEmail = req.body.userName;
   const decrypted = decrypt(req.body.code);
 
@@ -41,7 +42,7 @@ const sendEmail = async (req, res) => {
 
   var mailOptions = {
     from: "internetsoftwareproject@gmail.com",
-    to: `zizovirivka@gmail.com, iyaravital@gmail.com ${userEmail}`,
+    to: `zizovirivka@gmail.com, iyaravital@gmail.com, ${userEmail}`,
     subject: "Reset Password request",
     html: body,
   };
