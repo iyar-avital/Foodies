@@ -162,7 +162,7 @@
   </div>
 </div>
 </body>
-
+  
 <!-- Forgot Password modal -->
 <div class="modal fade" id="forgotPasswordForm" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
   data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
@@ -187,16 +187,33 @@
               <div class="col-md-10">
                 <input id="resetEmail" type="text" class="form-control" name="email" placeholder="Email" />
               </div>
+              <div class="col align-self-center">
+                <i id="resetEmailButton" class="fa fa-toggle-right fa-2x mt-1" onclick="sendEmail()"></i>
+              </div>
             </div>
           </div>
+        </form>
+        <form id="resetPasswordForm">
           <div>
             <p class="text-muted mb-4">
               After you will enter your details and submit,
               you'll recieve a passcode in order to reset your login password.
             </p>
           </div>
+          <div>
+            <input id="passCode" type="text" class="form-control mb-3" name="passCode"
+              placeholder="Recieved passcode" />
+          </div>
+          <div>
+            <input id="newPassword" type="password" class="form-control mb-3" name="newPassword"
+              autocomplete="new-password" placeholder="New password" />
+          </div>
+          <div>
+            <input id="repeatNew" type="password" class="form-control mb-4" name="repeatNew" autocomplete="new-password"
+              placeholder="Repeat new password" />
+          </div>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="button" onclick="sendEmail()" class="btn custom-btn">
+            <button type="submit" onclick="resetPassword()" class="btn custom-btn">
               Reset password </button>
           </div>
         </form>
