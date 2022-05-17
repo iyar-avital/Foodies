@@ -1,6 +1,7 @@
 function showForgotPasswordModal() {
   $("#logInForm").modal("hide");
   $("#forgotPasswordForm").modal("show");
+  $("#resetUsername").prop("disabled", false);
   $("#resetEmailButton").show();
   $("#resetPasswordForm").hide();
 }
@@ -14,7 +15,6 @@ async function sendEmail() {
   alert("Sending email...");
   // Make the email input and the buttom disable
   $("#resetUsername").prop("disabled", true);
-  $("#resetEmail").prop("disabled", true);
   $("#resetEmailButton").hide();
   $("#resetPasswordForm").show();
 
@@ -46,4 +46,3 @@ async function resetPassword(username, newPassword) {
     true
   );
 }
-
