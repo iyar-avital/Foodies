@@ -13,7 +13,7 @@ function hideForgotPasswordModal() {
 
 async function sendEmail() {
   var email = $('#resetUsername').val();
-  var passCode = (Math.random() + 1).toString(36).substring(2);
+  var passCode = (Math.random() + 1).toString(36).substring(6);
   var encrypted = encrypt(passCode);
 
   try {
