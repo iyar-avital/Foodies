@@ -37,7 +37,7 @@ const sendEmail = async (req, res) => {
     "<p>Please insert it in the right place and pick a new password.</p>";
   let msgFooter =
     "<p>Thanks for your cooperation,</p><p>Rivka and Iyar.</p></div>";
-  var body = `${msgHeader}${instruction}<b>${decrypted}</b><br></br><b>${msgFooter}</b>`;
+  var body = `${msgHeader}<b>${decrypted}</b>${instruction}<b>${msgFooter}</b>`;
 
   var mailOptions = {
     from: "internetsoftwareproject@gmail.com",
