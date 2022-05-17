@@ -28,14 +28,26 @@
       // Initialization login - logout button, and signUp button handling
       if (sessionStorage.getItem('loggedIn') == 'true') {
         $('#logout_btn').show();
-        $('#personal_area_btn').show();
+        $('#personal_area').show();
         $('#signup_btn').hide();
         $('#login_btn').hide();
       } else {
         $('#logout_btn').hide();
         $('#signup_btn').show();
         $('#login_btn').show();
-        $('#personal_area_btn').hide();
+        $('#personal_area').hide();
+      }
+
+      // Personal area button handling
+      $('#personal_area_btn').click(
+        function () {
+          $('li a').removeClass('active');
+          $('#body').load('users/personal_area');
+        }
+      );
+
+      if (location.hash == '#personal_area') {
+        $('#body').load('users/personal_area');
       }
     });
   </script>
@@ -64,9 +76,9 @@
           <li id="logout_btn" class="nav-item me-3">
             <button class="btn custom-outlined-btn" onclick=logout()>Log Out</button>
           </li>
-          <li id="personal_area_btn" class="nav-item me-3">
-            <button class="btn custom-outlined-btn" onclick="$('#body').load('users/personal_area')">
-              <i class="fa fa-user"></i></button>
+          <li id="personal_area" class="nav-item me-3">
+            <a id="personal_area_btn" class="btn custom-outlined-btn" href="#personal_area">
+              <i class="fa fa-user"></i></a>
           </li>
         </ul>
 
@@ -175,9 +187,6 @@
               <div class="col-md-10">
                 <input id="resetEmail" type="text" class="form-control" name="email" placeholder="Email" />
               </div>
-              <!-- <div class="col align-self-center"> 
-                <i id="resetEmailButton" onclick="sendEmail()" type="button" class="fa fa-toggle-right fa-2x mt-1"></i> 
-              </div>  -->
             </div>
           </div>
           <div>
