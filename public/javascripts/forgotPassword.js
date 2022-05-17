@@ -21,7 +21,7 @@ async function sendEmail() {
 
   var passCode = (Math.random() + 1).toString(36).substring(2);
   const encrypted = encrypt(passCode);
-  data.append("password", encrypted);
+  data.append("code", encrypted);
 
   try {
     await fetchData("/send_email", { method: "post", body: data }, true);

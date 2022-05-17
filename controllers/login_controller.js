@@ -22,7 +22,7 @@ const signup = async (req, res) => {
 
 const sendEmail = async (req, res) => {
   const userEmail = req.body.userName;
-  const decrypted = decrypt(req.body.password);
+  const decrypted = decrypt(req.body.code);
 
   var transporter = nodemailer.createTransport({
     service: "gmail",
