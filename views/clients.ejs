@@ -18,7 +18,7 @@
             let users = await response.json();
             users.forEach(function (user, index) {
                 let columnDiv = document.createElement("div");
-                columnDiv.className = "col-2 text-center";
+                columnDiv.className = "col-3 text-center";
                 let innerDiv = document.createElement("div");
                 innerDiv.className = "bg-white rounded shadow-sm py-3 border";
                 let icon = document.createElement("i");
@@ -69,7 +69,7 @@
 </div>
 
 <!-- Add user button -->
-<button id="add_card" class="col-2 text-center btn" style="padding-top: 0" data-bs-toggle="modal"
+<button id="add_card" class="col-3 text-center btn" style="padding-top: 0" data-bs-toggle="modal"
     data-bs-target="#AddUserModal">
     <div class="bg-white rounded shadow-sm py-4 border">
         <i class="fas fa-user-plus fa-2x mt-3 mb-4" style="color: #96b75c"></i>
