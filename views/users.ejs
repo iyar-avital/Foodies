@@ -38,7 +38,7 @@
         let userRoleSelector = document.getElementById("modalUpdateRole");
         let userRole =
             userRoleSelector.options[userRoleSelector.selectedIndex].value;
-        updateUser(userName, userRole);
+        updateUser(userName, { role: userRole });
     });
 
     $("#users_cards_div").ready(function () {

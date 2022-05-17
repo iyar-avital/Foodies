@@ -1,8 +1,9 @@
-async function updateUser(userNameToUpdate, userRoleToUpdate) {
-  let data = new URLSearchParams({ role: userRoleToUpdate });
+async function updateUser(userNameToUpdate, updatedUser) {
+  let data = new URLSearchParams(updatedUser);
   await fetchData(
     "/users/update/" + userNameToUpdate,
     { method: "put", body: data },
     true
   );
 }
+
