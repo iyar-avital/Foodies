@@ -2,7 +2,6 @@ function showForgotPasswordModal() {
   $("#logInForm").modal("hide");
   $("#forgotPasswordForm").modal("show");
   $("#resetUsername").prop("disabled", false);
-  $("#resetEmail").prop("disabled", false);
   $("#resetEmailButton").show();
 }
 
@@ -13,33 +12,22 @@ function hideForgotPasswordModal() {
 
 async function sendEmail() {
   let forgotPasswordForm = document.getElementById("passwordform");
-  let data = new FormData(forgotPasswordForm);
+  let data = new URLSearchParams(new FormData(forgotPasswordForm));
 
   // Make the email input and the buttom disable
   $("#resetUsername").prop("disabled", true);
-  $("#resetEmail").prop("disabled", true);
   $("#resetEmailButton").empty();
   $("#resetEmailButton").hide();
 
-  let helloStr =
-    "Hello there, \nYour new password to our website is:,\n";
   var passCode = (Math.random() + 1).toString(36).substring(2);
-  let thanksStr = "\nThanks for your cooperation,\nRivka and Iyar. ";
-  var body = `${helloStr}${passCode}${thanksStr}`;
+  const encrypted = encrypt(passCode);
+  data.append("password", encrypted);
 
-  await Email.send({
-    Host: "smtp.gmail.com",
-    Username: "internetsoftwareproject@gmail.com",
-    Password: "iyarrivka",
-    To: 'iyaravital@gmail.com, zizovirivka@gmail.com',
-    From: "internetsoftwareproject@gmail.com",
-    Subject: "Reset Password request",
-    Body: body,
-  }).then((message) => {
-    alert('sended ' + passCode);
-    resetPassword(data.get('userName'), passCode);
-  });
-
+  try {
+    await fetchData("/send_email", { method: "post", body: data }, true);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function resetPassword(username, passCode) {
@@ -51,4 +39,3 @@ async function resetPassword(username, passCode) {
     true
   );
 }
-
