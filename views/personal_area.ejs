@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css?a=1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="javascripts/updateUser.js"></script>
+
 <script>
     $('#personalFormid').ready(function () {
         (async function () {
@@ -7,8 +9,20 @@
             let user = await response.json();
             $('#inputUsername').val(user.username);
         })();
+
+        $("#save").click(function () {
+            let userName = $('#inputUsername').val();
+            let pass = $('#inputPassword').val();
+            let passConfirm = $('#inputPasswordConfirm').val();
+
+            if (pass == passConfirm)
+                return updateUser(userName, { password: pass });
+
+            $('#inputPasswordConfirm').addClass(' is-invalid');
+        });
     });
 </script>
+
 <div class="container-xl px-1 mt-5">
     <hr class="mt-0 mb-5">
     <div class="row">
@@ -25,7 +39,7 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form id="personalFormid">
+                    <form id="personalFormid" class="form-floating">
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Username</label>
                             <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username"
@@ -37,12 +51,12 @@
                                 autocomplete="new-password">
                         </div>
                         <div class="mb-3">
-                            <label class="small mb-1" for="inputRepeatedPassword">Repeat password</label>
-                            <input class="form-control" id="inputRepeatedPassword" type="password"
+                            <label class="small mb-1">Repeat password</label>
+                            <input type="password" class="form-control" id="inputPasswordConfirm"
                                 placeholder="Repeat new password">
                         </div>
                         <div>
-                            <button class="btn custom-btn" type="button">Save changes</button>
+                            <button id="save" class="btn custom-btn" type="button">Save changes</button>
                         </div>
                     </form>
                 </div>
