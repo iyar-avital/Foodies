@@ -1,5 +1,5 @@
 const service = require("../services/users_services.js");
-//var nodemailer = require("nodemailer");
+const { decrypt } = require("../utils/decryption.js");
 
 const logout = async (req, res) => {
   req.logOut();
@@ -20,9 +20,15 @@ const signup = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
+  const decrypted = decrypt(req.body.password);
+  console.log(decrypted);
+
   setTimeout(async function () {
     params = req.params;
     let user = await service.getUserByUsername(params.name);
+    if (user == undefined) return res.sendStatus(404);
+
+    // TODO: handle body
     let updatedUser = await service.updateUser(user._id, req.body);
     if (updatedUser._id.equals(user._id)) {
       res.sendStatus(200);

@@ -36,21 +36,19 @@ async function sendEmail() {
     Subject: "Reset Password request",
     Body: body,
   }).then((message) => {
-    alert('sended' + passCode);
+    alert('sended ' + passCode);
     resetPassword(data.get('userName'), passCode);
   });
 
 }
 
 async function resetPassword(username, passCode) {
-  var encrypt = new JSEncrypt();
-  encrypt.setPublicKey('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCPjcxfYXYkhimFtWrtan1pampQa7Zeggf2W7cwAxJIS4yw51yS35TKNYHg/gDoItLwKVKTkbbjRFcZlSlf3pv/5Gu0UkIrkVJgadriPBDMHVsOOdSg1sp32np2LhABF/xUUP2bIQahiT72/QPoPQyfK1xlOHOvpifPm2P64t6F8wIDAQAB');
-  var encrypted = encrypt.encrypt(passCode);
-
-  let data = new URLSearchParams({ password: passCode });
+  const encrypted = encrypt(passCode);
+  let data = new URLSearchParams({ password: encrypted });
   await fetchData(
     "/reset_password/" + username,
     { method: "put", body: data },
     true
   );
 }
+
