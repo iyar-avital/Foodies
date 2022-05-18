@@ -72,9 +72,21 @@ const resetPassword = async (req, res) => {
   }, DELAY_IN_USER_REQUEST);
 };
 
+//#region personal area
+const personalAreaView = (req, res) => {
+  res.render("personal_area");
+};
+
+const personalAreaData = async (req, res) => {
+  res.json(req.session.passport.user);
+};
+//#endregion
+
 module.exports = {
   logout,
   signup,
   sendEmail,
   resetPassword,
+  personalAreaView,
+  personalAreaData
 };

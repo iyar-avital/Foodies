@@ -5,7 +5,7 @@
 <script>
     $('#personalFormid').ready(function () {
         (async function () {
-            let response = await fetchData('users/personal_area/data');
+            let response = await fetchData('personal_area/data');
             let user = await response.json();
             $('#inputUsername').val(user.username);
         })();

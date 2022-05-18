@@ -1,17 +1,6 @@
 require("../utils/manage_access.js");
 const service = require("../services/users_services.js");
 
-//#region personal area
-const personalAreaView = (req, res) => {
-    res.render("personal_area");
-};
-
-const personalAreaData = async (req, res) => {
-    res.json(req.session.passport.user);
-};
-//#endregion
-
-
 //#region users
 const usersView = async (req, res) => {
     var result = '';
@@ -80,8 +69,6 @@ const updateUser = async (req, res) => {
 //#endregion
 
 module.exports = {
-    personalAreaView,
-    personalAreaData,
     usersView,
     usersData,
     addUser,
