@@ -1,0 +1,17 @@
+.inside_box {
+    background: white;
+    padding: 8px;
+    max-width: 1000px;
+    max-height: 70%;
+    text-align: center;
+    border-radius: 32px;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+.inside_box img {
+    margin: 12px;
+    width: 300px;
+    border-radius: 20px;
+    cursor: pointer;
+}

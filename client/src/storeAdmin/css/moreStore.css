@@ -1,0 +1,26 @@
+.strip {
+  height: 60vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.stripText_bg {
+  background: #00000044;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.shop_name {
+  font-size: 5em;
+  font-weight: bold;
+  color: #eee;
+}
+
+.store_info {
+  margin-top: -55px;
+  min-height: 650px;
+  padding: 20px;
+  background: white;
+  border-radius: 20px;
+}
