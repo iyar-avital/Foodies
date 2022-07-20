@@ -21,7 +21,7 @@ function CreateStore(props) {
         toast.success(
           "Store creating requests has been sent successfully. Please whait for admin approval"
         );
-        nav("myStores");
+        nav("/myStores");
       }
     } catch (err) {
       if (err.response.data.code == 11000) {

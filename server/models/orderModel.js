@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema({
     type: Array,
     required: [true, "can't be blank"],
   },
-  user_id: String,
+  client_short_id: String,
   status: {
     type: String,
     default: "pending",

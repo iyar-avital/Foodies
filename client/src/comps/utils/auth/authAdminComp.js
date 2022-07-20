@@ -27,6 +27,8 @@ function AuthAdminComp(props) {
       if (resp.data.role != "admin") {
         toast.error("Unathorized user");
         nav("../");
+      } else {
+        props.setAuthorized(true);
       }
     } catch (err) {
       //

@@ -47,7 +47,7 @@ function AddProductStoreAdmin(props) {
           >
             <ProductForm doApi={doFormApi} isLoading={isLoading} />
           </Col>
-          <Col md={6} className="createStore__bg"></Col>
+          <Col md={6} className="productForm__bg"></Col>
         </Row>
       </Container>
     </motion.div>

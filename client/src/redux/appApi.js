@@ -41,13 +41,6 @@ const appApi = createApi({
       }),
     }),
 
-    deleteUser: builder.mutation({
-      query: (pass) => ({
-        url: "/users/",
-        method: "DELETE",
-        body: { password: pass },
-      }),
-    }),
     //favs
     fetchFavs: builder.mutation({
       query: () => ({

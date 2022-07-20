@@ -16,8 +16,6 @@ function UpdateAccount() {
   //hooks
   const [updateUser, { isLoading, error }] = useUpdateUserMutation();
   const nav = useNavigate();
-
-  const [show, setShow] = useState(false);
   //user details
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
@@ -36,8 +34,6 @@ function UpdateAccount() {
       nav("/login");
     }
   }, [user, error]);
-
-  const handleToggle = () => setShow(!show);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -101,8 +97,6 @@ function UpdateAccount() {
     >
       <div className="d-flex align-items-center h-100">
         <Container>
-          <DeleteAccount show={show} handleToggle={handleToggle} />
-
           <Row className="justify-content-between align-items-center">
             <Col
               md={5}
@@ -189,16 +183,6 @@ function UpdateAccount() {
                 <Button variant="primary" type="submit">
                   {uploading || isLoading ? <Spinner animation="grow" /> : "Update"}
                 </Button>
-                <p className="text-center my-5">
-                  <a
-                    style={{ cursor: "pointer" }}
-                    className="text-decoration-none"
-                    onClick={handleToggle}
-                  >
-                    Delete
-                  </a>{" "}
-                  my acccount
-                </p>
               </Form>
             </Col>
             <Col md={6} className="update__bg"></Col>

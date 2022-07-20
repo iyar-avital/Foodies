@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import ImagesSearch from "../imagesSearch";
 
 function ProductForm(props) {
@@ -14,6 +15,7 @@ function ProductForm(props) {
 
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
+  const location = useLocation();
 
   useEffect(() => {
     setName(item?.name);

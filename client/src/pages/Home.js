@@ -21,7 +21,7 @@ function Home(props) {
   return (
     <React.Fragment>
       <HomeStrip />
-      <main className="container mb-4">
+      <main className="container">
         {/* <Info /> */}
         <div className="row">
           {shops_ar.map((item) => {

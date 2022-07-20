@@ -37,47 +37,6 @@ function MyStoreItem(props) {
           <h4>{item.name}</h4>
           {/* <p className="text-muted">address : {item.address}</p> */}
           <hr />
-          <div className="d-flex justify-content-between">
-            <button
-              onClick={() => {
-                nav("/storeAdmin/more/" + item._id);
-              }}
-              className="mx-2"
-              style={{ background: "none" }}
-              title="Info"
-            >
-              Info <BsFillInfoCircleFill size="1.5em" color="#34495E" />
-            </button>
-            <div>
-              <Link
-                to={"/storeAdmin/products/" + item._id}
-                state={{ item }}
-                className="mx-2"
-                style={{ background: "none" }}
-                title="Products"
-              >
-                <BsColumns size="1.5em" color="#16A085" />
-              </Link>
-              <Link
-                to={"/storeAdmin/editStore/" + item._id}
-                className="mx-2"
-                state={{ item }}
-                style={{ background: "none" }}
-                title="Edit"
-              >
-                <MdEdit size="1.5em" color="#3498DB" />
-              </Link>
-              <button
-                onClick={() => {
-                  props.delStore(item._id);
-                }}
-                style={{ background: "none" }}
-                title="Delete"
-              >
-                <MdDelete size="1.5em" color="#E74C3C" />
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </motion.div>

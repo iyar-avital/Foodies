@@ -10,22 +10,7 @@ function Footer(props) {
 
   return (
     <>
-      {/* // <div className="footer-basic">
-    //   <footer>
-    //     {user && (
-    //       <ul className="list-inline">
-    //         <li className="list-inline-item animaLinkSM">
-    //           <Link to="/createStore">Create store</Link>
-    //         </li>
-    //         <li className="list-inline-item animaLinkSM">
-    //           <Link to="/myStores">My stores</Link>
-    //         </li>
-    //       </ul>
-    //     )}
-    //     <p className="copyright">Foodzone © {dt.getFullYear()}</p>
-    //   </footer>
-    // </div> */}
-      <Nav className="justify-content-center " activeKey="/home">
+      <Nav className="justify-content-center mt-4" activeKey="/home">
         {user && (
           <>
             <Nav.Item>

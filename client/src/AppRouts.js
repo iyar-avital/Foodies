@@ -16,7 +16,7 @@ import MyStores from "./pages/myStores";
 // store Admin imports
 import LayoutStore from "./storeAdmin/layoutStore";
 import EditStoreAdmin from "./storeAdmin/editStoreAdmin";
-import MoreStore from "./storeAdmin/moreStore";
+
 import ProductsStoreAdmin from "./storeAdmin/productsStoreAdmin";
 import EditProductAdminStore from "./storeAdmin/editProductAdminStore";
 import AddProductStoreAdmin from "./storeAdmin/addProductStoreAdmin";
@@ -60,7 +60,6 @@ function AppRouts() {
         <Route path="/storeAdmin/:id" element={<LayoutStore />}>
           <Route index element={<HomeStore />} />
           <Route path="/storeAdmin/:id/editStore" element={<EditStoreAdmin />} />
-          <Route path="/storeAdmin/:id/more" element={<MoreStore />} />
           <Route path="/storeAdmin/:id/products" element={<ProductsStoreAdmin />} />
           <Route path="/storeAdmin/:id/products/edit/:prodId" element={<EditProductAdminStore />} />
           <Route path="/storeAdmin/:id/products/addProduct" element={<AddProductStoreAdmin />} />
