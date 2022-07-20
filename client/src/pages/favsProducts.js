@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { BsStar } from "react-icons/bs";
 import { BiConfused } from "react-icons/bi";
 import { useSelector } from "react-redux";
-import LottieAnimation from "../comps/utils/lottieAnimation";
-import AuthClientComp from "../comps/utils/auth/authClientComp";
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import AuthClientComp from "../comps/auth/authClientComp";
 import Product from "../comps/store/product";
 import { useAddRemoveFavsMutation } from "../redux/appApi";
 

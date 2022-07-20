@@ -1,17 +1,15 @@
-import axios, { Axios } from "axios";
 import React, { useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { motion } from "framer-motion";
-
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLoginUserMutation } from "../redux/appApi";
-import { API_URL, doApiMethod } from "../services/apiService";
+import { API_URL } from "../services/apiService";
 import "./css/Login.css";
-import ResetPass from "../comps/utils/resetPass";
-import { encrypt } from "../services/encryption";
+import { encrypt } from "../utils/encryption";
+import ResetPass from "../comps/general/resetPass";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -24,9 +22,8 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    let url = API_URL + "/users/login";
-    // await setPassword(encrypt(password));
-    let resp = await loginUser({ email, password });
+    let encryptPass = encrypt(password);
+    let resp = await loginUser({ email, password: encryptPass });
     if (resp.data) {
       toast.success("You are now logged in ");
       nav("/");

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-
-import { dateCreated } from "../comps/utils/dateCreated";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { BsPen, BsEraser, BsInfoCircle } from "react-icons/bs";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
 import { toast } from "react-toastify";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import { dateCreated } from "../utils/dateCreated";
 
 function ProductsStoreAdmin(props) {
   const [products, setProducts] = useState([]);

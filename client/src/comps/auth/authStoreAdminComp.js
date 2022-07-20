@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { API_URL, doApiGet } from "../../../services/apiService";
-import { STORE_SHORT_IDS } from "../../../services/localService";
-import { useLogoutUserMutation } from "../../../redux/appApi";
+import { API_URL, doApiGet } from "../../services/apiService";
+import { STORE_SHORT_IDS } from "../../services/localService";
+import { useLogoutUserMutation } from "../../redux/appApi";
 import Cookies from "js-cookie";
 
 function AuthStoreAdminComp(props) {

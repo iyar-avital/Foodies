@@ -8,7 +8,7 @@ import { BsCardImage } from "react-icons/bs";
 import { Col, Container, Form, Row, Spinner, Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 
-import ProductForm from "../comps/utils/forms/ProductForm";
+import ProductForm from "../comps/forms/ProductForm";
 
 function AddProductStoreAdmin(props) {
   const location = useLocation();

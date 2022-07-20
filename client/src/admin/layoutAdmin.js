@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AuthAdminComp from "../comps/utils/auth/authAdminComp";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import AuthAdminComp from "../comps/auth/authAdminComp";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 
 import HeaderAdmin from "./headerAdmin";
 

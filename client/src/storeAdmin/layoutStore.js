@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AuthStoreAdminComp from "../comps/utils/auth/authStoreAdminComp";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import AuthStoreAdminComp from "../comps/auth/authStoreAdminComp";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 import HeaderStore from "./headerStore";
 
 function LayoutStore(props) {

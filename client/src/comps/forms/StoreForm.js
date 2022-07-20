@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
-import ImagesSearch from "../imagesSearch";
+import ImagesSearch from "../misc/imagesSearch";
 
 function StoreForm(props) {
   const item = props.item;

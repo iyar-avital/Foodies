@@ -9,6 +9,7 @@ import { useSignupUserMutation } from "../redux/appApi";
 import { motion } from "framer-motion";
 
 import "./css/Signup.css";
+import { encrypt } from "../utils/encryption";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -24,17 +25,20 @@ function Signup() {
   const defaultImage =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
   const nav = useNavigate();
+
   const handleSignup = async (e) => {
     e.preventDefault();
     const picUrl = image ? await uploadImage(image) : defaultImage;
-    // password = bcrypt(password, process.env.REACT_APP_BCRYPT_KET);
-    signupUser({ name, email, phone, address, password, picture: picUrl }).then(({ data }) => {
-      if (data) {
-        console.log(data);
-        toast.success("Account created successfully");
-        nav("/");
+    let encryptPass = encrypt(password);
+    signupUser({ name, email, phone, address, password: encryptPass, picture: picUrl }).then(
+      ({ data }) => {
+        if (data) {
+          console.log(data);
+          toast.success("Account created successfully");
+          nav("/");
+        }
       }
-    });
+    );
   };
 
   const validateImg = (e) => {

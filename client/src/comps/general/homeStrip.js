@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/homeStrip.css";
+import "../css/homeStrip.css";
 import { motion } from "framer-motion";
 
 function HomeStrip(props) {

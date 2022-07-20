@@ -5,8 +5,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { FiGitPullRequest } from "react-icons/fi";
 import { BsShop, BsEraser } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
-import LottieAnimation from "../comps/utils/lottieAnimation";
-import PageLinks from "../comps/utils/pageLinks";
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import PageLinks from "../comps/misc/pageLinks";
 
 function UsersList(props) {
   const [ar, setAr] = useState([]);

@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
+import Cart from "../store/cart";
 import Navigation from "./Navigation";
-import Cart from "./store/cart";
 // import Cart from "./store/cart";
 
 function Layout() {

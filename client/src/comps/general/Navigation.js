@@ -1,19 +1,15 @@
 import React from "react";
-
 import { LinkContainer } from "react-router-bootstrap";
-import { API_URL, doApiGet } from "../services/apiService";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { toggleCart } from "../redux/cartSlice";
+import { toggleCart } from "../../redux/cartSlice";
 
 function Navigation() {
   const user = useSelector((state) => state.user);
@@ -50,7 +46,7 @@ function Navigation() {
             </Offcanvas.Header>
 
             <Offcanvas.Body>
-              <Nav className="mx-auto">
+              <Nav className="mx-auto  text-muted">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/stores">Stores</Nav.Link>

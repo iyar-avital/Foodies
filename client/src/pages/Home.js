@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import HomeStrip from "../comps/homeStrip";
-import Info from "../comps/info";
+import HomeStrip from "../comps/general/homeStrip";
 import StoreCard from "../comps/store/storeCard";
 import { API_URL, doApiGet } from "../services/apiService";
 
