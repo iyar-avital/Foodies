@@ -68,7 +68,7 @@ function ProductsAdmin(props) {
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
-            <th>store_id</th>
+            <th>store_short_id</th>
             <th>Date Created</th>
             <th>Short_id</th>
             <th>Del</th>
@@ -89,7 +89,7 @@ function ProductsAdmin(props) {
                 </td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
-                <td>{item.store_id}</td>
+                <td>{item.store_short_id}</td>
                 <td>{dateCreated(item.date_created)}</td>
                 <td>{item.short_id}</td>
                 <td>

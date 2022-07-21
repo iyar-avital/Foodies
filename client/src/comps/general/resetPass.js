@@ -147,7 +147,6 @@ function ResetPass(props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="col-lg-6"
           >
             <Modal.Body>
               <Form>
@@ -173,7 +172,6 @@ function ResetPass(props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="col-lg-6"
           >
             <Modal.Body>
               <Form>

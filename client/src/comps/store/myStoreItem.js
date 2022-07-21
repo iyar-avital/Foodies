@@ -22,7 +22,7 @@ function MyStoreItem(props) {
     >
       <div
         className="payment-card rounded-lg shadow bg-white text-center h-100 cursor-pointer"
-        onClick={() => nav("/storeAdmin/" + item._id)}
+        onClick={() => nav("/storeAdmin/" + item.short_id)}
       >
         <div className="payment-card__type px-4 py-5 d-flex justify-content-center align-items-center">
           <div
@@ -37,6 +37,38 @@ function MyStoreItem(props) {
           <h4>{item.name}</h4>
           {/* <p className="text-muted">address : {item.address}</p> */}
           <hr />
+          <div className="d-flex justify-content-between">
+            <button
+              onClick={() => {
+                nav("/storeAdmin/more/" + item.short_id);
+              }}
+              className="mx-2"
+              style={{ background: "none" }}
+              title="Info"
+            >
+              Info <BsFillInfoCircleFill size="1.5em" color="#34495E" />
+            </button>
+            <div>
+              <Link
+                to={"/storeAdmin/editStore/" + item.short_id}
+                className="mx-2"
+                state={{ item }}
+                style={{ background: "none" }}
+                title="Edit"
+              >
+                <MdEdit size="1.5em" color="#3498DB" />
+              </Link>
+              <button
+                onClick={() => {
+                  props.delStore(item.short_id);
+                }}
+                style={{ background: "none" }}
+                title="Delete"
+              >
+                <MdDelete size="1.5em" color="#E74C3C" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>

@@ -9,7 +9,7 @@ function Footer(props) {
   const user = useSelector((state) => state.user);
 
   return (
-    <>
+    <div className="footer py-4">
       <Nav className="justify-content-center mt-4" activeKey="/home">
         {user && (
           <>
@@ -31,8 +31,8 @@ function Footer(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <p className="text-center mt-4 mb-4">Foodzone © {dt.getFullYear()}</p>
-    </>
+      <p className="text-center py-3">Foodzone © {dt.getFullYear()}</p>
+    </div>
   );
 }
 

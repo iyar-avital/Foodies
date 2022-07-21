@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
 // get user stores
 router.get("/userStores", auth, async (req, res) => {
   try {
-    let user_id = req.session.user._id;
+    let user_id = req.session.user.short_id;
     let data = await StoreModel.find({ admin_id: user_id }).sort({
       date_created: -1,
     });
@@ -71,7 +71,7 @@ router.get("/search", async (req, res) => {
 router.get("/single/:id", async (req, res) => {
   try {
     let id = req.params.id;
-    let data = await StoreModel.findOne({ _id: id });
+    let data = await StoreModel.findOne({ short_id: id });
     res.json(data);
   } catch (err) {
     console.log(err);
@@ -100,7 +100,7 @@ router.post("/", auth, async (req, res) => {
   try {
     let store = new StoreModel(req.body);
     // short_id , admin_id ,
-    store.admin_id = req.session.user._id;
+    store.admin_short_id = req.session.user.short_id;
     store.short_id = await genShortId(StoreModel);
     await store.save();
     res.status(201).json(store);

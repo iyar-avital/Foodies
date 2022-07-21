@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { API_URL, doApiMethod } from "../../services/apiService";
+import { API_URL, doApiMethod } from "../services/apiService";
 import { useDispatch, useSelector } from "react-redux";
-import CheckoutItem from "./checkoutItem";
+import CheckoutItem from "../comps/orders/checkoutItem";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { PayPalButton } from "react-paypal-button-v2";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./checkout.css";
-import { resetCart } from "../../redux/cartSlice";
-import AuthClientComp from "../auth/authClientComp";
+import "./css/checkout.css";
+import { resetCart } from "../redux/cartSlice";
+import AuthClientComp from "../comps/auth/authClientComp";
 
 function Checkout(props) {
-  const { cart_ar, totalPrice, store_id } = useSelector((state) => state.cart);
+  const { cart_ar, totalPrice, store_short_id } = useSelector((state) => state.cart);
   const nav = useNavigate();
   const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ function Checkout(props) {
     let body = {
       total_price: totalPrice,
       products_ar: cart_ar,
-      store_short_id: store_id,
+      store_short_id: store_short_id,
     };
     console.log(body);
     let resp = await doApiMethod(url, "POST", body);

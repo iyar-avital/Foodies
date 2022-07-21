@@ -4,7 +4,7 @@ export const cartSlice = createSlice({
   initialState: {
     cart_ar: [],
     totalPrice: 0,
-    store_id: "",
+    store_short_id: "",
     showCart: false,
   },
   reducers: {
@@ -30,9 +30,9 @@ export const cartSlice = createSlice({
       //item not found
       else {
         // verify that the new item belongs to the same store
-        if (state.store_id === "" || state.store_id === payload.store_id) {
+        if (state.store_short_id === "" || state.store_short_id === payload.store_short_id) {
           state.cart_ar = [...state.cart_ar, { ...payload, qty: 1 }]; //add new item
-          state.store_id = payload.store_id;
+          state.store_short_id = payload.store_short_id;
         }
       }
       state.totalPrice = totalPrice(state.cart_ar);
@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
 
     resetCart: (state) => {
       state.cart_ar = [];
-      state.store_id = "";
+      state.store_short_id = "";
       state.totalPrice = [];
     },
   },

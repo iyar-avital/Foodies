@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { API_URL, doApiGet } from "../../services/apiService";
+import { API_URL, doApiGet } from "../services/apiService";
 import { GrDeliver } from "react-icons/gr";
-import "./checkout.css";
-import OldOrderItem from "./oldOrderItem";
-import AuthClientComp from "../auth/authClientComp";
+import "./css/checkout.css";
+import OldOrderItem from "../comps/orders/oldOrderItem";
+import AuthClientComp from "../comps/auth/authClientComp";
 
 function OldOrders(props) {
   const [ar, setAr] = useState([]);

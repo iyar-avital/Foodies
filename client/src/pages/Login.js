@@ -15,7 +15,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const nav = useNavigate();
 
   const handleToggle = () => setShow(!show);

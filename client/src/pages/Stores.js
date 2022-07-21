@@ -10,6 +10,7 @@ import LottieAnimation from "../comps/misc/lottieAnimation";
 
 function AllStores(props) {
   const [shops_ar, setShops_ar] = useState([]);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,12 +18,14 @@ function AllStores(props) {
   }, [location]);
 
   const doApi = async () => {
+    setLoading(true);
     const urlParams = new URLSearchParams(window.location.search);
     let pageQuery = urlParams.get("page") || 1;
     let url = API_URL + "/stores?&status=active&perPage=6&page=" + pageQuery;
     let resp = await doApiGet(url);
     console.log(resp.data);
     setShops_ar(resp.data);
+    setLoading(false);
   };
 
   return (
@@ -46,7 +49,10 @@ function AllStores(props) {
           return <StoreCard key={item._id} item={item} />;
         })}
       </div>
-      {shops_ar.length === 0 ? <LottieAnimation /> : ""}
+      {loading ? <LottieAnimation /> : ""}
+      {shops_ar.length === 0 && !loading && (
+        <h1 className="text-center text-muted display-2">No store found</h1>
+      )}
       <PageLinks
         perPage="6"
         apiUrlAmount={API_URL + "/stores/amount?status=active"}

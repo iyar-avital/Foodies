@@ -75,7 +75,7 @@ router.get("/storeProducts/:id", async (req, res) => {
   let id = req.params.id;
   try {
     let data = await ProductModel.find({
-      store_id: id,
+      store_short_id: id,
     }).sort({ [sort]: reverse });
     res.json(data);
   } catch (err) {
@@ -98,7 +98,7 @@ router.get("/single/:id", async (req, res) => {
 router.post("/:id", authStoreAdmin, async (req, res) => {
   try {
     let product = new ProductModel(req.body);
-    product.store_id = req.params.id;
+    product.store_short_id = req.params.id;
     product.user_id = req.session.user._id;
     product.short_id = await genShortId(ProductModel);
     await product.save();

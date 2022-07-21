@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 
 function HeaderStore(props) {
-  const baseUrl = window.location.href;
   const nav = useNavigate();
   const user = useSelector((state) => state.user);
   const handleLogout = (e) => {
@@ -48,7 +47,13 @@ function HeaderStore(props) {
               >
                 Products
               </Nav.Link>
-              <Nav.Link href={baseUrl + "../orders"}>Orders</Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./orders");
+                }}
+              >
+                Orders
+              </Nav.Link>
               <Nav.Link
                 onClick={() => {
                   nav("./editStore");
