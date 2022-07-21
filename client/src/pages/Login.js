@@ -85,10 +85,14 @@ function Login() {
                 {error?.status === 401 ? ( //403 - unauthorized
                   <p className="text-center">
                     Forgot your password?
-                    <a className="text-decoration-none" onClick={handleToggle}>
+                    <span
+                      className="text-primary"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleToggle}
+                    >
                       {" "}
                       resst password
-                    </a>
+                    </span>
                   </p>
                 ) : (
                   <p className="text-center ">
