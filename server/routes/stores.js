@@ -134,7 +134,7 @@ router.patch("/updateStatus/:idStore", authAdmin, async (req, res) => {
     let data = await StoreModel.updateOne({ _id: idStore }, { status });
     data.status = status;
     //get user info for the email and update role
-    let user = await UserModel.findOne({ _id: store.admin_id }, { password: 0 });
+    let user = await UserModel.findOne({ short_id: store.admin_short_id });
     //update user's role to store admin
     if (status === "active" && user.role != "storeAdmin") {
       let data = await UserModel.updateOne({ _id: user._id }, { role: "storeAdmin" });

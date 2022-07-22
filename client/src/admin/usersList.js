@@ -116,7 +116,7 @@ function UsersList(props) {
                     {" " + item.name}
                   </td>
                   <td>{item.email}</td>
-                  {/* <td>{item.address?.label}</td> */}
+                  <td>{item.address}</td>
                   <td className="d-flex justify-content-center">
                     <select
                       defaultValue={item.role}

@@ -127,9 +127,10 @@ function StoresAdmin(props) {
                 <td>{i + 1 + 5 * (numPage - 1)}</td>
                 <td>{item.name}</td>
                 <td>
-                  {ownerAr.map((owner) => {
-                    return owner._id == item.admin_id ? owner.email : "";
-                  })}
+                  {item.admin_short_id}
+                  {/* {ownerAr.map((owner) => {
+                    return owner.short_id == item.admin_short_id ? owner.name : "";
+                  })} */}
                 </td>
                 <td>
                   <img

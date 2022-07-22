@@ -1,11 +1,8 @@
 const nodemailer = require("nodemailer");
 const { ResetPassEmailCentent } = require("./emails/resetPassEmail");
-// const { ContactEmail } = require("./emails/contactEmail");
-// const {
-//   NewStoreEmailActive,
-//   NewStoreEmailPending,
-// } = require("./emails/newStoreEmail");
-// const { VerifyEmailHtml } = require("./emails/verifyEmail");
+const { ContactEmail } = require("./emails/contactEmail");
+const { NewStoreEmailActive, NewStoreEmailPending } = require("./emails/newStoreEmail");
+const { VerifyEmailHtml } = require("./emails/verifyEmail");
 
 // need to open in outlook new accout
 const transporter = nodemailer.createTransport({
@@ -42,19 +39,19 @@ const sendOutlookMail = (_mailOptions) => {
 //   await sendOutlookMail(mailOptions);
 // };
 
-// exports.sendNewStoreEmail = async (_bodyData = {}) => {
-//   let mailOptions = {
-//     from: process.env.SENDER_EMAIL_ADDRESS,
-//     replyTo: _bodyData.email,
-//     to: _bodyData.email,
-//     subject: "Your Store Is " + _bodyData.status,
-//     html:
-//       _bodyData.status === "active"
-//         ? NewStoreEmailActive(_bodyData)
-//         : NewStoreEmailPending(_bodyData),
-//   };
-//   await sendOutlookMail(mailOptions);
-// };
+exports.sendNewStoreEmail = async (_bodyData = {}) => {
+  let mailOptions = {
+    from: process.env.SENDER_EMAIL_ADDRESS,
+    replyTo: _bodyData.email,
+    to: _bodyData.email,
+    subject: "Your Store Is " + _bodyData.status,
+    html:
+      _bodyData.status === "active"
+        ? NewStoreEmailActive(_bodyData)
+        : NewStoreEmailPending(_bodyData),
+  };
+  await sendOutlookMail(mailOptions);
+};
 
 // exports.verifyUserEmail = async (_user, _host) => {
 //   let mailOptions = {

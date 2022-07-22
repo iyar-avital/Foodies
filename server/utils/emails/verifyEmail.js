@@ -26,7 +26,7 @@ exports.VerifyEmailHtml = (_user, _host) => {
   //   <head>
   //     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   //     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  //     <title>ShipMarket</title>
+  //     <title>Foodzone</title>
   //     <link
   //       href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
   //       rel="stylesheet"
@@ -382,7 +382,7 @@ exports.VerifyEmailHtml = (_user, _host) => {
   //                             color: black;
   //                           "
   //                         >
-  //                           ShipMarket
+  //                           Foodzone
   //                         </h2></a
   //                       >
   //                     </td>
@@ -504,7 +504,7 @@ exports.VerifyEmailHtml = (_user, _host) => {
   //                                   margin: 0;
   //                                 "
   //                               >
-  //                               Thank you for Register to ShipMarket Please verufy your mail to continue
+  //                               Thank you for Register to Foodzone Please verufy your mail to continue
   //                               </p>
   //                             </td>
   //                           </tr>

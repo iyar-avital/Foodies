@@ -95,7 +95,7 @@ function OrderInfo(props) {
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={handleToggle}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

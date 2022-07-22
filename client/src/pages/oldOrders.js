@@ -10,7 +10,6 @@ import OrderInfo from "../comps/orders/OrderInfo";
 function OldOrders(props) {
   const [ar, setAr] = useState([]);
   const [allTotal, setAllTotal] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [orderInfo, setOrderInfo] = useState(null);
 
