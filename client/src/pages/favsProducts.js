@@ -16,7 +16,6 @@ function FavsProducts(props) {
 
   useEffect(() => {
     doApiListFav();
-    // console.log(favs);
   }, [favs]);
 
   const doApiListFav = async () => {

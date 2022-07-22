@@ -6,7 +6,6 @@ import "../admin/css/formStore.css";
 import { motion } from "framer-motion";
 import { Col, Container, Form, Row, Spinner, Button } from "react-bootstrap";
 import StoreForm from "../comps/forms/StoreForm";
-import ProductForm from "../comps/forms/ProductForm";
 
 function EditStoreAdmin(props) {
   let params = useParams();
@@ -33,7 +32,7 @@ function EditStoreAdmin(props) {
       if (resp.data.modifiedCount) {
         toast.success("Store Updated");
         // back to the list of stores
-        nav("/storeAdmin");
+        nav("../");
       } else {
         toast.warning("Nothing to apdate");
       }
@@ -59,7 +58,11 @@ function EditStoreAdmin(props) {
           >
             <StoreForm item={store} doApi={doFormApi} isLoading={isLoading} />
           </Col>
-          <Col md={6} className="createStore__bg"></Col>
+          <Col
+            md={6}
+            className="createStore__bg"
+            style={{ backgroundImage: `url(${store?.imgUrl})` }}
+          ></Col>
         </Row>
       </Container>
     </motion.div>

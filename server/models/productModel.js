@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { getFromattedDate } = require("../utils/Data&timeFormat");
 
 let productScheam = new mongoose.Schema(
   {
@@ -21,8 +22,8 @@ let productScheam = new mongoose.Schema(
       required: [true, "can't be blank"],
     },
     date_created: {
-      type: Date,
-      default: Date.now(),
+      type: String,
+      default: getFromattedDate(),
     },
     store_short_id: String,
     short_id: String,

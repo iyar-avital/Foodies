@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import PageLinks from "../comps/misc/pageLinks";
 
 import LottieAnimation from "../comps/misc/lottieAnimation";
-import { dateCreated } from "../utils/dateCreated";
 
 function ProductsAdmin(props) {
   let [ar, setAr] = useState([]);
@@ -90,7 +89,7 @@ function ProductsAdmin(props) {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.store_short_id}</td>
-                <td>{dateCreated(item.date_created)}</td>
+                <td>{item.date_created}</td>
                 <td>{item.short_id}</td>
                 <td>
                   <button

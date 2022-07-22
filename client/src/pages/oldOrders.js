@@ -5,10 +5,16 @@ import { GrDeliver } from "react-icons/gr";
 import "./css/checkout.css";
 import OldOrderItem from "../comps/orders/oldOrderItem";
 import AuthClientComp from "../comps/auth/authClientComp";
+import OrderInfo from "../comps/orders/OrderInfo";
 
 function OldOrders(props) {
   const [ar, setAr] = useState([]);
   const [allTotal, setAllTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [orderInfo, setOrderInfo] = useState(null);
+
+  const handleToggle = () => setShow(!show);
 
   useEffect(() => {
     doApi();
@@ -36,58 +42,69 @@ function OldOrders(props) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.7 }}
-      className="container mt-5"
-      style={{ minHeight: "85vh" }}
-    >
-      <AuthClientComp />
-      <section className="shopping-cart">
-        <div className="container">
-          <div className="content">
-            <div className="row">
-              <div className="col-md-12 col-lg-8">
-                <div className="items">
-                  {/* start product */}
-                  {ar.length == 0 ? (
-                    <h2 className="text-center mt-5">
-                      You have not ordered yet
-                      <GrDeliver className="mx-2" />
-                    </h2>
-                  ) : (
-                    ""
-                  )}
-                  {ar.map((item, i) => {
-                    let date = item.date_created.replace("T", " ");
-                    date = date.substring(0, date.indexOf(":") + 3);
+    <>
+      <OrderInfo handleToggle={handleToggle} show={show} item={orderInfo} />;
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.7 }}
+        className="container mt-5"
+        style={{ minHeight: "85vh" }}
+      >
+        <AuthClientComp />
+        <section className="shopping-cart">
+          <div className="container">
+            <div className="content">
+              <div className="row">
+                <div className="col-md-12 col-lg-8">
+                  <div className="items">
+                    {/* start product */}
+                    {ar.length == 0 ? (
+                      <h2 className="text-center mt-5">
+                        You have not ordered yet
+                        <GrDeliver className="mx-2" />
+                      </h2>
+                    ) : (
+                      ""
+                    )}
+                    {ar.map((item, i) => {
+                      // let date = item.date_created.replace("T", " ");
+                      // date = date.substring(0, date.indexOf(":") + 3);
 
-                    return <OldOrderItem key={item._id} item={item} i={i} date={date} />;
-                  })}
-                  {/* end product */}
-                </div>
-              </div>
-              {/* start Orders Info */}
-              <div className="col-md-12 col-lg-4">
-                <div className="summary">
-                  <h3>All My Orders</h3>
-                  <div className="summary-item">
-                    <span className="text">Orders</span>
-                    <span className="price">{ar.length}</span>
-                  </div>
-                  <div className="summary-item">
-                    <span className="text">Total price</span>
-                    <span className="price">₪ {allTotal}</span>
+                      return (
+                        <OldOrderItem
+                          key={item._id}
+                          item={item}
+                          i={i}
+                          handleToggle={handleToggle}
+                          setOrderInfo={setOrderInfo}
+                        />
+                      );
+                    })}
+                    {/* end product */}
                   </div>
                 </div>
+                {/* start Orders Info */}
+                <div className="col-md-12 col-lg-4">
+                  <div className="summary">
+                    <h3>All My Orders</h3>
+                    <div className="summary-item">
+                      <span className="text">Orders</span>
+                      <span className="price">{ar.length}</span>
+                    </div>
+                    <div className="summary-item">
+                      <span className="text">Total price</span>
+                      <span className="price">₪ {allTotal}</span>
+                    </div>
+                  </div>
+                </div>
+                {/* end Orders Info */}
               </div>
-              {/* end Orders Info */}
             </div>
           </div>
-        </div>
-      </section>
-    </motion.div>
+        </section>
+      </motion.div>
+    </>
   );
 }
 
