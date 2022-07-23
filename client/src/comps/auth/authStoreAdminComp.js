@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { API_URL, doApiGet } from "../../services/apiService";
 import { STORE_SHORT_IDS } from "../../services/localService";
@@ -10,6 +10,7 @@ function AuthStoreAdminComp(props) {
   let nav = useNavigate();
   let session = Cookies.get("FOODZONE_SESSION");
   const [logoutUser, { isLoading, error }] = useLogoutUserMutation();
+  let params = useParams();
 
   useEffect(() => {
     if (session) {
@@ -28,22 +29,11 @@ function AuthStoreAdminComp(props) {
       if (resp.data.role === "admin") {
         props.setAuthorized(true);
         return;
-      } else if (resp.data.role !== "storeAdmin") {
+      } else {
         toast.error("Plase Wait for admin approval");
         nav("../");
         return;
       }
-      //verify that users own this store
-      else if (
-        !localStorage[STORE_SHORT_IDS] ||
-        !JSON.parse(localStorage[STORE_SHORT_IDS]).includes(props.short_id)
-      ) {
-        toast.error("You are not allowed to access this store");
-        nav("/");
-        return;
-      }
-      props.setAuthorized(true);
-      return;
     } catch (err) {
       //
       console.log(err.response);

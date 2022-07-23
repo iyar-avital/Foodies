@@ -13,7 +13,6 @@ UserSchema = new mongoose.Schema(
       lowercase: true, // lowercase the string before saving
       unique: true,
       required: [true, "can't be blank"],
-      index: true,
       validate: [isEmail, "invalid email"],
     },
     address: {

@@ -27,10 +27,10 @@
 }
 
 .footer {
-    height: 20vh;
+    /* height: 20vh; */
     position: absolute;
-    height: 2.5rem;
-    bottom: 0;
+    /* height: 2.5rem; */
+    /* bottom: 0; */
     width: 100%;
 }
 
