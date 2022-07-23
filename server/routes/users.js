@@ -55,11 +55,16 @@ router.get("/myInfo", auth, async (req, res) => {
 });
 
 router.get("/logout", async (req, res) => {
-  req.session.destroy((err) => {
+  req.session.destroy(async (err) => {
     if (err) {
       return res.redirect("/");
     }
-    res.status(200).clearCookie(process.env.SESSION_NAME).json({ msg: "logged out" });
+    try {
+      await UserModel.updateOne({ _id: req.session.user._id }, { status: "offline" });
+      res.status(200).clearCookie(process.env.SESSION_NAME).json({ msg: "logged out" });
+    } catch (error) {
+      res.status(500).json(error);
+    }
   });
 });
 
@@ -69,6 +74,7 @@ router.post("/", async (req, res) => {
     let decryptPass = decrypt(req.body.password);
     user.password = await bcrypt.hash(decryptPass, 10);
     user.short_id = await genShortId(UserModel);
+    user.status = "online";
     await user.save();
     req.session.authenticated = true; //initial session
 
@@ -101,6 +107,7 @@ router.post("/login", async (req, res) => {
     }
     req.session.authenticated = true; //initial session
     req.session.user = user; //initial session
+    await UserModel.updateOne({ email: req.body.email, status: "online" });
     res.status(200).json({ user: user, cookie: req.session.cookie });
   } catch (error) {
     console.log(error);

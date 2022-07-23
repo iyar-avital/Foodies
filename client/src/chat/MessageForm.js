@@ -1,13 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { useEffect } from "react";
-import {
-  Form,
-  Row,
-  Col,
-  FormGroup,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Form, Row, Col, FormGroup, FormControl, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { AppContext } from "../context/appContext";
 import "./css/MessageForm.css";
@@ -15,8 +8,7 @@ import "./css/MessageForm.css";
 function MessageForm() {
   const [message, setMessage] = useState("");
   const user = useSelector((state) => state.user);
-  const { socket, currentRoom, setMessages, messages, privateMemberMsg } =
-    useContext(AppContext);
+  const { socket, currentRoom, setMessages, messages, serviceMsg } = useContext(AppContext);
   const messageEndRef = useRef(null);
 
   useEffect(() => {
@@ -41,7 +33,6 @@ function MessageForm() {
   const todayDate = getFromattedDate();
 
   socket.off("room-messages").on("room-messages", (roomMessages) => {
-    console.log("room messages", roomMessages);
     setMessages(roomMessages);
   });
 
@@ -67,18 +58,11 @@ function MessageForm() {
         {user &&
           messages.map(({ _id: date, messagesByDate }, idx) => (
             <div key={idx}>
-              <p className="alert alert-info text-center message-date-indicator">
-                {date}
-              </p>
+              <p className="alert alert-info text-center message-date-indicator">{date}</p>
               {messagesByDate.map(({ content, time, from: sender }, idx) => (
-                <div
-                  className={
-                    sender._id === user._id ? "message" : "incoming-message"
-                  }
-                  key={idx}
-                >
+                <div className={sender._id === user._id ? "message" : "incoming-message"} key={idx}>
                   <div className="message-inner">
-                    {!privateMemberMsg && (
+                    {!serviceMsg && (
                       <div className="d-flex align-items-center">
                         <img
                           src={sender.picture}

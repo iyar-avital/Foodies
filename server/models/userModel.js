@@ -41,6 +41,10 @@ UserSchema = new mongoose.Schema(
       type: "Object",
       default: {},
     },
+    status: {
+      type: "String",
+      default: "offline",
+    },
     favs_ar: {
       type: Array,
       default: [],

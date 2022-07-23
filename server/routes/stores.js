@@ -1,5 +1,5 @@
 const express = require("express");
-const { auth, authStoreAdmin, authAdmin } = require("../middlewares/auth");
+const { auth, authStoreAdmin, authAdmin, authOwnership } = require("../middlewares/auth");
 const { sendNewStoreEmail } = require("../utils/sendEmail");
 const { genShortId } = require("../utils/genShortId");
 const { StoreModel, validateStore } = require("../models/storeModel");
@@ -30,8 +30,8 @@ router.get("/", async (req, res) => {
 // get user stores
 router.get("/userStores", auth, async (req, res) => {
   try {
-    let user_id = req.session.user.short_id;
-    let data = await StoreModel.find({ admin_id: user_id }).sort({
+    let user_short_id = req.session.user.short_id;
+    let data = await StoreModel.find({ admin_short_id: user_short_id }).sort({
       date_created: -1,
     });
     res.json(data);
@@ -114,7 +114,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 //Edit  Store
-router.put("/:idStore", authStoreAdmin, async (req, res) => {
+router.put("/:idStore", authOwnership, async (req, res) => {
   try {
     let idEdit = req.params.idStore;
     let data = await StoreModel.updateOne({ _id: idEdit }, req.body);
@@ -165,7 +165,7 @@ router.patch("/updateStatus/:idStore", authAdmin, async (req, res) => {
 });
 
 //Delete  Store
-router.delete("/:idStore", authStoreAdmin, async (req, res) => {
+router.delete("/:idStore", authOwnership, async (req, res) => {
   try {
     let idDel = req.params.idStore;
     let data = await StoreModel.deleteOne({ _id: idDel });

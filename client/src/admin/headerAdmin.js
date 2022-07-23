@@ -68,6 +68,13 @@ function HeaderAdmin(props) {
               >
                 Orders
               </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./chat");
+                }}
+              >
+                Chat
+              </Nav.Link>
             </Nav>
             <Nav>
               {!user && (

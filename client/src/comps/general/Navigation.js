@@ -47,10 +47,28 @@ function Navigation() {
 
             <Offcanvas.Body>
               <Nav className="mx-auto  text-muted">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/stores">Stores</Nav.Link>
-                <Nav.Link href="/admin">Admin</Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    nav("./");
+                  }}
+                >
+                  Home
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    nav("./about");
+                  }}
+                >
+                  About
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    nav("./stores");
+                  }}
+                >
+                  Stores
+                </Nav.Link>
+                <Nav.Link href="./admin">Admin</Nav.Link>
               </Nav>
 
               <Nav>
