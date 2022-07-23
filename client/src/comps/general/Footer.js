@@ -23,13 +23,13 @@ function Footer(props) {
                 My stores
               </Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link className="text-secondary" href="/Forums">
+                Forums & Customers service
+              </Nav.Link>
+            </Nav.Item>
           </>
         )}
-        <Nav.Item>
-          <Nav.Link className="text-secondary" eventKey="link-2">
-            Customers service
-          </Nav.Link>
-        </Nav.Item>
       </Nav>
       <p className="text-center py-3">Foodzone © {dt.getFullYear()}</p>
     </div>

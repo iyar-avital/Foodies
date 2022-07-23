@@ -32,6 +32,8 @@ import FavsProducts from "./pages/favsProducts";
 import Checkout from "./pages/checkout";
 import OldOrders from "./pages/oldOrders";
 import OrdersListStore from "./storeAdmin/ordersListStore";
+import Chat from "./chat/Chat";
+import ChatAdmin from "./admin/chat/ChatAdmin";
 
 function AppRouts() {
   return (
@@ -46,12 +48,14 @@ function AppRouts() {
           <Route path="uptateAccount" element={<UpdateAccount />} />
           <Route path="about" element={<About />} />
           <Route path="favorites" element={<FavsProducts />} />
-          <Route path="myStores" element={<MyStores />} />
           <Route path="stores" element={<AllStores />} />
           <Route path="store/:id" element={<StoreHome />} />
-          <Route path="createStore" element={<CreateStore />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="oldOrders" element={<OldOrders />} />
+          {/* footer */}
+          <Route path="createStore" element={<CreateStore />} />
+          <Route path="myStores" element={<MyStores />} />
+          <Route path="forums" element={<Chat />} />
           {/* <Route path="/searchStore/:searchQ" element={<SearchStore />} /> */}
         </Route>
         {/*store admin*/}
@@ -72,6 +76,7 @@ function AppRouts() {
           <Route path="products" element={<ProductsAdmin />} />
           <Route path="orders" element={<OrdersAdmin />} />
           <Route path="orders/:id" element={<OrderInfoAdmin />} />
+          <Route path="chat" element={<ChatAdmin />} />
         </Route>
         <Route path="/*" element={<Page404 />} />
       </Routes>

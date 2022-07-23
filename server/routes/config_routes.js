@@ -12,10 +12,6 @@ exports.routesInit = (app) => {
   app.use("/products", productsR);
   app.use("/orders", ordersR);
   app.use("/favs", favR);
-
-  app.use((req, res) => {
-    res.status(404).json({ msg_error: "Url not found , 404!" });
-  });
 };
 
 exports.corsAccessControl = (app) => {
@@ -24,10 +20,7 @@ exports.corsAccessControl = (app) => {
 
     res.set("Access-Control-Allow-Origin", process.env.CLIENT_URL);
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH");
-    res.set(
-      "Access-Control-Allow-Headers",
-      "X-Requested-With,Content-Type,auth-token"
-    );
+    res.set("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,auth-token");
     next();
   });
 };

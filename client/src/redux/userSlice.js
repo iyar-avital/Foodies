@@ -6,18 +6,18 @@ export const userSlice = createSlice({
   initialState: null,
   reducers: {
     resetUser: (state, { payload }) => null,
-    // addNotifications: (state, { payload }) => {
-    //   //actions recive roomId ad payload
-    //   if (state.newMessages[payload]) {
-    //     //if roomId exist as an element key in newMessages
-    //     state.newMessages[payload] = state.newMessages[payload] + 1; //decrise by 1
-    //   } else {
-    //     state.newMessages[payload] = 1; // create element with roomId as the key and initialize to 1
-    //   }
-    // },
-    // resetNotifications: (state, { payload }) => {
-    //   delete state.newMessages[payload];
-    // },
+    addNotifications: (state, { payload }) => {
+      //actions recive roomId ad payload
+      if (state.newMessages[payload]) {
+        //if roomId exist as an element key in newMessages
+        state.newMessages[payload] = state.newMessages[payload] + 1; //decrise by 1
+      } else {
+        state.newMessages[payload] = 1; // create element with roomId as the key and initialize to 1
+      }
+    },
+    resetNotifications: (state, { payload }) => {
+      delete state.newMessages[payload];
+    },
   },
 
   extraReducers: (builder) => {

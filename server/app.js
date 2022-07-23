@@ -6,11 +6,12 @@ require("./connection");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const { Server } = require("socket.io");
 const { routesInit, corsAccessControl } = require("./routes/config_routes");
 
 const app = express();
 
-const IN_PROD = process.env.NODE_ENV === "production";
+const server = http.createServer(app);
 
 //the defualt is to sotre in memory sotre
 const store = new MongoDBStore({
@@ -19,6 +20,13 @@ const store = new MongoDBStore({
 });
 store.on("error", function (error) {
   console.log(error);
+});
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
 
 app.use(express.json());
@@ -40,7 +48,7 @@ app.use(
     resave: false,
     saveUninitialized: false, //store session only if initialized
     cookie: {
-      maxAge: 1000 * 60 * 15, // 15 minutes
+      maxAge: 1000 * 60 * 15 * 60, // 15 minutes
       sameSite: false,
       secure: false,
       httpOnly: false,
@@ -52,8 +60,15 @@ app.use(
 corsAccessControl(app);
 routesInit(app);
 
-const server = http.createServer(app);
 let port = process.env.PORT || "3002";
 server.listen(port, () => {
   console.log("listening on " + port);
 });
+
+module.exports = { app, io };
+
+require("./socket/socket");
+
+// app.use((req, res) => {
+//   res.status(404).json({ msg_error: "Url not found , 404!" });
+// });

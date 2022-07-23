@@ -28,6 +28,7 @@ function MyStores(props) {
       setAr(resp.data);
       setArSort(resp.data);
       saveShortIdTolacal(resp.data);
+      console.log(resp.data);
     } catch (err) {
       console.log(err);
     }
