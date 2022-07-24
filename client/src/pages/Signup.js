@@ -80,8 +80,8 @@ function Signup() {
       >
         <Row className="justify-content-between">
           <Col
-            md={5}
-            className="d-flex shadow flex-direction-column align-items-center justify-content-center"
+            lg={5}
+            className="d-flex shadow flex-direction-column align-items-center justify-content-center mt-3"
           >
             <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleSignup}>
               <p className="text-center display-6 mb-4">Create account</p>
@@ -166,7 +166,7 @@ function Signup() {
               </div>
             </Form>
           </Col>
-          <Col md={6} className="signup__bg"></Col>
+          <Col lg={6} className="signup__bg d-none d-lg-block"></Col>
         </Row>
       </motion.div>
     </Container>

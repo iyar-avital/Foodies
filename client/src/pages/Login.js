@@ -44,7 +44,7 @@ function Login() {
       <Container>
         <ResetPass handleToggle={handleToggle} show={show} />
         <Row>
-          <Col md={5} className="login__bg"></Col>
+          <Col md={5} ms className="login__bg d-none d-md-block"></Col>
           <Col
             md={7}
             className="d-flex shad flex-direction-column align-items-center justify-content-center"

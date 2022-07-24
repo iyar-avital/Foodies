@@ -46,7 +46,8 @@ router.get("/amount", async (req, res) => {
 // user info
 router.get("/myInfo", auth, async (req, res) => {
   try {
-    let data = await UserModel.findOne({ _id: req.session.user._id }, { password: 0 });
+    let data = await UserModel.findOne({ _id: req.session.user._id });
+    console.log(data);
     res.json(data);
   } catch (err) {
     console.log(err);

@@ -1,6 +1,6 @@
 .strip_home {
     background-image: url("https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=1600");
-    height: 91vh;
+    min-height: 90vh;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

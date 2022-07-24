@@ -12,14 +12,22 @@ exports.auth = (req, res, next) => {
 };
 
 exports.authAdmin = (req, res, next) => {
-  let role = req.session.user.role;
-  if (role !== ROLES.ADMIN) {
-    return res.status(403).json({ err: "Access denied" });
+  if (!req.session.user) {
+    return res.status(401).json({ err: "please log in first" });
+  } else {
+    let role = req.session.user.role;
+    if (role !== ROLES.ADMIN) {
+      return res.status(403).json({ err: "Access denied" });
+    }
+    next();
   }
-  next();
 };
 
 exports.authStoreAdmin = async (req, res, next) => {
+  if (!req.session.user) {
+    // return res.status(401).json({ err: "please log in first" });
+    return res.status(401).json({ err: "please log in first" });
+  }
   let role = req.session.user.role;
   if (role !== ROLES.ADMIN && role !== ROLES.STORE_ADMIN) {
     return res.status(403).json({ message: "access denied" });
@@ -28,6 +36,9 @@ exports.authStoreAdmin = async (req, res, next) => {
 };
 
 exports.authOwnership = async (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(401).json({ err: "please log in first" });
+  }
   let role = req.session.user.role;
   let store_id = req.header("id-Store");
   if (role === ROLES.ADMIN) {

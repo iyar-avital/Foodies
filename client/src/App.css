@@ -23,7 +23,10 @@
 
 .page-container {
     position: relative;
-    min-height: 100vh;
+}
+
+.page-container .content-wrap {
+    min-height: 92vh !important;
 }
 
 .footer {
@@ -52,6 +55,7 @@
 body {
     background: white;
     font-family: "Roboto", sans-serif;
+    min-height: 100vh;
 }
 
 .logoFont {
