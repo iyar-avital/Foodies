@@ -1,8 +1,7 @@
 const { app, io } = require("../app");
 const { authAdmin } = require("../middlewares/auth");
 const { ForumModel } = require("../models/forumModel");
-const MessageModel = require("../models/MessageModel");
-const UserModel = require("../models/userModel");
+const MessageModel = require("../models/messageModel");
 
 app.get("/chat/rooms", async (req, res) => {
   try {
