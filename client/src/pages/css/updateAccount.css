@@ -1,0 +1,32 @@
+.update__bg {
+    background-image: url(https://images.pexels.com/photos/839443/pexels-photo-839443.jpeg?auto=compress&cs=tinysrgb&w=1600);
+    height: 92vh;
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+.update-profile-pic__container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.update-profile-pic {
+    width: 100px;
+    border-radius: 50%;
+    border: 2px solid gray;
+    height: 100px;
+}
+
+.add-picture-icon {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    color: green;
+    background: white;
+    cursor: pointer;
+    z-index: 99;
+}

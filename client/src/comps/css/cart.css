@@ -1,0 +1,18 @@
+.cart {
+    width: 100%;
+    min-width: 700px;
+}
+
+@media (max-width: 767px) {
+    .cart {
+        min-width: 30px;
+    }
+    .item-btns {
+        padding-left: 120px;
+        margin: 18px;
+    }
+    .item-number {
+        margin: 16px;
+        padding-left: 180px;
+    }
+}

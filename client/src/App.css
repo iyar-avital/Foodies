@@ -1,0 +1,179 @@
+/* נשתמש בו להמשך לדברים שלנו כללים */
+
+
+/* style for links */
+
+.productForm__bg {
+    background-image: url(https://images.pexels.com/photos/256318/pexels-photo-256318.jpeg?auto=compress&cs=tinysrgb&w=1600);
+    height: 92vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Quando);
+*:after,
+*:before {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    position: relative;
+    outline: none;
+}
+
+body {
+    background: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.logoFont {
+    /* font-family: 'Libre Bodoni', serif; */
+    font-family: 'Lobster', cursive;
+    text-decoration: none;
+    color: black;
+}
+
+.logoFont:hover {
+    color: black;
+}
+
+
+/* Lottie Animation */
+
+.box_Animation {
+    height: 300px;
+    width: 400px;
+    margin: 0 auto;
+}
+
+
+/* Scrollbar style */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-sc
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: rgb(237, 242, 247);
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: rgb(203, 213, 224);
+    border-radius: 30px;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(160, 174, 192);
+}
+
+
+/* =========================== */
+
+
+/* pageLinks */
+
+.pageLinks {
+    border: 1px solid silver;
+    border-radius: 40%;
+    transition: 1000ms;
+}
+
+.pageLinks:hover {
+    background: #eee;
+}
+
+
+/* links style */
+
+
+/* =========================== */
+
+.animaLink {
+    color: black;
+    padding: 0 15px;
+    height: 60px;
+    display: inline-flex;
+    text-decoration: none;
+    align-items: center;
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+.animaLink:hover {
+    color: black;
+}
+
+.animaLink:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background: #eee;
+    visibility: hidden;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: .25s linear;
+}
+
+.animaLink:hover:before,
+.animaLink:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+
+/* links style small */
+
+
+/* =========================== */
+
+.animaLinkSM {
+    padding: 0 15px;
+    height: 60px;
+    display: inline-flex;
+    text-decoration: none;
+    align-items: center;
+    z-index: 1;
+    border: none;
+}
+
+.animaLinkSM:hover {
+    color: black;
+}
+
+.animaLinkSM:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background: #eee;
+    visibility: hidden;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: .25s linear;
+}
+
+.animaLinkSM:hover:before,
+.animaLinkSM:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+}

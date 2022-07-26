@@ -1,4 +1,0 @@
-{
-     "secret": "flowers project secret",
-     "connection_str": "mongodb://127.0.0.1/sessions"
-}

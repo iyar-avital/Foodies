@@ -1,0 +1,48 @@
+/* @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+	background: #f9f9f9;
+	font-family: "roboto", sans-serif;
+} */
+
+.main-content {
+	/* padding-top: 100px; */
+	padding-bottom: 100px;
+}
+
+.shadow {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.shadow:hover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.247) !important;
+}
+
+.payment-card__type {
+	background: #eee;
+  /* part of children element that out of the border of parent element will hide */
+  overflow: hidden;
+}
+
+.payment-card__type img {
+	height: 200px;
+  width: 300px;
+  border-radius: 15px;
+}
+
+
+.add-payment {
+	min-height: 290px;
+	background: #eee;
+	cursor: pointer;
+}
+
+.status_tag{
+  position: absolute;
+  z-index: 100;
+  top:50px;
+  left:-59px;
+  background: #B6E896;
+  padding:8px 100px;
+  transform: rotate(-45deg);
+}
