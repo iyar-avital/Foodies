@@ -43,7 +43,6 @@ export const userSlice = createSlice({
         return null;
       }
     });
-    builder.addMatcher(appApi.endpoints.deleteUser.matchFulfilled, () => {});
   },
 });
 

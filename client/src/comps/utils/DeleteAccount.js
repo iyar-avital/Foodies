@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDeleteUserMutation } from "../redux/appApi";
+import { useDeleteUserMutation } from "../../redux/appApi";
 import { Col, Container, InputGroup, Row, Spinner, Form, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+import { API_URL, doApiMethod } from "../../services/apiService";
 
 function DeleteAccount(props) {
   const [password, setPassword] = useState("");
@@ -12,10 +14,22 @@ function DeleteAccount(props) {
   let show = props.show;
   let handleToggle = props.handleToggle;
 
-  const onDeleteClick = () => {
+  const onDeleteClick = async () => {
     if (password) {
+      await setPassword(password.toString());
+      console.log(password);
       if (window.confirm("You are about to delete your account")) {
-        deleteUser(password);
+        try {
+          let url = API_URL + "/users/";
+          let data = await axios({
+            method: "DELETE",
+            url: url,
+            withCredentials: true,
+          });
+          return data;
+        } catch (err) {
+          throw err;
+        }
         handleToggle();
       } else {
         handleToggle();

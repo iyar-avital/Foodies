@@ -5,8 +5,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSignupUserMutation } from "../comps/redux/appApi";
+import { useSignupUserMutation } from "../redux/appApi";
 import { motion } from "framer-motion";
+
 import "./css/Signup.css";
 
 function Signup() {
@@ -23,19 +24,17 @@ function Signup() {
   const defaultImage =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
   const nav = useNavigate();
-
   const handleSignup = async (e) => {
     e.preventDefault();
     const picUrl = image ? await uploadImage(image) : defaultImage;
-    signupUser({ name, email, phone, address, password, picture: picUrl }).then(
-      ({ data }) => {
-        if (data) {
-          console.log(data);
-          toast.success("Account created successfully");
-          nav("/");
-        }
+    // password = bcrypt(password, process.env.REACT_APP_BCRYPT_KET);
+    signupUser({ name, email, phone, address, password, picture: picUrl }).then(({ data }) => {
+      if (data) {
+        console.log(data);
+        toast.success("Account created successfully");
+        nav("/");
       }
-    );
+    });
   };
 
   const validateImg = (e) => {
@@ -54,13 +53,10 @@ function Signup() {
     data.append("upload_preset", "ucq0egki");
     try {
       setUploading(true);
-      let res = await fetch(
-        "https://api.cloudinary.com/v1_1/nati5550558/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
+      let res = await fetch("https://api.cloudinary.com/v1_1/nati5550558/image/upload", {
+        method: "POST",
+        body: data,
+      });
       console.log(data);
       const urlData = await res.json();
       setUploading(false);
@@ -83,16 +79,10 @@ function Signup() {
             md={5}
             className="d-flex shadow flex-direction-column align-items-center justify-content-center"
           >
-            <Form
-              style={{ width: "80%", maxWidth: 500 }}
-              onSubmit={handleSignup}
-            >
+            <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleSignup}>
               <p className="text-center display-6 mb-4">Create account</p>
               <div className="signup-profile-pic__container">
-                <img
-                  src={imagePreview || defaultImage}
-                  className="signup-profile-pic"
-                />
+                <img src={imagePreview || defaultImage} className="signup-profile-pic" />
                 <label htmlFor="image-upload" className="image-upload-label">
                   <i className="fas fa-plus-circle add-picture-icon"></i>
                 </label>
@@ -160,11 +150,7 @@ function Signup() {
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
-                {uploading || isLoading ? (
-                  <Spinner animation="grow" />
-                ) : (
-                  "Signup"
-                )}
+                {uploading || isLoading ? <Spinner animation="grow" /> : "Signup"}
               </Button>
               <div className="mt-4">
                 <p className="text-center">

@@ -130,8 +130,8 @@ router.get("/productsInfo/:idOrder", auth, async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   try {
-    const { name, address, phone, clientId: short_id } = req.session.user;
-    req.body = { ...req.body, name, address, phone, clientId };
+    const { name, address, phone, short_id: client_short_id } = req.session.user;
+    req.body = { ...req.body, name, address, phone, client_short_id };
     let order = await OrderModel.findOne({
       status: "pending",
     });
@@ -147,7 +147,6 @@ router.post("/", auth, async (req, res) => {
     }
     // add new order
     let newOrder = new OrderModel(req.body);
-    newOrder.user_id = req.session.user._id;
     newOrder.short_id = await genShortId(OrderModel);
     await newOrder.save();
     return res.status(201).json(newOrder);

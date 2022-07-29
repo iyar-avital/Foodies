@@ -11,12 +11,13 @@ import { useLoginUserMutation } from "../comps/redux/appApi";
 import { API_URL, doApiMethod } from "../services/apiService";
 import "./css/Login.css";
 import ResetPass from "../comps/utils/resetPass";
+import { encrypt } from "../services/encryption";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const nav = useNavigate();
 
   const handleToggle = () => setShow(!show);
@@ -24,7 +25,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     let url = API_URL + "/users/login";
-    // let resp = await doApiMethod(url, "POST", { email, password });
+    // await setPassword(encrypt(password));
     let resp = await loginUser({ email, password });
     if (resp.data) {
       toast.success("You are now logged in ");

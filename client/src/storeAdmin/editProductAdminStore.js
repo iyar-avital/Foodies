@@ -65,7 +65,11 @@ function EditProductAdminStore(props) {
           >
             <ProductForm item={product} doApi={doFormApi} isLoading={isLoading} />
           </Col>
-          <Col md={6} className="createStore__bg"></Col>
+          <Col
+            md={6}
+            className="productForm__bg"
+            style={{ backgroundImage: `url(${product?.imgUrl})` }}
+          ></Col>
         </Row>
       </Container>
     </motion.div>

@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const { auth, authAdmin } = require("../middlewares/auth");
 const { UserModel } = require("../models/userModel");
 const { genShortId } = require("../utils/genShortId");
+const decrypt = require("../utils/decryption");
 
 router.get("/", (req, res) => {
   res.json({ msg: "users from " });
@@ -51,8 +52,6 @@ router.get("/myInfo", auth, async (req, res) => {
   }
 });
 
-router.get("/resetPass", async (req, res) => {});
-
 router.get("/logout", async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -65,9 +64,10 @@ router.get("/logout", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let user = new UserModel(req.body);
+    // user.passwort = await
     user.password = await bcrypt.hash(user.password, 10);
+    user.short_id = await genShortId(UserModel);
     await user.save();
-    user.short_id = genShortId(UserModel);
     req.session.authenticated = true; //initial session
 
     req.session.user = user; //initial session
@@ -91,6 +91,8 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ err: "User not found" });
     }
+    // let decryptPass = decrypt(req.body.password);
+    // console.log(decryptPass);
     let validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) {
       return res.status(401).json({ err: "Email or password is wrong" });
@@ -99,6 +101,7 @@ router.post("/login", async (req, res) => {
     req.session.user = user; //initial session
     res.status(200).json({ user: user, cookie: req.session.cookie });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ err: error.message });
   }
 });
@@ -129,6 +132,20 @@ router.put("/update", auth, async (req, res) => {
     res.status(400).json(error); //failed to find user
   }
 });
+// router.patch("/resetPass", auth, async (req, res) => {
+//   let newPassword = req.body.newPassword;
+//   let validPass = await bcrypt.compare(password, req.session.user.password);
+//   if (validPass) {
+//     try {
+//       let data = await UserModel.updateOne({ _id: req.session.user.id }, { password: newPassword });
+//       res.status(200).json(data);
+//     } catch (error) {
+//       res.status(500).json(error);
+//     }
+//   } else {
+//     res.status(401);
+//   }
+// });
 
 router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
   let userId = req.params.userId;
@@ -148,7 +165,7 @@ router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
 });
 
 router.delete("/", auth, async (res, req) => {
-  let password = req.body.password;
+  // let password = req.header("x-api-key");
   try {
     let user = await UserModel.find({ _id: req.session.user._id });
     let validPass = await bcrypt.compare(password, user.password);
@@ -162,7 +179,7 @@ router.delete("/", auth, async (res, req) => {
       return res.status(500).json(error); // failed to delete
     }
   } catch (error) {
-    res.status(400).json(error); //failed to find user
+    return res.status(400).json(error); //failed to find user
   }
   try {
     await UserModel.deleteOne({ _id: req.session.user._id });
