@@ -6,7 +6,6 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
 import PageLinks from "../comps/utils/pageLinks";
-import { dateCreated } from "../comps/utils/dateCreated";
 import LottieAnimation from "../comps/utils/lottieAnimation";
 
 function ProductsAdmin(props) {
@@ -89,7 +88,7 @@ function ProductsAdmin(props) {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.store_id}</td>
-                <td>{dateCreated(item.date_created)}</td>
+                <td>{item.date_created}</td>
                 <td>{item.short_id}</td>
                 <td>
                   <button
