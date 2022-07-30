@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { getFormatedTime, getFromattedDate } = require("../utils/Data&timeFormat");
 
 const orderSchema = new mongoose.Schema({
   products_ar: {
@@ -7,13 +8,13 @@ const orderSchema = new mongoose.Schema({
   },
   client_short_id: String,
   status: {
-    type: String,
+    type: "String",
     default: "pending",
   },
   total_price: Number,
   date_created: {
-    type: Date,
-    default: Date.now(),
+    type: "String",
+    default: getFormatedTime() + " " + getFromattedDate(),
   },
   short_id: String,
   store_short_id: {
