@@ -4,7 +4,7 @@ const Buffer = require("buffer/").Buffer;
 
 const decrypt = (message) => {
   const privateKey = {
-    key: fs.readFileSync("private_key.pem", "utf8"),
+    key: fs.readFileSync(process.env.CRYPT_PRIVET_KEY, "utf8"),
     passphrase: "",
     padding: crypto.constants.RSA_PKCS1_PADDING,
   };

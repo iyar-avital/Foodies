@@ -1,17 +1,15 @@
-import axios, { Axios } from "axios";
 import React, { useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { motion } from "framer-motion";
-
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLoginUserMutation } from "../comps/redux/appApi";
-import { API_URL, doApiMethod } from "../services/apiService";
+import { useLoginUserMutation } from "../redux/appApi";
+import { API_URL } from "../services/apiService";
 import "./css/Login.css";
-import ResetPass from "../comps/utils/resetPass";
-import { encrypt } from "../services/encryption";
+import { encrypt } from "../utils/encryption";
+import ResetPass from "../comps/general/resetPass";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -19,24 +17,20 @@ function Login() {
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
   const [show, setShow] = useState(true);
   const nav = useNavigate();
-
   const handleToggle = () => setShow(!show);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    let url = API_URL + "/users/login";
-    // await setPassword(encrypt(password));
-    let resp = await loginUser({ email, password });
+    let encryptPass = encrypt(password);
+    let resp = await loginUser({ email, password: encryptPass });
     if (resp.data) {
       toast.success("You are now logged in ");
       nav("/");
-
       console.log(resp.data);
     } else {
       console.log(error);
     }
   };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -70,7 +64,6 @@ function Login() {
                   required
                 />
               </Form.Group>
-
               <Form.Group className="mb-3 text-start" controlId="formBasicPassword">
                 <Form.Label className="text-left">Password</Form.Label>
                 <Form.Control
@@ -109,5 +102,4 @@ function Login() {
     </motion.div>
   );
 }
-
 export default Login;

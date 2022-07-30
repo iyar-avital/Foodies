@@ -3,18 +3,30 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { AiOutlineClose } from "react-icons/ai";
-import { doApiGet } from "../../services/apiService";
+import { API_URL, doApiGet } from "../../services/apiService";
+import isEmail from "validator/lib/isEmail";
+import axios from "axios";
 
 function ResetPass(props) {
   const [email, setEmail] = useState("");
-  const [emailSent, setEmailSent] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [emailSent, setEmailSent] = useState(true);
+  const [resetCode, setResetCode] = useState("");
+
   let show = props.show;
   let handleToggle = props.handleToggle;
   let error = null;
 
   const handleReset = async () => {
-    let url = "/users/resetPass/" + email;
-    let resp = await doApiGet(url);
+    let url = API_URL + "/users/resetPass";
+    let resp = await axios.get(url, {
+      headers: {
+        "x-api-key": email,
+      },
+    });
+    if (resp.data.emailSent) {
+      setEmailSent(true);
+    }
   };
 
   return (
@@ -30,23 +42,45 @@ function ResetPass(props) {
             </p>
           )}
           <Form>
-            <Form.Label>Please enter your email address</Form.Label>
-            <Form.Group className="mb-3 text-start" controlId="formBasicEmail">
-              <Form.Control
-                type="email"
-                placeholder="Email address"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-            </Form.Group>
+            {emailSent ? (
+              <>
+                <Form.Label>Reset code sent to {email}</Form.Label>
+                <Form.Group className="mb-3 text-start" controlId="formBasicPassword">
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter code"
+                    onChange={(e) => setResetCode(e.target.value)}
+                    value={resetCode}
+                    required
+                  />
+                </Form.Group>
+              </>
+            ) : (
+              <>
+                <Form.Label>Please enter your email address</Form.Label>
+                <Form.Group className="mb-3 text-start" controlId="formBasicEmail">
+                  <Form.Control
+                    type="email"
+                    placeholder="Email address"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    required
+                  />
+                </Form.Group>
+              </>
+            )}
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleToggle}>
             Close
           </Button>
-          <Button variant="primary" type="submit" onClick={handleReset}>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={handleReset}
+            disabled={!email && !resetCode}
+          >
             Reset
           </Button>
         </Modal.Footer>
@@ -67,7 +101,6 @@ function ResetPass(props) {
     //           placeholder="Email"
     //           onChange={(e) => setEmail(e.target.value)}
     //         />
-
     //         <Button variant="primary" type="submit" onClick={handleSubmit}>
     //           Submit
     //         </Button>
@@ -77,5 +110,4 @@ function ResetPass(props) {
     // </div>
   );
 }
-
 export default ResetPass;
