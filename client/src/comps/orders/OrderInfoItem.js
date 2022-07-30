@@ -1,6 +1,6 @@
 import React from "react";
 
-function OldOrderInfoItem(props) {
+function OrderInfoItem(props) {
   let item = props.item;
   let i = props.i;
   console.log(item);
@@ -51,4 +51,4 @@ function OldOrderInfoItem(props) {
   );
 }
 
-export default OldOrderInfoItem;
+export default OrderInfoItem;
