@@ -24,7 +24,7 @@ let productScheam = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    store_id: String,
+    store_short_id: String,
     short_id: String,
   },
   { minimize: false } //not droping empty objects
