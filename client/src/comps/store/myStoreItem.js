@@ -3,7 +3,6 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { BsFillInfoCircleFill, BsColumns } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
 function MyStoreItem(props) {
   let nav = useNavigate();
   let item = props.item;
@@ -11,7 +10,6 @@ function MyStoreItem(props) {
     color: "white",
     background: "#F1948A",
   };
-
   return (
     <motion.div
       layout
@@ -22,7 +20,7 @@ function MyStoreItem(props) {
     >
       <div
         className="payment-card rounded-lg shadow bg-white text-center h-100 cursor-pointer"
-        onClick={() => nav("/storeAdmin/" + item._id)}
+        onClick={() => nav("/storeAdmin/" + item.short_id)}
       >
         <div className="payment-card__type px-4 py-5 d-flex justify-content-center align-items-center">
           <div
@@ -40,7 +38,7 @@ function MyStoreItem(props) {
           <div className="d-flex justify-content-between">
             <button
               onClick={() => {
-                nav("/storeAdmin/more/" + item._id);
+                nav("/storeAdmin/more/" + item.short_id);
               }}
               className="mx-2"
               style={{ background: "none" }}
@@ -50,16 +48,7 @@ function MyStoreItem(props) {
             </button>
             <div>
               <Link
-                to={"/storeAdmin/products/" + item._id}
-                state={{ item }}
-                className="mx-2"
-                style={{ background: "none" }}
-                title="Products"
-              >
-                <BsColumns size="1.5em" color="#16A085" />
-              </Link>
-              <Link
-                to={"/storeAdmin/editStore/" + item._id}
+                to={"/storeAdmin/editStore/" + item.short_id}
                 className="mx-2"
                 state={{ item }}
                 style={{ background: "none" }}
@@ -69,7 +58,7 @@ function MyStoreItem(props) {
               </Link>
               <button
                 onClick={() => {
-                  props.delStore(item._id);
+                  props.delStore(item.short_id);
                 }}
                 style={{ background: "none" }}
                 title="Delete"
@@ -83,5 +72,4 @@ function MyStoreItem(props) {
     </motion.div>
   );
 }
-
 export default MyStoreItem;

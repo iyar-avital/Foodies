@@ -12,6 +12,19 @@
     overflow-x: hidden;
 }
 
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.footer {
+    height: 20vh;
+    position: absolute;
+    height: 2.5rem;
+    bottom: 0;
+    width: 100%;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Quando);
 *:after,
 *:before {

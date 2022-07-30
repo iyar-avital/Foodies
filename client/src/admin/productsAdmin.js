@@ -2,23 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsPen, BsEraser, BsInfoCircle } from "react-icons/bs";
 import { MdAddShoppingCart } from "react-icons/md";
-
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
-import PageLinks from "../comps/utils/pageLinks";
-import { dateCreated } from "../comps/utils/dateCreated";
-import LottieAnimation from "../comps/utils/lottieAnimation";
-
+import PageLinks from "../comps/misc/pageLinks";
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import { dateCreated } from "../utils/dateCreated";
 function ProductsAdmin(props) {
   let [ar, setAr] = useState([]);
   let [numPage, setPageNum] = useState(1);
   let nav = useNavigate();
   const location = useLocation();
-
   useEffect(() => {
     doApi();
   }, [location]);
-
   const doApi = async () => {
     // get products page number
     const urlParams = new URLSearchParams(window.location.search);
@@ -35,7 +31,6 @@ function ProductsAdmin(props) {
       }
     }
   };
-
   const delProduct = async (_idDel) => {
     if (window.confirm("Are you sure you want to delete?")) {
       try {
@@ -53,7 +48,6 @@ function ProductsAdmin(props) {
       }
     }
   };
-
   return (
     <div className="container">
       <h1 className="display-4">Products List</h1>
@@ -67,7 +61,7 @@ function ProductsAdmin(props) {
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
-            <th>store_id</th>
+            <th>store_short_id</th>
             <th>Date Created</th>
             <th>Short_id</th>
             <th>Del</th>
@@ -88,7 +82,7 @@ function ProductsAdmin(props) {
                 </td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
-                <td>{item.store_id}</td>
+                <td>{item.store_short_id}</td>
                 <td>{dateCreated(item.date_created)}</td>
                 <td>{item.short_id}</td>
                 <td>
@@ -117,5 +111,4 @@ function ProductsAdmin(props) {
     </div>
   );
 }
-
 export default ProductsAdmin;
