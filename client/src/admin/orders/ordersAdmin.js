@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import LottieAnimation from "../../comps/utils/lottieAnimation";
+import LottieAnimation from "../../comps/misc/lottieAnimation";
 import { API_URL, doApiGet } from "../../services/apiService";
 import OrderItem from "./orderItem";
 

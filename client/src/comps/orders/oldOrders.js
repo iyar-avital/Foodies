@@ -4,7 +4,7 @@ import { API_URL, doApiGet } from "../../services/apiService";
 import { GrDeliver } from "react-icons/gr";
 import "./checkout.css";
 import OldOrderItem from "./oldOrderItem";
-import AuthClientComp from "../utils/auth/authClientComp";
+import AuthClientComp from "../auth/authClientComp";
 
 function OldOrders(props) {
   const [ar, setAr] = useState([]);
