@@ -1,41 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDeleteUserMutation } from "../../redux/appApi";
-import { Col, Container, InputGroup, Row, Spinner, Form, Button } from "react-bootstrap";
+import { InputGroup, Spinner, Form, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import { API_URL, doApiMethod } from "../../services/apiService";
+import { useDeleteUserMutation } from "../../redux/appApi";
+import { toast } from "react-toastify";
+import { encrypt } from "../../utils/encryption";
 
 function DeleteAccount(props) {
   const [password, setPassword] = useState("");
   const [deleteUser, { Loading, error }] = useDeleteUserMutation();
   const nav = useNavigate();
-
   let show = props.show;
   let handleToggle = props.handleToggle;
 
   const onDeleteClick = async () => {
     if (password) {
-      await setPassword(password.toString());
-      console.log(password);
-      if (window.confirm("You are about to delete your account")) {
-        try {
-          let url = API_URL + "/users/";
-          let data = await axios({
-            method: "DELETE",
-            url: url,
-            withCredentials: true,
-          });
-          return data;
-        } catch (err) {
-          throw err;
-        }
-        handleToggle();
-      } else {
+      let encryptedPassword = encrypt(password);
+      let resp = await deleteUser(encryptedPassword);
+      if (resp.data.deletedCount === 1) {
+        nav("/");
+        toast.info("Your account has been deleted");
+        console.log(resp);
         handleToggle();
       }
-    } else {
-      alert("Password requierd");
     }
   };
   return (
@@ -44,7 +31,9 @@ function DeleteAccount(props) {
         <Modal.Header closeButton>
           <Modal.Title>Delete your account</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
+          {error && <p className="alert alert-danger">{error.data.err}</p>}
           <p className="text-start">Please enter your password</p>
           <InputGroup className="mb-3">
             <Form.Control
@@ -52,6 +41,7 @@ function DeleteAccount(props) {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               required
+              type="password"
             />
           </InputGroup>
         </Modal.Body>
@@ -59,13 +49,12 @@ function DeleteAccount(props) {
           <Button variant="secondary" type="submit" onClick={handleToggle}>
             Close
           </Button>
-          <Button variant="primary" onClick={onDeleteClick}>
-            Delete
+          <Button variant="primary" onClick={onDeleteClick} disabled={!password}>
+            {Loading ? <Spinner animation="grow" /> : "Delete"}
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 }
-
 export default DeleteAccount;
