@@ -1,8 +1,7 @@
-import React from "react";
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AuthAdminComp from "../comps/utils/auth/authAdminComp";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import AuthAdminComp from "../comps/auth/authAdminComp";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 
 import HeaderAdmin from "./headerAdmin";
 
@@ -11,9 +10,6 @@ function LayoutAdmin(props) {
   return (
     <div>
       <React.Fragment>
-        <AuthAdminComp />/
-        <HeaderAdmin />
-        <Outlet />
         <AuthAdminComp setAuthorized={setAuthorized} />
 
         {!authorized ? (
@@ -28,4 +24,5 @@ function LayoutAdmin(props) {
     </div>
   );
 }
+
 export default LayoutAdmin;

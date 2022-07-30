@@ -8,8 +8,9 @@ import { useUpdateUserMutation } from "../redux/appApi";
 import { useSelector } from "react-redux";
 import "./css/updateAccount.css";
 import { toast } from "react-toastify";
-import DeleteAccount from "../comps/utils/DeleteAccount";
+import DeleteAccount from "../comps/general/DeleteAccount";
 import { motion } from "framer-motion";
+import { encrypt } from "../utils/encryption";
 
 function UpdateAccount() {
   const user = useSelector((state) => state.user);
@@ -23,11 +24,11 @@ function UpdateAccount() {
   const [newPassword, setNewPassword] = useState("");
   const [phone, setPhone] = useState(user?.phone);
   const [address, setAddress] = useState(user?.address);
+  const [show, setShow] = useState(true);
   //image upload states
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [imagePreview, setImagePreview] = useState(user?.picture);
-
   useEffect(() => {
     if (!user) {
       toast.error(error?.data.err);
@@ -35,15 +36,19 @@ function UpdateAccount() {
     }
   }, [user, error]);
 
+  const handleToggle = () => setShow(!show);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     const picUrl = image ? await uploadImage(image) : imagePreview;
+    let encryptCurrentPass = encrypt(currentPassword);
+    let encryptNewPass = newPassword ? encrypt(newPassword) : null;
     let resp = await updateUser({
       name,
       email,
-      password: currentPassword,
+      password: encryptCurrentPass,
       picture: picUrl,
-      newPassword,
+      newPassword: encryptNewPass,
       address,
       phone,
     });
@@ -57,7 +62,6 @@ function UpdateAccount() {
       nav("/");
     }
   };
-
   const validateImg = (e) => {
     const file = e.target.files[0];
     if (file.size >= 1048576) {
@@ -67,7 +71,6 @@ function UpdateAccount() {
       setImagePreview(URL.createObjectURL(file));
     }
   };
-
   const uploadImage = async () => {
     const data = new FormData();
     data.append("file", image);
@@ -87,7 +90,6 @@ function UpdateAccount() {
       console.log(err);
     }
   };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -95,6 +97,7 @@ function UpdateAccount() {
       transition={{ delay: 0.5, duration: 0.7 }}
       className="register-photo"
     >
+      <DeleteAccount show={show} handleToggle={handleToggle} />
       <div className="d-flex align-items-center h-100">
         <Container>
           <Row className="justify-content-between align-items-center">
@@ -160,7 +163,7 @@ function UpdateAccount() {
                     value={newPassword}
                   />
                 </Form.Group>
-                <Form.Group className="mb-3 " controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Address</Form.Label>
                   <Form.Control
                     type="text"
@@ -183,6 +186,18 @@ function UpdateAccount() {
                 <Button variant="primary" type="submit">
                   {uploading || isLoading ? <Spinner animation="grow" /> : "Update"}
                 </Button>
+                <div className="my-4">
+                  <p className="text-center">
+                    <span
+                      className="text-primary color-info"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleToggle}
+                    >
+                      Delete
+                    </span>{" "}
+                    my account
+                  </p>
+                </div>
               </Form>
             </Col>
             <Col md={6} className="update__bg"></Col>
@@ -192,5 +207,4 @@ function UpdateAccount() {
     </motion.div>
   );
 }
-
 export default UpdateAccount;

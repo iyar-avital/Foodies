@@ -5,9 +5,10 @@ import { MdAddShoppingCart } from "react-icons/md";
 
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
-import PageLinks from "../comps/utils/pageLinks";
-import { dateCreated } from "../comps/utils/dateCreated";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import PageLinks from "../comps/misc/pageLinks";
+
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import { dateCreated } from "../utils/dateCreated";
 
 function ProductsAdmin(props) {
   let [ar, setAr] = useState([]);

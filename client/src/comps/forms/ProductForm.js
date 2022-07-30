@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Spinner, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import ImagesSearch from "../imagesSearch";
+import ImagesSearch from "../misc/imagesSearch";
 
 function ProductForm(props) {
   const item = props?.item;

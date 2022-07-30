@@ -5,8 +5,8 @@ import { BsPen, BsEraser } from "react-icons/bs";
 import { MdAddBusiness } from "react-icons/md";
 import { toast } from "react-toastify";
 
-import LottieAnimation from "../comps/utils/lottieAnimation";
-import PageLinks from "../comps/utils/pageLinks";
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import PageLinks from "../comps/misc/pageLinks";
 
 function StoresAdmin(props) {
   const [ar, setAr] = useState([]);
