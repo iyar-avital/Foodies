@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
+const { getFromattedDate } = require("../utils/Data&timeFormat");
+
 let storeSchema = new mongoose.Schema(
   {
     name: {
@@ -39,8 +41,8 @@ let storeSchema = new mongoose.Schema(
       default: "pending",
     },
     date_created: {
-      type: Date,
-      default: Date.now(),
+      type: String,
+      default: getFromattedDate(),
     },
     short_id: String,
     //   categories: Array,
