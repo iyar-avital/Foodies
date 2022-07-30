@@ -5,11 +5,12 @@ const { auth, authAdmin } = require("../middlewares/auth");
 const { UserModel } = require("../models/userModel");
 const { genShortId } = require("../utils/genShortId");
 const decrypt = require("../utils/decryption");
+const { resetPassEmail } = require("../utils/sendEmail");
+const { random } = require("lodash");
 
 router.get("/", (req, res) => {
   res.json({ msg: "users from " });
 });
-
 // all users
 router.get("/usersList", authAdmin, async (req, res) => {
   let perPage = req.query.perPage || 10;
@@ -26,7 +27,6 @@ router.get("/usersList", authAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 // get amount of users
 router.get("/amount", async (req, res) => {
   try {
@@ -40,7 +40,6 @@ router.get("/amount", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 // user info
 router.get("/myInfo", auth, async (req, res) => {
   try {
@@ -51,7 +50,6 @@ router.get("/myInfo", auth, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 router.get("/logout", async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -60,18 +58,15 @@ router.get("/logout", async (req, res) => {
     res.status(200).clearCookie(process.env.SESSION_NAME).json({ msg: "logged out" });
   });
 });
-
 router.post("/", async (req, res) => {
   try {
     let user = new UserModel(req.body);
-    // user.passwort = await
-    user.password = await bcrypt.hash(user.password, 10);
+    let decryptPass = decrypt(req.body.password);
+    user.password = await bcrypt.hash(decryptPass, 10);
     user.short_id = await genShortId(UserModel);
     await user.save();
     req.session.authenticated = true; //initial session
-
     req.session.user = user; //initial session
-
     res.status(201).json({ cookie: req.session.cookie, user: user });
   } catch (error) {
     let msg;
@@ -83,7 +78,6 @@ router.post("/", async (req, res) => {
     res.status(400).json(msg);
   }
 });
-
 router.post("/login", async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email });
@@ -91,9 +85,9 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ err: "User not found" });
     }
-    // let decryptPass = decrypt(req.body.password);
-    // console.log(decryptPass);
-    let validPass = await bcrypt.compare(req.body.password, user.password);
+    let decryptPass = decrypt(req.body.password);
+    // let decryptPass = req.body.password;
+    let validPass = await bcrypt.compare(decryptPass, user.password);
     if (!validPass) {
       return res.status(401).json({ err: "Email or password is wrong" });
     }
@@ -108,16 +102,20 @@ router.post("/login", async (req, res) => {
 
 router.put("/update", auth, async (req, res) => {
   let { name, email, password, newPassword, address, phone, picture } = req.body;
+  let decryptPass = decrypt(password);
+  let decryptNewPass = null;
+  if (newPassword) {
+    decryptNewPass = decrypt(newPassword);
+  }
   try {
     let user = await UserModel.findOne({ _id: req.session.user._id });
-    console.log(user);
-    let validPass = await bcrypt.compare(password, user.password);
+    let validPass = await bcrypt.compare(decryptPass, user.password);
     if (!validPass) {
       return res.status(403).json({ err: "wrong password" });
     }
     let payload = { name, email, address, phone, picture };
-    if (newPassword) {
-      password = await bcrypt.hash(newPassword, 10);
+    if (decryptNewPass) {
+      password = await bcrypt.hash(decryptNewPass, 10);
       payload = { ...payload, password };
     }
     try {
@@ -132,20 +130,50 @@ router.put("/update", auth, async (req, res) => {
     res.status(400).json(error); //failed to find user
   }
 });
-// router.patch("/resetPass", auth, async (req, res) => {
-//   let newPassword = req.body.newPassword;
-//   let validPass = await bcrypt.compare(password, req.session.user.password);
-//   if (validPass) {
-//     try {
-//       let data = await UserModel.updateOne({ _id: req.session.user.id }, { password: newPassword });
-//       res.status(200).json(data);
-//     } catch (error) {
-//       res.status(500).json(error);
-//     }
-//   } else {
-//     res.status(401);
-//   }
-// });
+
+//send reset password email to the user
+router.get("/resetPass", (req, res) => {
+  let email = req.header("x-api-key");
+  let rand = random(0, 999999);
+  req.session.resetCode = rand;
+  if (resetPassEmail(email, rand)) {
+    return res.status(200).json({
+      msg: "Reset code has been sent to yout email",
+      emailSent: true,
+    });
+  } else {
+    return res.status(500).json({ err: "something went wrong", emailSent: false });
+  }
+});
+
+//checks the recived code
+router.get("/checkResetCode", async (res, req) => {
+  let code = req.query.code;
+  if (code === req.session.resetCode) {
+    try {
+      let data = await UserModel.updateOne({ _id: req.session.user._id }, { password: null });
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  } else {
+    res.status(401).json({ err: "code is not correct" });
+  }
+});
+//change the user password
+router.patch("/resetCode", async (res, req) => {
+  let encryptedPass = req.header("x-api-key");
+  let decryptedPass = decrypt(encryptedPass);
+  let hashPass = await bcrypt.hash(decryptedPass, 10);
+  //becrypt
+  try {
+    let data = await UserModel.updateOne(
+      { _id: req.session.user._id, password: null },
+      { password: hashPass }
+    );
+    res.status(200).json(data);
+  } catch (error) {}
+});
 
 router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
   let userId = req.params.userId;
@@ -164,30 +192,20 @@ router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
   }
 });
 
-router.delete("/", auth, async (res, req) => {
-  // let password = req.header("x-api-key");
-  try {
-    let user = await UserModel.find({ _id: req.session.user._id });
-    let validPass = await bcrypt.compare(password, user.password);
-    if (!validPass) {
-      return res.status(403).json({ err: "wrong password" });
-    }
-    try {
-      await UserModel.deleteOne(user);
-      res.status(200).json({ msg: "delete user" });
-    } catch (error) {
-      return res.status(500).json(error); // failed to delete
-    }
-  } catch (error) {
-    return res.status(400).json(error); //failed to find user
+router.delete("/", auth, async (req, res) => {
+  let password = req.header("x-api-key");
+  let decryptPass = decrypt(password);
+  let validPass = await bcrypt.compare(decryptPass, req.session.user.password);
+  if (!validPass) {
+    return res.status(403).json({ err: "wrong password" });
   }
   try {
-    await UserModel.deleteOne({ _id: req.session.user._id });
+    let data = await UserModel.deleteOne({ _id: req.session.user._id });
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json(error); // failed to delete
   }
 });
-
 // del user - DELETE
 router.delete("/delete/:delId", authAdmin, async (req, res) => {
   let delId = req.params.delId;
@@ -206,5 +224,4 @@ router.delete("/delete/:delId", authAdmin, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 module.exports = router;
