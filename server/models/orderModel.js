@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { getFormatedTime, getFromattedDate } = require("../utils/Data&timeFormat");
+const { getFormatedTime, getFromattedDate } = require("../utils/DateTimeFormat");
 
 const orderSchema = new mongoose.Schema({
   products_ar: {

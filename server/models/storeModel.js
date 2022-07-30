@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
-const { getFromattedDate } = require("../utils/Data&timeFormat");
+const { getFromattedDate } = require("../utils/DateTimeFormat");
 
 let storeSchema = new mongoose.Schema(
   {
