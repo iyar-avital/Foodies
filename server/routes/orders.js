@@ -1,5 +1,5 @@
 const express = require("express");
-const { auth, payPalAuth, authAdmin } = require("../middlewares/auth");
+const { auth, payPalAuth, authAdmin, authStoreAdmin } = require("../middlewares/auth");
 const { genShortId } = require("../utils/genShortId");
 const { OrderModel } = require("../models/orderModel");
 const { ProductModel } = require("../models/productModel");
@@ -7,13 +7,34 @@ const { StoreModel } = require("../models/storeModel");
 const { UserModel } = require("../models/userModel");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    msg: "orders work",
-  });
+router.get("/sotreOrders/:store_id", authStoreAdmin, async (req, res) => {
+  let store_short_id = req.params.store_id;
+  let perPage = req.query.perPage || 10;
+  let page = req.query.page >= 1 ? req.query.page - 1 : 0;
+  let sort = req.query.sort || "_id";
+  let reverse = req.query.reverse == "yes" ? -1 : 1;
+  let status = req.query.status;
+
+  try {
+    let filter = { store_short_id };
+    filter = status
+      ? { ...filter, status }
+      : {
+        ...filter,
+      };
+    let data = await OrderModel.find(filter)
+      .limit(perPage)
+      .skip(perPage * page)
+      .sort({
+        [sort]: reverse,
+      });
+    res.json(data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
-router.get("/userOrder", auth, async (req, res) => {
+router.get("/userOrder", async (req, res) => {
   try {
     let data = await OrderModel.find({
       user_id: req.session.user._id,
@@ -29,8 +50,8 @@ router.get("/userOrder", auth, async (req, res) => {
   }
 });
 
-router.get("/allOrders", async (req, res) => {
-  let perPage = req.query.perPage || 5;
+router.get("/allOrders", authAdmin, async (req, res) => {
+  let perPage = req.query.perPage || 10;
   let page = req.query.page >= 1 ? req.query.page - 1 : 0;
   let sort = req.query.sort || "_id";
   let reverse = req.query.reverse == "yes" ? -1 : 1;
@@ -42,8 +63,8 @@ router.get("/allOrders", async (req, res) => {
     filter = status
       ? { ...filter, status }
       : {
-          ...filter,
-        };
+        ...filter,
+      };
     let data = await OrderModel.find(filter)
       .limit(perPage)
       .skip(perPage * page)
@@ -80,23 +101,6 @@ router.get("/storesWithOrders", async (req, res) => {
     });
 
     res.json({ data });
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-// ## NEW ##
-// get order details store info and user name and email
-router.get("/deliveryInfo/:idOrder", async (req, res) => {
-  try {
-    let order = await OrderModel.findOne({
-      _id: req.params.idOrder,
-    });
-    let store = await StoreModel.findOne({
-      short_id: order.store_short_id,
-    });
-    let user = await UserModel.findOne({ _id: order.user_id }, { name: 1, email: 1 });
-    res.status(200).json({ order, store, user });
   } catch (error) {
     res.status(500).json(error);
   }
