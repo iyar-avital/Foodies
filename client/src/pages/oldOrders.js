@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { API_URL, doApiGet } from "../../services/apiService";
+import { API_URL, doApiGet } from "../services/apiService";
 import { GrDeliver } from "react-icons/gr";
-import "./checkout.css";
-import OldOrderItem from "./oldOrderItem";
-import AuthClientComp from "../utils/auth/authClientComp";
+import "./css/checkout.css";
+import OldOrderItem from "../comps/orders/oldOrderItem";
+import AuthClientComp from "../comps/auth/authClientComp";
 
 function OldOrders(props) {
   const [ar, setAr] = useState([]);
   const [allTotal, setAllTotal] = useState(0);
-
   useEffect(() => {
     doApi();
   }, []);
-
   useEffect(() => {
     totalAllOrders();
   }, [ar]);
-
   const doApi = async () => {
     let url = API_URL + "/orders/userOrder";
     let resp = await doApiGet(url);
@@ -26,7 +23,6 @@ function OldOrders(props) {
     // console.log(temp_ar);
     setAr(temp_ar);
   };
-
   const totalAllOrders = () => {
     let num = 0;
     if (ar.length > 0) {
@@ -34,7 +30,6 @@ function OldOrders(props) {
       setAllTotal(num);
     }
   };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -62,7 +57,6 @@ function OldOrders(props) {
                   {ar.map((item, i) => {
                     let date = item.date_created.replace("T", " ");
                     date = date.substring(0, date.indexOf(":") + 3);
-
                     return <OldOrderItem key={item._id} item={item} i={i} date={date} />;
                   })}
                   {/* end product */}
@@ -90,5 +84,4 @@ function OldOrders(props) {
     </motion.div>
   );
 }
-
 export default OldOrders;
