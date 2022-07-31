@@ -38,12 +38,11 @@ function MyStores(props) {
     saveStoresIdsLocall(short_id_ar);
   };
 
-  const delStore = async (_idDel) => {
+  const delStore = async (_idDel, _short_id) => {
     if (window.confirm("Are you sure you want to delete?")) {
       try {
         let url = API_URL + "/stores/" + _idDel;
-        let resp = await doApiMethod(url, "DELETE", {}, _idDel);
-        // console.log(resp.data);
+        let resp = await doApiMethod(url, "DELETE", {}, _short_id);
         if (resp.data.deletedCount) {
           toast.info("Stores deleted");
         }
