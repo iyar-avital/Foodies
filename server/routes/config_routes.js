@@ -4,7 +4,6 @@ const productsR = require("./products");
 const storeR = require("./stores");
 const favR = require("./favProducts");
 const ordersR = require("./orders");
-
 exports.routesInit = (app) => {
   app.use("/", indexR);
   app.use("/users", usersR);
@@ -12,10 +11,6 @@ exports.routesInit = (app) => {
   app.use("/products", productsR);
   app.use("/orders", ordersR);
   app.use("/favs", favR);
-
-  app.use((req, res) => {
-    res.status(404).json({ msg_error: "Url not found , 404!" });
-  });
 };
 
 exports.corsAccessControl = (app) => {
