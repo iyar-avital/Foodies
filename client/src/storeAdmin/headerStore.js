@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 
 function HeaderStore(props) {
-  const baseUrl = window.location.href;
   const nav = useNavigate();
   const user = useSelector((state) => state.user);
   const handleLogout = (e) => {
@@ -38,7 +37,6 @@ function HeaderStore(props) {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>Foodzone</Offcanvas.Title>
           </Offcanvas.Header>
-
           <Offcanvas.Body>
             <Nav className="mx-auto">
               <Nav.Link
@@ -48,7 +46,13 @@ function HeaderStore(props) {
               >
                 Products
               </Nav.Link>
-              <Nav.Link href={baseUrl + "../orders"}>Orders</Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./orders");
+                }}
+              >
+                Orders
+              </Nav.Link>
               <Nav.Link
                 onClick={() => {
                   nav("./editStore");
@@ -85,7 +89,6 @@ function HeaderStore(props) {
                   id="basic-nav-dropdown"
                 >
                   {/* <NavDropdown.Item href="#action/3.1">Favorites</NavDropdown.Item> */}
-
                   <NavDropdown.Item>
                     <Button variant="danger" onClick={handleLogout}>
                       Logout
@@ -100,5 +103,4 @@ function HeaderStore(props) {
     </Navbar>
   );
 }
-
 export default HeaderStore;

@@ -7,11 +7,11 @@ import Navigation from "./Navigation";
 
 function Layout() {
   return (
-    <div>
+    <div className="page-container">
       {" "}
       <Navigation />
       <Cart />
-      <Outlet />
+      <Outlet className="content-wrap" />
       <Footer />
     </div>
   );

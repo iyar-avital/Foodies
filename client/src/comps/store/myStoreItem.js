@@ -3,7 +3,6 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { BsFillInfoCircleFill, BsColumns } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
 function MyStoreItem(props) {
   let nav = useNavigate();
   let item = props.item;
@@ -11,7 +10,6 @@ function MyStoreItem(props) {
     color: "white",
     background: "#F1948A",
   };
-
   return (
     <motion.div
       layout
@@ -22,7 +20,7 @@ function MyStoreItem(props) {
     >
       <div
         className="payment-card rounded-lg shadow bg-white text-center h-100 cursor-pointer"
-        onClick={() => nav("/storeAdmin/" + item._id)}
+        onClick={() => nav("/storeAdmin/" + item.short_id)}
       >
         <div className="payment-card__type px-4 py-5 d-flex justify-content-center align-items-center">
           <div
@@ -31,16 +29,50 @@ function MyStoreItem(props) {
           >
             {item.status}
           </div>
-          <img src={item.imgUrl || "/images/no_image.png"} alt={item.name + " image"} />
+          <img
+            src={item.imgUrl || "/images/no_image.png"}
+            alt={item.name + " image"}
+          />
         </div>
         <div className="payment-card__info p-4">
           <h4>{item.name}</h4>
           {/* <p className="text-muted">address : {item.address}</p> */}
           <hr />
+          <div className="d-flex justify-content-between">
+            <button
+              onClick={() => {
+                nav("/storeAdmin/more/" + item.short_id);
+              }}
+              className="mx-2"
+              style={{ background: "none" }}
+              title="Info"
+            >
+              Info <BsFillInfoCircleFill size="1.5em" color="#34495E" />
+            </button>
+            <div>
+              <Link
+                to={"/storeAdmin/editStore/" + item.short_id}
+                className="mx-2"
+                state={{ item }}
+                style={{ background: "none" }}
+                title="Edit"
+              >
+                <MdEdit size="1.5em" color="#3498DB" />
+              </Link>
+              <button
+                onClick={() => {
+                  props.delStore(item.short_id);
+                }}
+                style={{ background: "none" }}
+                title="Delete"
+              >
+                <MdDelete size="1.5em" color="#E74C3C" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
   );
 }
-
 export default MyStoreItem;

@@ -3,7 +3,6 @@ import { BsFacebook, BsTwitter, BsSnapchat, BsInstagram } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Nav } from "react-bootstrap";
-
 function Footer(props) {
   const dt = new Date();
   const user = useSelector((state) => state.user);
@@ -31,7 +30,7 @@ function Footer(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <p className="text-center mt-4 mb-4">Foodzone © {dt.getFullYear()}</p>
+      <p className="text-center py-3">Foodzone © {dt.getFullYear()}</p>
     </>
   );
 }

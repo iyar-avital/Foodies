@@ -16,7 +16,6 @@ import MyStores from "./pages/myStores";
 // store Admin imports
 import LayoutStore from "./storeAdmin/layoutStore";
 import EditStoreAdmin from "./storeAdmin/editStoreAdmin";
-
 import ProductsStoreAdmin from "./storeAdmin/productsStoreAdmin";
 import EditProductAdminStore from "./storeAdmin/editProductAdminStore";
 import AddProductStoreAdmin from "./storeAdmin/addProductStoreAdmin";
@@ -30,10 +29,9 @@ import StoresAdmin from "./admin/storesAdmin";
 import ProductsAdmin from "./admin/productsAdmin";
 import HomeStore from "./storeAdmin/adminHome";
 import FavsProducts from "./pages/favsProducts";
-import Checkout from "./comps/orders/checkout";
-import OldOrders from "./comps/orders/oldOrders";
+import Checkout from "./pages/checkout";
+import OldOrders from "./pages/oldOrders";
 import OldOrderInfoClient from "./comps/orders/oldOrderInfoClient";
-import DeleteAccount from "./comps/general/DeleteAccount";
 
 function AppRouts() {
   return (
@@ -60,10 +58,23 @@ function AppRouts() {
         {/*store admin*/}
         <Route path="/storeAdmin/:id" element={<LayoutStore />}>
           <Route index element={<HomeStore />} />
-          <Route path="/storeAdmin/:id/editStore" element={<EditStoreAdmin />} />
-          <Route path="/storeAdmin/:id/products" element={<ProductsStoreAdmin />} />
-          <Route path="/storeAdmin/:id/products/edit/:prodId" element={<EditProductAdminStore />} />
-          <Route path="/storeAdmin/:id/products/addProduct" element={<AddProductStoreAdmin />} />
+          <Route
+            path="/storeAdmin/:id/editStore"
+            element={<EditStoreAdmin />}
+          />
+          <Route
+            path="/storeAdmin/:id/products"
+            element={<ProductsStoreAdmin />}
+          />
+          {/* <Route path="/storeAdmin/:id/orders" element={< />} /> */}
+          <Route
+            path="/storeAdmin/:id/products/edit/:prodId"
+            element={<EditProductAdminStore />}
+          />
+          <Route
+            path="/storeAdmin/:id/products/addProduct"
+            element={<AddProductStoreAdmin />}
+          />
         </Route>
         {/*admin*/}
         <Route path="/admin" element={<LayoutAdmin />}>
@@ -80,5 +91,4 @@ function AppRouts() {
     </BrowserRouter>
   );
 }
-
 export default AppRouts;

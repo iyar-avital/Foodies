@@ -5,7 +5,6 @@ const { genShortId } = require("../utils/genShortId");
 const { StoreModel, validateStore } = require("../models/storeModel");
 const { UserModel } = require("../models/userModel");
 const router = express.Router();
-
 //get all stores
 router.get("/", async (req, res) => {
   let perPage = req.query.perPage || 5;
@@ -30,7 +29,7 @@ router.get("/", async (req, res) => {
 // get user stores
 router.get("/userStores", auth, async (req, res) => {
   try {
-    let user_id = req.session.user._id;
+    let user_id = req.session.user.short_id;
     let data = await StoreModel.find({ admin_id: user_id }).sort({
       date_created: -1,
     });
@@ -40,7 +39,6 @@ router.get("/userStores", auth, async (req, res) => {
     res.status(500).json(error);
   }
 });
-
 //?s=
 router.get("/search", async (req, res) => {
   let perPage = req.query.perPage || 5;
@@ -57,7 +55,6 @@ router.get("/search", async (req, res) => {
       .limit(perPage)
       .skip(page * perPage)
       .sort({ [sort]: reverse });
-
     // filter To get just the active stores
     let filterData = data.filter((store) => store.status === "active");
     res.json(filterData);
@@ -66,19 +63,17 @@ router.get("/search", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //get single stores
 router.get("/single/:id", async (req, res) => {
   try {
     let id = req.params.id;
-    let data = await StoreModel.findOne({ _id: id });
+    let data = await StoreModel.findOne({ short_id: id });
     res.json(data);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
 // get amount of stores
 router.get("/amount", async (req, res) => {
   let status = req.query.status;
@@ -94,13 +89,12 @@ router.get("/amount", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //open new Store
 router.post("/", auth, async (req, res) => {
   try {
     let store = new StoreModel(req.body);
     // short_id , admin_id ,
-    store.admin_id = req.session.user._id;
+    store.admin_short_id = req.session.user.short_id;
     store.short_id = await genShortId(StoreModel);
     await store.save();
     res.status(201).json(store);
@@ -112,7 +106,6 @@ router.post("/", auth, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 //Edit  Store
 router.put("/:idStore", authStoreAdmin, async (req, res) => {
   try {
@@ -124,7 +117,6 @@ router.put("/:idStore", authStoreAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 // change store status
 router.patch("/updateStatus/:idStore", authAdmin, async (req, res) => {
   try {
@@ -163,7 +155,6 @@ router.patch("/updateStatus/:idStore", authAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 //Delete  Store
 router.delete("/:idStore", authStoreAdmin, async (req, res) => {
   try {
@@ -175,5 +166,4 @@ router.delete("/:idStore", authStoreAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 module.exports = router;

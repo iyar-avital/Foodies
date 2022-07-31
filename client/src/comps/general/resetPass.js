@@ -10,11 +10,9 @@ import { encrypt } from "../../utils/encryption";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
 const SEND_EMAIL = "send email";
 const SEND_CODE = "send send code";
 const SEND_PASSWORD = "new password";
-
 function ResetPass(props) {
   const [content, setContent] = useState(SEND_EMAIL);
   const [email, setEmail] = useState("ronennt@gmail.com");
@@ -22,12 +20,9 @@ function ResetPass(props) {
   const [resetCode, setResetCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
-
   const nav = useNavigate();
-
   let show = props.show;
   let handleToggle = props.handleToggle;
-
   const handleClose = () => {
     setContent(SEND_EMAIL);
     setResetCode("");
@@ -36,7 +31,6 @@ function ResetPass(props) {
     setError("");
     handleToggle();
   };
-
   const handelSubmit = () => {
     switch (content) {
       case SEND_EMAIL:
@@ -52,7 +46,6 @@ function ResetPass(props) {
         return;
     }
   };
-
   const sendEmail = async () => {
     if (!isEmail(email)) {
       setError("invalid email");
@@ -71,14 +64,15 @@ function ResetPass(props) {
         setEmail("");
         setContent(SEND_CODE);
       } else if (resp.data.emailSent === false) {
-        setError("Cannot send code. Plase check the email address and try again");
+        setError(
+          "Cannot send code. Plase check the email address and try again"
+        );
       }
     } catch (error) {
       console.log(error);
       setError(error.response.data);
     }
   };
-
   const submitCode = async () => {
     let url = API_URL + "/users/checkResetCode";
     try {
@@ -95,7 +89,6 @@ function ResetPass(props) {
       setError(error.response.data);
     }
   };
-
   const submitPassword = async () => {
     let url = API_URL + "/users/resetCode";
     let encryptedPassword = encrypt(newPassword);
@@ -109,16 +102,20 @@ function ResetPass(props) {
       setNewPassword("");
       toast.success("Your password has been changed successfully");
       handleToggle();
-
       nav("/");
     } else {
       setError("wrong code");
     }
   };
-
   return (
     <>
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Reset password</Modal.Title>
         </Modal.Header>
@@ -126,7 +123,10 @@ function ResetPass(props) {
         {content === SEND_EMAIL && (
           <Modal.Body>
             <Form controlId="formBasicEmail">
-              <Form.Group className="mb-3 text-start" controlId="formBasicEmail">
+              <Form.Group
+                className="mb-3 text-start"
+                controlId="formBasicEmail"
+              >
                 <Form.Label>Please enter your email address</Form.Label>
                 <Form.Control
                   type="email"
@@ -152,7 +152,10 @@ function ResetPass(props) {
             <Modal.Body>
               <Form>
                 <Form.Label>Recet code sent to {userEmail}</Form.Label>
-                <Form.Group className="mb-3 text-start" controlId="formBasicText">
+                <Form.Group
+                  className="mb-3 text-start"
+                  controlId="formBasicText"
+                >
                   <Form.Control
                     type="text"
                     placeholder="Enter reset code"
@@ -178,7 +181,10 @@ function ResetPass(props) {
             <Modal.Body>
               <Form>
                 <Form.Label>Please enter new password</Form.Label>
-                <Form.Group className="mb-3 text-start" controlId="formBasicPassword">
+                <Form.Group
+                  className="mb-3 text-start"
+                  controlId="formBasicPassword"
+                >
                   <Form.Control
                     type="password"
                     placeholder="Enter new password"
@@ -191,7 +197,6 @@ function ResetPass(props) {
             </Modal.Body>
           </motion.div>
         )}
-
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -209,5 +214,4 @@ function ResetPass(props) {
     </>
   );
 }
-
 export default ResetPass;

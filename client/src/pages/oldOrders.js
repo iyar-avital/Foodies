@@ -2,15 +2,9 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { API_URL, doApiGet } from "../services/apiService";
 import { GrDeliver } from "react-icons/gr";
-<<<<<<< HEAD:client/src/pages/oldOrders.js
 import "./css/checkout.css";
 import OldOrderItem from "../comps/orders/oldOrderItem";
 import AuthClientComp from "../comps/auth/authClientComp";
-=======
-import "./checkout.css";
-import OldOrderItem from "./oldOrderItem";
-import AuthClientComp from "../auth/authClientComp";
->>>>>>> 96bc1546244f69a5157c4fbe5c85f0ee752e586a:client/src/comps/orders/oldOrders.js
 
 function OldOrders(props) {
   const [ar, setAr] = useState([]);
@@ -63,7 +57,14 @@ function OldOrders(props) {
                   {ar.map((item, i) => {
                     let date = item.date_created.replace("T", " ");
                     date = date.substring(0, date.indexOf(":") + 3);
-                    return <OldOrderItem key={item._id} item={item} i={i} date={date} />;
+                    return (
+                      <OldOrderItem
+                        key={item._id}
+                        item={item}
+                        i={i}
+                        date={date}
+                      />
+                    );
                   })}
                   {/* end product */}
                 </div>
