@@ -1,86 +1,115 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { MdAdminPanelSettings, MdOutlineLogout, MdStorefront } from "react-icons/md";
-import { BiHomeAlt, BiCategory } from "react-icons/bi";
-import { HiOutlineClipboardList } from "react-icons/hi";
-import { RiShoppingCartLine } from "react-icons/ri";
-import { FaUserAstronaut } from "react-icons/fa";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import { useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 
 function HeaderAdmin(props) {
+  const nav = useNavigate();
+  const user = useSelector((state) => state.user);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    nav("/logout");
+  };
+
   return (
-    <header>
-      <nav className="navbar navbar-expand-lg">
-        <div className="container-fluid">
-          <Link to="/" className="logoFont">
-            <h2>Foodzone</h2>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            style={{ maxWidth: "80vw" }}
-            className="offcanvas offcanvas-end"
-            tabIndex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                Admin Panel <MdAdminPanelSettings className="ms-2" />
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="offcanvas-body">
-              <ul className="navbar-nav justify-content-start flex-grow-1 ps-5">
-                <React.Fragment>
-                  <li data-bs-dismiss="offcanvas">
-                    <Link to="../logout" className="nav-link rounded text-danger">
-                      Log out <MdOutlineLogout className="ms-1" />
-                    </Link>
-                  </li>
-                  <li data-bs-dismiss="offcanvas">
-                    <Link className="nav-link" to="/admin/home">
-                      Home <BiHomeAlt className="ms-1" />
-                    </Link>
-                  </li>
-                  <li data-bs-dismiss="offcanvas">
-                    <Link className="nav-link" to="/admin/orders">
-                      Orders <HiOutlineClipboardList className="ms-1" />
-                    </Link>
-                  </li>
-                  <li data-bs-dismiss="offcanvas">
-                    <Link className="nav-link" to="/admin/users">
-                      Users <FaUserAstronaut className="ms-1" />
-                    </Link>
-                  </li>
-                  <li data-bs-dismiss="offcanvas">
-                    <Link className="nav-link" to="/admin/stores">
-                      Stores <MdStorefront className="ms-1" />
-                    </Link>
-                  </li>
-                  <li data-bs-dismiss="offcanvas">
-                    <Link className="nav-link" to="/admin/products">
-                      Products <RiShoppingCartLine className="ms-1" />
-                    </Link>
-                  </li>
-                </React.Fragment>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <Navbar key={"lg"} bg="light" expand={"lg"}>
+      <Container>
+        <LinkContainer to="/">
+          <Navbar.Brand>
+            <img
+              src={`${process.env.REACT_APP_CLIENT_URL}/images/foodzone_icon.png`}
+              style={{ width: 70, height: 60 }}
+            />
+          </Navbar.Brand>
+        </LinkContainer>{" "}
+        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+        <Navbar.Offcanvas
+          id={`offcanvasNavbar-expand-lg`}
+          aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
+          placement="end"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>Foodzone</Offcanvas.Title>
+          </Offcanvas.Header>
+
+          <Offcanvas.Body>
+            <Nav className="mx-auto">
+              <Nav.Link
+                onClick={() => {
+                  nav("./Users");
+                }}
+              >
+                Users
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./stores");
+                }}
+              >
+                Stores
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./products");
+                }}
+              >
+                Products
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./orders");
+                }}
+              >
+                Orders
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              {!user && (
+                <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+              )}
+              {user && (
+                <NavDropdown
+                  title={
+                    <>
+                      <img
+                        src={user.picture}
+                        style={{
+                          width: 30,
+                          height: 30,
+                          marginRadius: 10,
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                          marginRight: "8px",
+                        }}
+                      />
+                      {user.name}
+                    </>
+                  }
+                  id="basic-nav-dropdown"
+                >
+                  {/* <NavDropdown.Item href="#action/3.1">Favorites</NavDropdown.Item> */}
+
+                  <NavDropdown.Item>
+                    <Button variant="danger" onClick={handleLogout}>
+                      Logout
+                    </Button>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+            </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
   );
 }
 
