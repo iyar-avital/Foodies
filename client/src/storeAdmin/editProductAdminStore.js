@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import { FaRegEdit } from "react-icons/fa";
 import { BsCardImage } from "react-icons/bs";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
-import { Col, Container, Form, Row, Spinner, Button } from "react-bootstrap";
-import ProductForm from "../comps/utils/forms/ProductForm";
+import StoreForm from "../comps/forms/StoreForm";
+import ProductForm from "../comps/forms/ProductForm";
 import { motion } from "framer-motion";
 
 function EditProductAdminStore(props) {
@@ -65,7 +65,11 @@ function EditProductAdminStore(props) {
           >
             <ProductForm item={product} doApi={doFormApi} isLoading={isLoading} />
           </Col>
-          <Col md={6} className="createStore__bg"></Col>
+          <Col
+            md={6}
+            className="productForm__bg"
+            style={{ backgroundImage: `url(${product?.imgUrl})` }}
+          ></Col>
         </Row>
       </Container>
     </motion.div>

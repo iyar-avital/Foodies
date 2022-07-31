@@ -64,7 +64,9 @@ function ResetPass(props) {
         setEmail("");
         setContent(SEND_CODE);
       } else if (resp.data.emailSent === false) {
-        setError("Cannot send code. Plase check the email address and try again");
+        setError(
+          "Cannot send code. Plase check the email address and try again"
+        );
       }
     } catch (error) {
       console.log(error);
@@ -107,7 +109,13 @@ function ResetPass(props) {
   };
   return (
     <>
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Reset password</Modal.Title>
         </Modal.Header>
@@ -115,7 +123,10 @@ function ResetPass(props) {
         {content === SEND_EMAIL && (
           <Modal.Body>
             <Form controlId="formBasicEmail">
-              <Form.Group className="mb-3 text-start" controlId="formBasicEmail">
+              <Form.Group
+                className="mb-3 text-start"
+                controlId="formBasicEmail"
+              >
                 <Form.Label>Please enter your email address</Form.Label>
                 <Form.Control
                   type="email"
@@ -136,11 +147,15 @@ function ResetPass(props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.7 }}
+            className="col-lg-6"
           >
             <Modal.Body>
               <Form>
                 <Form.Label>Recet code sent to {userEmail}</Form.Label>
-                <Form.Group className="mb-3 text-start" controlId="formBasicText">
+                <Form.Group
+                  className="mb-3 text-start"
+                  controlId="formBasicText"
+                >
                   <Form.Control
                     type="text"
                     placeholder="Enter reset code"
@@ -161,11 +176,15 @@ function ResetPass(props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.7 }}
+            className="col-lg-6"
           >
             <Modal.Body>
               <Form>
                 <Form.Label>Please enter new password</Form.Label>
-                <Form.Group className="mb-3 text-start" controlId="formBasicPassword">
+                <Form.Group
+                  className="mb-3 text-start"
+                  controlId="formBasicPassword"
+                >
                   <Form.Control
                     type="password"
                     placeholder="Enter new password"

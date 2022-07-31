@@ -2,7 +2,7 @@ import React from "react";
 
 import "./css/about.css";
 import { motion } from "framer-motion";
-import Developers from "../comps/utils/developers";
+import Developers from "../comps/general/developers";
 
 function About(props) {
   let dev1Info = {

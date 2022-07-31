@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import PageLinks from "../comps/misc/pageLinks";
 import LottieAnimation from "../comps/misc/lottieAnimation";
 import { dateCreated } from "../utils/dateCreated";
+
 function ProductsAdmin(props) {
   let [ar, setAr] = useState([]);
   let [numPage, setPageNum] = useState(1);
@@ -51,7 +52,10 @@ function ProductsAdmin(props) {
   return (
     <div className="container">
       <h1 className="display-4">Products List</h1>
-      <Link className="btn btn-outline-success mt-2 mb-4" to="/admin/addProduct">
+      <Link
+        className="btn btn-outline-success mt-2 mb-4"
+        to="/admin/addProduct"
+      >
         Add Product <MdAddShoppingCart />
       </Link>
       <table className="table table-striped">

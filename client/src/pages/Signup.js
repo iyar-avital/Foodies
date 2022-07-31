@@ -5,9 +5,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSignupUserMutation } from "../comps/redux/appApi";
+import { useSignupUserMutation } from "../redux/appApi";
 import { motion } from "framer-motion";
+
 import "./css/Signup.css";
+import { encrypt } from "../utils/encryption";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -27,7 +29,8 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     const picUrl = image ? await uploadImage(image) : defaultImage;
-    signupUser({ name, email, phone, address, password, picture: picUrl }).then(
+    let encryptPass = encrypt(password);
+    signupUser({ name, email, phone, address, password: encryptPass, picture: picUrl }).then(
       ({ data }) => {
         if (data) {
           console.log(data);
@@ -47,20 +50,16 @@ function Signup() {
       setImagePreview(URL.createObjectURL(file));
     }
   };
-
   const uploadImage = async () => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "ucq0egki");
     try {
       setUploading(true);
-      let res = await fetch(
-        "https://api.cloudinary.com/v1_1/nati5550558/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
+      let res = await fetch("https://api.cloudinary.com/v1_1/nati5550558/image/upload", {
+        method: "POST",
+        body: data,
+      });
       console.log(data);
       const urlData = await res.json();
       setUploading(false);
@@ -83,16 +82,10 @@ function Signup() {
             md={5}
             className="d-flex shadow flex-direction-column align-items-center justify-content-center"
           >
-            <Form
-              style={{ width: "80%", maxWidth: 500 }}
-              onSubmit={handleSignup}
-            >
+            <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleSignup}>
               <p className="text-center display-6 mb-4">Create account</p>
               <div className="signup-profile-pic__container">
-                <img
-                  src={imagePreview || defaultImage}
-                  className="signup-profile-pic"
-                />
+                <img src={imagePreview || defaultImage} className="signup-profile-pic" />
                 <label htmlFor="image-upload" className="image-upload-label">
                   <i className="fas fa-plus-circle add-picture-icon"></i>
                 </label>
@@ -128,7 +121,6 @@ function Signup() {
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
-
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -160,11 +152,7 @@ function Signup() {
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
-                {uploading || isLoading ? (
-                  <Spinner animation="grow" />
-                ) : (
-                  "Signup"
-                )}
+                {uploading || isLoading ? <Spinner animation="grow" /> : "Signup"}
               </Button>
               <div className="mt-4">
                 <p className="text-center">
@@ -182,5 +170,4 @@ function Signup() {
     </Container>
   );
 }
-
 export default Signup;

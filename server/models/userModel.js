@@ -49,6 +49,10 @@ UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    reset_code: {
+      type: String,
+      default: "",
+    },
   },
   { minimize: false } //not droping empty objects
 );

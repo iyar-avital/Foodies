@@ -29,7 +29,10 @@ function MyStoreItem(props) {
           >
             {item.status}
           </div>
-          <img src={item.imgUrl || "/images/no_image.png"} alt={item.name + " image"} />
+          <img
+            src={item.imgUrl || "/images/no_image.png"}
+            alt={item.name + " image"}
+          />
         </div>
         <div className="payment-card__info p-4">
           <h4>{item.name}</h4>

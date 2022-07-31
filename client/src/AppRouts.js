@@ -58,11 +58,23 @@ function AppRouts() {
         {/*store admin*/}
         <Route path="/storeAdmin/:id" element={<LayoutStore />}>
           <Route index element={<HomeStore />} />
-          <Route path="/storeAdmin/:id/editStore" element={<EditStoreAdmin />} />
-          <Route path="/storeAdmin/:id/products" element={<ProductsStoreAdmin />} />
+          <Route
+            path="/storeAdmin/:id/editStore"
+            element={<EditStoreAdmin />}
+          />
+          <Route
+            path="/storeAdmin/:id/products"
+            element={<ProductsStoreAdmin />}
+          />
           {/* <Route path="/storeAdmin/:id/orders" element={< />} /> */}
-          <Route path="/storeAdmin/:id/products/edit/:prodId" element={<EditProductAdminStore />} />
-          <Route path="/storeAdmin/:id/products/addProduct" element={<AddProductStoreAdmin />} />
+          <Route
+            path="/storeAdmin/:id/products/edit/:prodId"
+            element={<EditProductAdminStore />}
+          />
+          <Route
+            path="/storeAdmin/:id/products/addProduct"
+            element={<AddProductStoreAdmin />}
+          />
         </Route>
         {/*admin*/}
         <Route path="/admin" element={<LayoutAdmin />}>
