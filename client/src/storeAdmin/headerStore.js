@@ -41,6 +41,13 @@ function HeaderStore(props) {
             <Nav className="mx-auto">
               <Nav.Link
                 onClick={() => {
+                  nav("./");
+                }}
+              >
+                Home
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
                   nav("./products");
                 }}
               >
