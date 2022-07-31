@@ -110,7 +110,7 @@ router.post("/login", async (req, res) => {
     }
     req.session.authenticated = true; //initial session
     req.session.user = user; //initial session
-    await UserModel.updateOne({ email: req.body.email, status: "online" });
+    await UserModel.updateOne({ email: req.body.email }, { status: "online" });
     res.status(200).json({ user: user, cookie: req.session.cookie });
   } catch (error) {
     console.log(error);
