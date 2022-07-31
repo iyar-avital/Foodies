@@ -7,7 +7,7 @@ import "./css/myStores.css";
 import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import { saveStoresIdsLocall } from "../services/localService";
-import AuthClientComp from "../comps/utils/auth/authClientComp";
+import AuthClientComp from "../comps/auth/authClientComp";
 import MyStoreItem from "../comps/store/myStoreItem";
 
 function MyStores(props) {

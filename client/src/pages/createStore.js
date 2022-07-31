@@ -6,7 +6,7 @@ import { API_URL, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
 
 import "./css/createStore.css";
-import StoreForm from "../comps/utils/forms/StoreForm";
+import StoreForm from "../comps/forms/StoreForm";
 
 function CreateStore(props) {
   const [isLoading, setIsLoading] = useState(false);

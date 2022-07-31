@@ -1,32 +1,25 @@
 import React from "react";
-
 import { LinkContainer } from "react-router-bootstrap";
-import { API_URL, doApiGet } from "../services/apiService";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { toggleCart } from "../comps/redux/cartSlice";
+import { toggleCart } from "../../redux/cartSlice";
 
 function Navigation() {
   const user = useSelector((state) => state.user);
   let nav = useNavigate();
   const dispatch = useDispatch();
   const { cart_ar } = useSelector((state) => state.cart);
-
   const handleLogout = (e) => {
     e.preventDefault();
-
     nav("/logout");
   };
-
   return (
     <>
       <Navbar key={"lg"} bg="light" expand={"lg"}>
@@ -50,13 +43,12 @@ function Navigation() {
             </Offcanvas.Header>
 
             <Offcanvas.Body>
-              <Nav className="mx-auto">
+              <Nav className="mx-auto  text-muted">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/stores">Stores</Nav.Link>
                 <Nav.Link href="/admin">Admin</Nav.Link>
               </Nav>
-
               <Nav>
                 {!user && (
                   <LinkContainer to="/login">
@@ -91,7 +83,6 @@ function Navigation() {
                     )}
                     <NavDropdown.Item href="/uptateAccount">Account</NavDropdown.Item>
                     <NavDropdown.Divider />
-
                     <NavDropdown.Item>
                       <Button variant="danger" onClick={handleLogout}>
                         Logout
@@ -107,5 +98,4 @@ function Navigation() {
     </>
   );
 }
-
 export default Navigation;

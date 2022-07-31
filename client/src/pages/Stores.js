@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 import { API_URL, doApiGet } from "../services/apiService";
 
 import { BiStore } from "react-icons/bi";
-import PageLinks from "../comps/utils/pageLinks";
-import Search from "../comps/utils/search";
+import PageLinks from "../comps/misc/pageLinks";
+import Search from "../comps/general/search";
 import StoreCard from "../comps/store/storeCard";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 
 function AllStores(props) {
   const [shops_ar, setShops_ar] = useState([]);

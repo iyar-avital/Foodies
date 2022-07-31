@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./css/storeHome.css";
 import Product from "../comps/store/product";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 import { resetCart, toggleCart } from "../comps/redux/cartSlice";
 
 function StoreHome(props) {

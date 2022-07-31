@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./checkout.css";
 import { resetCart } from "../redux/cartSlice";
-import AuthClientComp from "../utils/auth/authClientComp";
+import AuthClientComp from "../auth/authClientComp";
 
 function Checkout(props) {
   const { cart_ar, totalPrice, store_id } = useSelector((state) => state.cart);

@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 //client
-import Layout from "./comps/Layout";
+import Layout from "./comps/general/Layout";
 import CreateStore from "./pages/createStore";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Logout from "./comps/utils/Logout";
+import Logout from "./comps/general/Logout";
 import Signup from "./pages/Signup";
 import UpdateAccount from "./pages/UpdateAccount";
 import Page404 from "./pages/page404";
@@ -16,7 +16,7 @@ import MyStores from "./pages/myStores";
 // store Admin imports
 import LayoutStore from "./storeAdmin/layoutStore";
 import EditStoreAdmin from "./storeAdmin/editStoreAdmin";
-import MoreStore from "./storeAdmin/moreStore";
+
 import ProductsStoreAdmin from "./storeAdmin/productsStoreAdmin";
 import EditProductAdminStore from "./storeAdmin/editProductAdminStore";
 import AddProductStoreAdmin from "./storeAdmin/addProductStoreAdmin";
@@ -30,9 +30,10 @@ import StoresAdmin from "./admin/storesAdmin";
 import ProductsAdmin from "./admin/productsAdmin";
 import HomeStore from "./storeAdmin/adminHome";
 import FavsProducts from "./pages/favsProducts";
-import Checkout from "./comps/orders_comps/checkout";
-import OldOrders from "./comps/orders_comps/oldOrders";
-import OldOrderInfoClient from "./comps/orders_comps/oldOrderInfoClient";
+import Checkout from "./comps/orders/checkout";
+import OldOrders from "./comps/orders/oldOrders";
+import OldOrderInfoClient from "./comps/orders/oldOrderInfoClient";
+import DeleteAccount from "./comps/general/DeleteAccount";
 
 function AppRouts() {
   return (
@@ -60,7 +61,6 @@ function AppRouts() {
         <Route path="/storeAdmin/:id" element={<LayoutStore />}>
           <Route index element={<HomeStore />} />
           <Route path="/storeAdmin/:id/editStore" element={<EditStoreAdmin />} />
-          <Route path="/storeAdmin/:id/more" element={<MoreStore />} />
           <Route path="/storeAdmin/:id/products" element={<ProductsStoreAdmin />} />
           <Route path="/storeAdmin/:id/products/edit/:prodId" element={<EditProductAdminStore />} />
           <Route path="/storeAdmin/:id/products/addProduct" element={<AddProductStoreAdmin />} />
