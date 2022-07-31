@@ -10,7 +10,6 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { toggleCart } from "../../redux/cartSlice";
-
 function Navigation() {
   const user = useSelector((state) => state.user);
   let nav = useNavigate();
@@ -39,16 +38,37 @@ function Navigation() {
             placement="end"
           >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>Foodzone</Offcanvas.Title>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+                Foodzone
+              </Offcanvas.Title>
             </Offcanvas.Header>
 
             <Offcanvas.Body>
               <Nav className="mx-auto  text-muted">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/about">About</Nav.Link>
-                <Nav.Link href="/stores">Stores</Nav.Link>
-                <Nav.Link href="/admin">Admin</Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    nav("./");
+                  }}
+                >
+                  Home
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    nav("./about");
+                  }}
+                >
+                  About
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    nav("./stores");
+                  }}
+                >
+                  Stores
+                </Nav.Link>
+                <Nav.Link href="./admin">Admin</Nav.Link>
               </Nav>
+
               <Nav>
                 {!user && (
                   <LinkContainer to="/login">
@@ -75,13 +95,23 @@ function Navigation() {
                     }
                     id="basic-nav-dropdown"
                   >
-                    <NavDropdown.Item href="/favorites">Favorites</NavDropdown.Item>
-                    <NavDropdown.Item href="/oldOrders">Orders</NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => dispatch(toggleCart())}>Cart</NavDropdown.Item>
+                    <NavDropdown.Item href="/favorites">
+                      Favorites
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/oldOrders">
+                      Orders
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => dispatch(toggleCart())}>
+                      Cart
+                    </NavDropdown.Item>
                     {cart_ar.length > 0 && (
-                      <NavDropdown.Item href="/checkout">Checkout</NavDropdown.Item>
+                      <NavDropdown.Item href="/checkout">
+                        Checkout
+                      </NavDropdown.Item>
                     )}
-                    <NavDropdown.Item href="/uptateAccount">Account</NavDropdown.Item>
+                    <NavDropdown.Item href="/uptateAccount">
+                      Account
+                    </NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item>
                       <Button variant="danger" onClick={handleLogout}>

@@ -27,7 +27,10 @@ UserSchema = new mongoose.Schema(
     password: {
       type: "String",
       required: [true, "can't be blank"],
-      minLength: [4, "Password must be at least 4 characters ar em, got {VALUE}"],
+      minLength: [
+        4,
+        "Password must be at least 4 characters ar em, got {VALUE}",
+      ],
     },
     role: {
       type: "String",
@@ -35,11 +38,16 @@ UserSchema = new mongoose.Schema(
     },
     picture: {
       type: "String",
-      default: "https://pics.freeicons.io/uploads/icons/png/16671574911586787867-64.png",
+      default:
+        "https://pics.freeicons.io/uploads/icons/png/16671574911586787867-64.png",
     },
     newMessages: {
       type: "Object",
       default: {},
+    },
+    status: {
+      type: "String",
+      default: "offline",
     },
     favs_ar: {
       type: Array,

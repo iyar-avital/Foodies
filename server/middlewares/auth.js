@@ -1,5 +1,6 @@
 const ROLES = require("../utils/roles");
 const { default: axios } = require("axios");
+const { StoreModel } = require("../models/storeModel");
 
 // if user is already logged in
 exports.auth = (req, res, next) => {
@@ -9,7 +10,6 @@ exports.auth = (req, res, next) => {
     return res.status(401).json({ err: "please log in first" });
   }
 };
-
 exports.authAdmin = (req, res, next) => {
   let role = req.session.user.role;
   if (role !== ROLES.ADMIN) {
@@ -18,15 +18,31 @@ exports.authAdmin = (req, res, next) => {
   next();
 };
 
-exports.authStoreAdmin = (req, res, next) => {
+exports.authStoreAdmin = async (req, res, next) => {
   let role = req.session.user.role;
-  if (role !== ROLES.STORE_ADMIN && role !== ROLES.ADMIN) {
-    return res.status(403).json({ err: "access denied" });
+  if (role !== ROLES.ADMIN && role !== ROLES.STORE_ADMIN) {
+    return res.status(403).json({ message: "access denied" });
+  }
+  next();
+};
+
+exports.authOwnership = async (req, res, next) => {
+  let role = req.session.user.role;
+  if (role === ROLES.ADMIN) {
+    next();
+  } else {
+    let store_id = req.header(id - Store);
+    let hisStore = await StoreModel.findOne({
+      _id: store_id,
+      admin_short_id: req.session.user.short_id,
+    });
+    if (!hisStore) {
+      return res.status(403).json({ message: "access denied" });
+    }
   }
   //chek the specific store
   next();
 };
-
 exports.payPalAuth = async (_tokenId, _orderId, _ifRealPay = true) => {
   let url = !_ifRealPay
     ? "https://api-m.sandbox.paypal.com/v2/checkout/orders/" + _orderId

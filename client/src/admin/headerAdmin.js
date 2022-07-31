@@ -36,7 +36,9 @@ function HeaderAdmin(props) {
           placement="end"
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>Foodzone</Offcanvas.Title>
+            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+              Foodzone
+            </Offcanvas.Title>
           </Offcanvas.Header>
 
           <Offcanvas.Body>
@@ -68,6 +70,13 @@ function HeaderAdmin(props) {
                 }}
               >
                 Orders
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  nav("./chat");
+                }}
+              >
+                Chat
               </Nav.Link>
             </Nav>
             <Nav>
