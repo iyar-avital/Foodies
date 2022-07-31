@@ -39,12 +39,15 @@ function Login() {
       <Container>
         <ResetPass handleToggle={handleToggle} show={show} />
         <Row>
-          <Col md={5} className="login__bg"></Col>
+          <Col md={5} ms className="login__bg d-none d-md-block"></Col>{" "}
           <Col
             md={7}
             className="d-flex shad flex-direction-column align-items-center justify-content-center"
           >
-            <Form style={{ width: "80%", maxWidth: 500 }} onSubmit={handleLogin}>
+            <Form
+              style={{ width: "80%", maxWidth: 500 }}
+              onSubmit={handleLogin}
+            >
               {error && (
                 <p className="alert alert-danger">
                   {error.data?.err
@@ -52,7 +55,10 @@ function Login() {
                     : "It's not you, it's up. Please thy again later."}
                 </p>
               )}
-              <Form.Group className="mb-3 text-start" controlId="formBasicEmail">
+              <Form.Group
+                className="mb-3 text-start"
+                controlId="formBasicEmail"
+              >
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
                   type="email"
@@ -62,7 +68,10 @@ function Login() {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3 text-start" controlId="formBasicPassword">
+              <Form.Group
+                className="mb-3 text-start"
+                controlId="formBasicPassword"
+              >
                 <Form.Label className="text-left">Password</Form.Label>
                 <Form.Control
                   type="password"

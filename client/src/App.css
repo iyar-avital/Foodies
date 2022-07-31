@@ -22,8 +22,12 @@
 
 .page-container {
   position: relative;
-  min-height: 100vh;
 }
+
+.page-container .content-wrap {
+  min-height: 92vh !important;
+}
+
 
 .footer {
   /* height: 20vh; */
@@ -34,6 +38,7 @@
 }
 
 @import url(https://fonts.googleapis.com/css?family=Quando);
+
 *:after,
 *:before {
   box-sizing: border-box;
@@ -51,6 +56,7 @@
 body {
   background: white;
   font-family: "Roboto", sans-serif;
+  min-height: 100vh;
 }
 
 .logoFont {
