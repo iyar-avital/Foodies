@@ -10,7 +10,7 @@ function StoreCard(props) {
     <div className="col-lg-4 col-md-6 col-sm-12 p-2">
       <div
         onClick={() => {
-          nav("/store/" + item._id);
+          nav("/store/" + item.short_id);
         }}
         className="product-card bg-white mb-4 overflow-hidden d-lg-flex flex-column rounded-lg position-relative border store"
       >

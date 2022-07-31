@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { API_URL, doApiGet } from "../../../services/apiService";
-import { STORE_SHORT_IDS } from "../../../services/localService";
-import { useLogoutUserMutation } from "../../redux/appApi";
+import { API_URL, doApiGet } from "../../services/apiService";
+import { STORE_SHORT_IDS } from "../../services/localService";
+import { useLogoutUserMutation } from "../redux/appApi";
 import Cookies from "js-cookie";
 
 function AuthStoreAdminComp(props) {
@@ -25,21 +25,25 @@ function AuthStoreAdminComp(props) {
     let url = API_URL + "/users/myInfo";
     try {
       let resp = await doApiGet(url);
-      if (resp.data.role !== "admin") {
+      if (resp.data.role === "admin") {
+        props.setAuthorized(true);
+        return;
+      } else if (resp.data.role !== "storeAdmin") {
+        toast.error("Plase Wait for admin approval");
+        nav("../");
         return;
       }
-      if (resp.data.role !== "storeAdmin") {
-        toast.error("Unathorized user");
-        nav("../");
-      }
       //verify that users own this store
-      if (
+      else if (
         !localStorage[STORE_SHORT_IDS] ||
-        !JSON.parse(localStorage[STORE_SHORT_IDS]).includes(props.store_short_id)
+        !JSON.parse(localStorage[STORE_SHORT_IDS]).includes(props.short_id)
       ) {
         toast.error("You are not allowed to access this store");
         nav("/");
+        return;
       }
+      props.setAuthorized(true);
+      return;
     } catch (err) {
       //
       console.log(err.response);

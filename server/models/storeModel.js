@@ -35,7 +35,7 @@ let storeSchema = new mongoose.Schema(
       required: [true, "can't be blank"],
       minLength: [10, "info be at least 10 letters, got {VALUE}"],
     },
-    admin_id: String,
+    admin_short_id: String,
     status: {
       type: String,
       default: "pending",

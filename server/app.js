@@ -22,7 +22,7 @@ store.on("error", function (error) {
 });
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
@@ -40,7 +40,7 @@ app.use(
     resave: false,
     saveUninitialized: false, //store session only if initialized
     cookie: {
-      maxAge: 1000 * 60 * 15 * 60, // 15 minutes
+      maxAge: 1000 * 60 * 15, // 15 minutes
       sameSite: false,
       secure: false,
       httpOnly: false,

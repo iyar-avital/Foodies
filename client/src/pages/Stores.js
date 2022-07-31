@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { API_URL, doApiGet } from "../services/apiService";
-
 import { BiStore } from "react-icons/bi";
-import PageLinks from "../comps/utils/pageLinks";
-import Search from "../comps/utils/search";
+import PageLinks from "../comps/misc/pageLinks";
+import Search from "../comps/general/search";
 import StoreCard from "../comps/store/storeCard";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 
 function AllStores(props) {
   const [shops_ar, setShops_ar] = useState([]);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,12 +17,14 @@ function AllStores(props) {
   }, [location]);
 
   const doApi = async () => {
+    setLoading(true);
     const urlParams = new URLSearchParams(window.location.search);
     let pageQuery = urlParams.get("page") || 1;
     let url = API_URL + "/stores?&status=active&perPage=6&page=" + pageQuery;
     let resp = await doApiGet(url);
     console.log(resp.data);
     setShops_ar(resp.data);
+    setLoading(false);
   };
 
   return (
@@ -46,7 +48,10 @@ function AllStores(props) {
           return <StoreCard key={item._id} item={item} />;
         })}
       </div>
-      {shops_ar.length === 0 ? <LottieAnimation /> : ""}
+      {loading ? <LottieAnimation /> : ""}
+      {shops_ar.length === 0 && !loading && (
+        <h1 className="text-center text-muted display-2">No store found</h1>
+      )}
       <PageLinks
         perPage="6"
         apiUrlAmount={API_URL + "/stores/amount?status=active"}
@@ -56,5 +61,4 @@ function AllStores(props) {
     </main>
   );
 }
-
 export default AllStores;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BsPen, BsEraser, BsInfoCircle } from "react-icons/bs";
 import { MdAddShoppingCart } from "react-icons/md";
-
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
 import PageLinks from "../comps/utils/pageLinks";
@@ -13,11 +12,9 @@ function ProductsAdmin(props) {
   let [numPage, setPageNum] = useState(1);
   let nav = useNavigate();
   const location = useLocation();
-
   useEffect(() => {
     doApi();
   }, [location]);
-
   const doApi = async () => {
     // get products page number
     const urlParams = new URLSearchParams(window.location.search);
@@ -34,7 +31,6 @@ function ProductsAdmin(props) {
       }
     }
   };
-
   const delProduct = async (_idDel) => {
     if (window.confirm("Are you sure you want to delete?")) {
       try {
@@ -52,11 +48,13 @@ function ProductsAdmin(props) {
       }
     }
   };
-
   return (
     <div className="container">
       <h1 className="display-4">Products List</h1>
-      <Link className="btn btn-outline-success mt-2 mb-4" to="/admin/addProduct">
+      <Link
+        className="btn btn-outline-success mt-2 mb-4"
+        to="/admin/addProduct"
+      >
         Add Product <MdAddShoppingCart />
       </Link>
       <table className="table table-striped">
@@ -66,7 +64,7 @@ function ProductsAdmin(props) {
             <th>Image</th>
             <th>Name</th>
             <th>Price</th>
-            <th>store_id</th>
+            <th>store_short_id</th>
             <th>Date Created</th>
             <th>Short_id</th>
             <th>Del</th>
@@ -116,5 +114,4 @@ function ProductsAdmin(props) {
     </div>
   );
 }
-
 export default ProductsAdmin;

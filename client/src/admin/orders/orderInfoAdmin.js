@@ -4,7 +4,7 @@ import { API_URL, doApiGet } from "../../services/apiService";
 import { BsInfoCircle, BsChevronRight } from "react-icons/bs";
 import OldOrderInfoItem from "../../comps/orders_comps/OrderInfoItem";
 import "../css/formStore.css";
-import LottieAnimation from "../../comps/utils/lottieAnimation";
+import LottieAnimation from "../../comps/misc/lottieAnimation";
 
 function OrderInfoAdmin(props) {
   let [order, setOrder] = useState({});

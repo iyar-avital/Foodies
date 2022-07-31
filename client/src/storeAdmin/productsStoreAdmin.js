@@ -7,7 +7,8 @@ import { BsPen, BsEraser, BsInfoCircle } from "react-icons/bs";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
 import { toast } from "react-toastify";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import LottieAnimation from "../comps/misc/lottieAnimation";
+import { dateCreated } from "../utils/dateCreated";
 
 function ProductsStoreAdmin(props) {
   const [products, setProducts] = useState([]);

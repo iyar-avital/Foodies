@@ -1,10 +1,11 @@
 const nodemailer = require("nodemailer");
-const { ContactEmail } = require("../emails/contactEmail");
-const {
-  NewStoreEmailActive,
-  NewStoreEmailPending,
-} = require("../emails/newStoreEmail");
-const { VerifyEmailHtml } = require("../emails/verifyEmail");
+const { ResetPassEmailCentent } = require("./emails/resetPassEmail");
+// const { ContactEmail } = require("./emails/contactEmail");
+// const {
+//   NewStoreEmailActive,
+//   NewStoreEmailPending,
+// } = require("./emails/newStoreEmail");
+// const { VerifyEmailHtml } = require("./emails/verifyEmail");
 
 // need to open in outlook new accout
 const transporter = nodemailer.createTransport({
@@ -17,7 +18,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SENDER_EMAIL_PASSWORD,
   },
 });
-
 const sendOutlookMail = (_mailOptions) => {
   transporter.sendMail(_mailOptions, function (error, info) {
     if (error) {
@@ -30,38 +30,49 @@ const sendOutlookMail = (_mailOptions) => {
   });
 };
 
-exports.sendContactEmail = async (_bodyData = {}) => {
-  let mailOptions = {
-    from: process.env.SENDER_EMAIL_ADDRESS,
-    replyTo: _bodyData.email,
-    to: "deliverproject2022@gmail.com",
-    subject: _bodyData.subject,
-    html: ContactEmail(_bodyData),
-  };
-  await sendOutlookMail(mailOptions);
-};
+// exports.sendContactEmail = async (_bodyData = {}) => {
+//   let mailOptions = {
+//     from: process.env.SENDER_EMAIL_ADDRESS,
+//     replyTo: _bodyData.email,
+//     to: "deliverproject2022@gmail.com",
+//     subject: _bodyData.subject,
+//     html: ContactEmail(_bodyData),
+//   };
+//   await sendOutlookMail(mailOptions);
+// };
 
-exports.sendNewStoreEmail = async (_bodyData = {}) => {
-  let mailOptions = {
-    from: process.env.SENDER_EMAIL_ADDRESS,
-    replyTo: _bodyData.email,
-    to: _bodyData.email,
-    subject: "Your Store Is " + _bodyData.status,
-    html:
-      _bodyData.status === "active"
-        ? NewStoreEmailActive(_bodyData)
-        : NewStoreEmailPending(_bodyData),
-  };
-  await sendOutlookMail(mailOptions);
-};
+// exports.sendNewStoreEmail = async (_bodyData = {}) => {
+//   let mailOptions = {
+//     from: process.env.SENDER_EMAIL_ADDRESS,
+//     replyTo: _bodyData.email,
+//     to: _bodyData.email,
+//     subject: "Your Store Is " + _bodyData.status,
+//     html:
+//       _bodyData.status === "active"
+//         ? NewStoreEmailActive(_bodyData)
+//         : NewStoreEmailPending(_bodyData),
+//   };
+//   await sendOutlookMail(mailOptions);
+// };
 
-exports.verifyUserEmail = async (_user, _host) => {
+// exports.verifyUserEmail = async (_user, _host) => {
+//   let mailOptions = {
+//     from: process.env.SENDER_EMAIL_ADDRESS,
+//     replyTo: _user.email,
+//     to: _user.email,
+//     subject: "Email Verification",
+//     html: VerifyEmailHtml(_user, _host),
+//   };
+//   await sendOutlookMail(mailOptions);
+// };
+
+exports.resetPassEmail = async (_email, _code) => {
   let mailOptions = {
     from: process.env.SENDER_EMAIL_ADDRESS,
-    replyTo: _user.email,
-    to: _user.email,
-    subject: "Email Verification",
-    html: VerifyEmailHtml(_user, _host),
+    replyTo: process.env.SENDER_EMAIL_ADDRESS,
+    to: _email,
+    subject: "Reset password - Foodzone",
+    html: ResetPassEmailCentent(_code),
   };
   await sendOutlookMail(mailOptions);
 };
