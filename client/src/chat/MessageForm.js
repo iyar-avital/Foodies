@@ -15,14 +15,13 @@ import "./css/MessageForm.css";
 function MessageForm() {
   const [message, setMessage] = useState("");
   const user = useSelector((state) => state.user);
-  const { socket, currentRoom, setMessages, messages, privateMemberMsg } =
+  const { socket, currentRoom, setMessages, messages, serviceMsg } =
     useContext(AppContext);
   const messageEndRef = useRef(null);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
   const getFromattedDate = () => {
     let date = new Date();
     // returns date in format of mm-dd-yyyy
@@ -33,15 +32,12 @@ function MessageForm() {
     }).format(date);
     return date;
   };
-
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   const todayDate = getFromattedDate();
 
   socket.off("room-messages").on("room-messages", (roomMessages) => {
-    console.log("room messages", roomMessages);
     setMessages(roomMessages);
   });
 
@@ -59,7 +55,6 @@ function MessageForm() {
     socket.emit("message-room", roomId, message, user, time, todayDate);
     setMessage("");
   };
-
   return (
     <>
       <div className="messages-output">
@@ -78,7 +73,7 @@ function MessageForm() {
                   key={idx}
                 >
                   <div className="message-inner">
-                    {!privateMemberMsg && (
+                    {!serviceMsg && (
                       <div className="d-flex align-items-center">
                         <img
                           src={sender.picture}
@@ -133,5 +128,4 @@ function MessageForm() {
     </>
   );
 }
-
 export default MessageForm;

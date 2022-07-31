@@ -42,29 +42,47 @@ router.get("/amount", async (req, res) => {
 // user info
 router.get("/myInfo", auth, async (req, res) => {
   try {
-    let data = await UserModel.findOne({ _id: req.session.user._id }, { password: 0 });
+    let data = await UserModel.findOne(
+      { _id: req.session.user._id },
+      { password: 0 }
+    );
     res.json(data);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
   }
 });
+
 router.get("/logout", async (req, res) => {
-  req.session.destroy((err) => {
+  req.session.destroy(async (err) => {
     if (err) {
       return res.redirect("/");
     }
-    res.status(200).clearCookie(process.env.SESSION_NAME).json({ msg: "logged out" });
+    try {
+      await UserModel.updateOne(
+        { _id: req.session.user._id },
+        { status: "offline" }
+      );
+      res
+        .status(200)
+        .clearCookie(process.env.SESSION_NAME)
+        .json({ msg: "logged out" });
+    } catch (error) {
+      res.status(500).json(error);
+    }
   });
 });
+
 router.post("/", async (req, res) => {
   try {
     let user = new UserModel(req.body);
     let decryptPass = decrypt(req.body.password);
     user.password = await bcrypt.hash(decryptPass, 10);
     user.short_id = await genShortId(UserModel);
+    user.status = "online";
     await user.save();
     req.session.authenticated = true; //initial session
+
     req.session.user = user; //initial session
     res.status(201).json({ cookie: req.session.cookie, user: user });
   } catch (error) {
@@ -92,6 +110,7 @@ router.post("/login", async (req, res) => {
     }
     req.session.authenticated = true; //initial session
     req.session.user = user; //initial session
+    await UserModel.updateOne({ email: req.body.email, status: "online" });
     res.status(200).json({ user: user, cookie: req.session.cookie });
   } catch (error) {
     console.log(error);
@@ -99,7 +118,8 @@ router.post("/login", async (req, res) => {
   }
 });
 router.put("/update", auth, async (req, res) => {
-  let { name, email, password, newPassword, address, phone, picture } = req.body;
+  let { name, email, password, newPassword, address, phone, picture } =
+    req.body;
   let decryptPass = decrypt(password);
   let decryptNewPass = null;
   if (newPassword) {
@@ -128,30 +148,32 @@ router.put("/update", auth, async (req, res) => {
     res.status(400).json(error); //failed to find user
   }
 });
-
 //send reset password email to the user
 router.get("/sendResetEmail", async (req, res) => {
   let email = req.header("x-api-key");
   let rnd = random(0, 999999);
   try {
-    let data = await UserModel.findOneAndUpdate({ email: email }, { reset_code: rnd });
+    let data = await UserModel.findOneAndUpdate(
+      { email: email },
+      { reset_code: rnd }
+    );
     if (!data) {
       return res.status(404).json("user not found");
     }
-
     if (resetPassEmail(email, rnd)) {
       return res.status(200).json({
         msg: "Reset code has been sent to yout email",
         emailSent: true,
       });
     } else {
-      return res.status(500).json({ err: "something went wrong", emailSent: false });
+      return res
+        .status(500)
+        .json({ err: "something went wrong", emailSent: false });
     }
   } catch (error) {
     res.status(500).json(error);
   }
 });
-
 //checks the recived code
 router.get("/checkResetCode", async (req, res) => {
   let code = req.header("x-api-key");
@@ -177,21 +199,26 @@ router.get("/resetCode", async (req, res) => {
   let hashPass = await bcrypt.hash(decryptedPass, 10);
   //becrypt
   try {
-    let data = await UserModel.updateOne({ email: email, password: null }, { password: hashPass });
+    let data = await UserModel.updateOne(
+      { email: email, password: null },
+      { password: hashPass }
+    );
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
-
 router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
   let userId = req.params.userId;
   let role = req.params.role;
   try {
     // prevent from user to changch himself or the first admin
     if (userId != req.session.user._id) {
-      let data = await UserModel.findOneAndUpdate({ _id: userId }, { role: role });
+      let data = await UserModel.findOneAndUpdate(
+        { _id: userId },
+        { role: role }
+      );
       if (!data) {
         return res.status(404).json({ err: "user not found" });
       }
@@ -229,7 +256,9 @@ router.delete("/delete/:delId", authAdmin, async (req, res) => {
       // deletedCount -> 1 del success msg
       res.json(data);
     } else {
-      res.status(401).json({ err: "You cant delete your self Or the superAdmin" });
+      res
+        .status(401)
+        .json({ err: "You cant delete your self Or the superAdmin" });
     }
   } catch (err) {
     console.log(err);
