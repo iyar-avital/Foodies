@@ -12,17 +12,13 @@
     overflow-x: hidden;
 }
 
-.page-container {
-    position: relative;
-    min-height: 100vh;
-}
-
-.footer {
-    height: 20vh;
-    position: absolute;
-    height: 2.5rem;
-    bottom: 0;
-    width: 100%;
+.createStore__bg {
+    background-image: url(https://images.pexels.com/photos/3285137/pexels-photo-3285137.jpeg?auto=compress&cs=tinysrgb&w=1600);
+    height: 92vh;
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Quando);

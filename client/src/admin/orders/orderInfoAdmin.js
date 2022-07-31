@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_URL, doApiGet } from "../../services/apiService";
 import { BsInfoCircle, BsChevronRight } from "react-icons/bs";
-import OldOrderInfoItem from "../../comps/orders/oldOrderInfoItem";
+import OldOrderInfoItem from "../../comps/orders_comps/OrderInfoItem";
 import "../css/formStore.css";
 import LottieAnimation from "../../comps/misc/lottieAnimation";
 

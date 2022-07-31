@@ -31,7 +31,7 @@ import HomeStore from "./storeAdmin/adminHome";
 import FavsProducts from "./pages/favsProducts";
 import Checkout from "./pages/checkout";
 import OldOrders from "./pages/oldOrders";
-import OldOrderInfoClient from "./comps/orders/oldOrderInfoClient";
+import OrdersListStore from "./storeAdmin/ordersListStore";
 
 function AppRouts() {
   return (
@@ -40,51 +40,38 @@ function AppRouts() {
         {/* client */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/uptateAccount" element={<UpdateAccount />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/favorites" element={<FavsProducts />} />
-          <Route path="/myStores" element={<MyStores />} />
-          <Route path="/stores" element={<AllStores />} />
-          <Route path="/store/:id" element={<StoreHome />} />
-          <Route path="/createStore" element={<CreateStore />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/oldOrders" element={<OldOrders />} />
-          <Route path="/oldOrders/:idOrder" element={<OldOrderInfoClient />} />
+          <Route path="login" element={<Login />} />
+          <Route path="logout" element={<Logout />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="uptateAccount" element={<UpdateAccount />} />
+          <Route path="about" element={<About />} />
+          <Route path="favorites" element={<FavsProducts />} />
+          <Route path="myStores" element={<MyStores />} />
+          <Route path="stores" element={<AllStores />} />
+          <Route path="store/:id" element={<StoreHome />} />
+          <Route path="createStore" element={<CreateStore />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="oldOrders" element={<OldOrders />} />
           {/* <Route path="/searchStore/:searchQ" element={<SearchStore />} /> */}
         </Route>
         {/*store admin*/}
         <Route path="/storeAdmin/:id" element={<LayoutStore />}>
           <Route index element={<HomeStore />} />
-          <Route
-            path="/storeAdmin/:id/editStore"
-            element={<EditStoreAdmin />}
-          />
-          <Route
-            path="/storeAdmin/:id/products"
-            element={<ProductsStoreAdmin />}
-          />
-          {/* <Route path="/storeAdmin/:id/orders" element={< />} /> */}
-          <Route
-            path="/storeAdmin/:id/products/edit/:prodId"
-            element={<EditProductAdminStore />}
-          />
-          <Route
-            path="/storeAdmin/:id/products/addProduct"
-            element={<AddProductStoreAdmin />}
-          />
+          <Route path="editStore" element={<EditStoreAdmin />} />
+          <Route path="products" element={<ProductsStoreAdmin />} />
+          <Route path="orders" element={<OrdersListStore />} />
+          <Route path="products/edit/:prodId" element={<EditProductAdminStore />} />
+          <Route path="products/addProduct" element={<AddProductStoreAdmin />} />
         </Route>
         {/*admin*/}
         <Route path="/admin" element={<LayoutAdmin />}>
           <Route index element={<AdminHome />} />
-          <Route path="/admin/home" element={<AdminHome />} />
-          <Route path="/admin/users" element={<UsersList />} />
-          <Route path="/admin/stores" element={<StoresAdmin />} />
-          <Route path="/admin/products" element={<ProductsAdmin />} />
-          <Route path="/admin/orders" element={<OrdersAdmin />} />
-          <Route path="/admin/orders/:id" element={<OrderInfoAdmin />} />
+          <Route path="home" element={<AdminHome />} />
+          <Route path="users" element={<UsersList />} />
+          <Route path="stores" element={<StoresAdmin />} />
+          <Route path="products" element={<ProductsAdmin />} />
+          <Route path="orders" element={<OrdersAdmin />} />
+          <Route path="orders/:id" element={<OrderInfoAdmin />} />
         </Route>
         <Route path="/*" element={<Page404 />} />
       </Routes>

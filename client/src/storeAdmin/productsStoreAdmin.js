@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import Table from "react-bootstrap/Table";
+
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { BsPen, BsEraser, BsInfoCircle } from "react-icons/bs";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -68,7 +70,7 @@ function ProductsStoreAdmin(props) {
       <Link className="btn btn-outline-success my-3" to="./addProduct" state={{ storeInfo }}>
         Add Product <MdAddShoppingCart />
       </Link>
-      <table className="table table-striped">
+      <Table striped>
         <thead>
           <tr>
             <th>#</th>
@@ -95,7 +97,7 @@ function ProductsStoreAdmin(props) {
                 </td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
-                <td>{dateCreated(item.date_created)}</td>
+                <td>{item.date_created}</td>
                 <td>{item.short_id}</td>
                 <td>
                   <button
@@ -120,7 +122,7 @@ function ProductsStoreAdmin(props) {
             );
           })}
         </tbody>
-      </table>
+      </Table>
       {products.length === 0 ? <h2 className="text-center display-2">No Products</h2> : ""}
       {loading ? <LottieAnimation /> : ""}
     </div>

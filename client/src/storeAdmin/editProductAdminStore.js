@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaRegEdit } from "react-icons/fa";
-import { BsCardImage } from "react-icons/bs";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import StoreForm from "../comps/forms/StoreForm";
 import ProductForm from "../comps/forms/ProductForm";
