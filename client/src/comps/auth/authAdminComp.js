@@ -17,7 +17,7 @@ function AuthStoreAdminComp(props) {
     } else {
       toast.error("Please log in first");
       logoutUser();
-      nav("../login");
+      nav("/login");
     }
   }, []);
 
