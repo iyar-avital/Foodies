@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { BsInfoCircle, BsEraser } from "react-icons/bs";
 import { toast } from "react-toastify";
 import { API_URL, doApiMethod } from "../../services/apiService";
 
 function OrderItem(props) {
-  const nav = useNavigate();
+  const handleToggle = props.handleToggle;
+  const setOrderInfo = props.setOrderInfo;
   const item = props.item;
 
   const delOrder = async (_idDel) => {
@@ -35,21 +35,24 @@ function OrderItem(props) {
             item.status === "shipped"
               ? "badge bg-info"
               : item.status === "paid"
-              ? "badge bg-warning"
-              : "badge bg-success"
+                ? "badge bg-warning"
+                : "badge bg-success"
           }
         >
           {item.status}
         </span>
       </td>
-      <td>{item.date_created.replace(/T/, " ").substr(0, 16)}</td>
+      <td>{item.date_created}</td>
       {/* <td>{item.destination.label}</td> */}
+      <td>{item.store_short_id}</td>
+      <td> </td>
       <td>₪ {item.total_price}</td>
       <td>{item.products_ar.length}</td>
       <td>
         <button
           onClick={() => {
-            nav("/admin/orders/" + item._id);
+            setOrderInfo(item);
+            handleToggle();
           }}
           className="btn btn-outline-info"
           title="Info"
