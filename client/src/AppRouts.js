@@ -21,11 +21,11 @@ import EditProductAdminStore from "./storeAdmin/editProductAdminStore";
 import AddProductStoreAdmin from "./storeAdmin/addProductStoreAdmin";
 // admin imports
 import LayoutAdmin from "./admin/layoutAdmin";
-import AdminHome from "./admin/adminHome";
+import HomeAdmin from "./admin/HomeAdmin";
 import UsersList from "./admin/usersList";
 import OrdersAdmin from "./admin/orders/ordersAdmin";
 import OrderInfoAdmin from "./admin/orders/orderInfoAdmin";
-import StoresAdmin from "./admin/storesAdmin";
+import StoresAdmin from "./admin/HomeStore";
 import ProductsAdmin from "./admin/productsAdmin";
 import HomeStore from "./storeAdmin/adminHome";
 import FavsProducts from "./pages/favsProducts";
@@ -75,8 +75,8 @@ function AppRouts() {
         </Route>
         {/*admin*/}
         <Route path="/admin" element={<LayoutAdmin />}>
-          <Route index element={<AdminHome />} />
-          <Route path="home" element={<AdminHome />} />
+          <Route index element={<HomeAdmin />} />
+          <Route path="home" element={<HomeAdmin />} />
           <Route path="users" element={<UsersList />} />
           <Route path="stores" element={<StoresAdmin />} />
           <Route path="products" element={<ProductsAdmin />} />

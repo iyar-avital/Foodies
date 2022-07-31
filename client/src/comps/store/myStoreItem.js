@@ -3,6 +3,8 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { BsFillInfoCircleFill, BsColumns } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Button } from "react-bootstrap";
+
 function MyStoreItem(props) {
   let nav = useNavigate();
   let item = props.item;
@@ -20,7 +22,12 @@ function MyStoreItem(props) {
     >
       <div
         className="payment-card rounded-lg shadow bg-white text-center h-100 cursor-pointer"
-        onClick={() => nav("/storeAdmin/" + item.short_id)}
+        disabled={true}
+        onClick={() => {
+          if (item.status === "active") {
+            nav("/storeAdmin/" + item.short_id);
+          }
+        }}
       >
         <div className="payment-card__type px-4 py-5 d-flex justify-content-center align-items-center">
           <div
@@ -39,7 +46,7 @@ function MyStoreItem(props) {
           {/* <p className="text-muted">address : {item.address}</p> */}
           <hr />
           <div className="d-flex justify-content-between">
-            <button
+            {/* <button
               onClick={() => {
                 nav("/storeAdmin/more/" + item.short_id);
               }}
@@ -48,9 +55,9 @@ function MyStoreItem(props) {
               title="Info"
             >
               Info <BsFillInfoCircleFill size="1.5em" color="#34495E" />
-            </button>
+            </button>*/}
             <div>
-              <Link
+              {/* <Link
                 to={"/storeAdmin/editStore/" + item.short_id}
                 className="mx-2"
                 state={{ item }}
@@ -58,10 +65,10 @@ function MyStoreItem(props) {
                 title="Edit"
               >
                 <MdEdit size="1.5em" color="#3498DB" />
-              </Link>
+              </Link> */}
               <button
                 onClick={() => {
-                  props.delStore(item.short_id);
+                  props.delStore(item._id, item.short_id);
                 }}
                 style={{ background: "none" }}
                 title="Delete"

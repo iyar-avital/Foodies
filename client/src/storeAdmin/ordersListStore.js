@@ -64,7 +64,7 @@ function OrdersListStore() {
                 <h1>Orders</h1>
                 <button
                     onClick={() => {
-                        nav(-1);
+                        nav("../");
                     }}
                     className="btn btn-outline-dark me-2"
                 >

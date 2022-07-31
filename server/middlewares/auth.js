@@ -28,12 +28,12 @@ exports.authStoreAdmin = async (req, res, next) => {
 
 exports.authOwnership = async (req, res, next) => {
   let role = req.session.user.role;
+  let store_id = req.header("id-Store");
   if (role === ROLES.ADMIN) {
     next();
   } else {
-    let store_id = req.header(id - Store);
     let hisStore = await StoreModel.findOne({
-      _id: store_id,
+      short_id: store_id,
       admin_short_id: req.session.user.short_id,
     });
     if (!hisStore) {

@@ -61,7 +61,7 @@ function ProductsStoreAdmin(props) {
       <h1>{storeInfo.name} Products</h1>
       <button
         onClick={() => {
-          nav(-1);
+          nav("../");
         }}
         className="btn btn-outline-dark me-2"
       >
