@@ -7,7 +7,6 @@ const { genShortId } = require("../utils/genShortId");
 const decrypt = require("../utils/decryption");
 const { resetPassEmail } = require("../utils/sendEmail");
 const { random } = require("lodash");
-
 router.get("/", (req, res) => {
   res.json({ msg: "users from " });
 });
@@ -99,7 +98,6 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ err: error.message });
   }
 });
-
 router.put("/update", auth, async (req, res) => {
   let { name, email, password, newPassword, address, phone, picture } = req.body;
   let decryptPass = decrypt(password);
@@ -132,47 +130,59 @@ router.put("/update", auth, async (req, res) => {
 });
 
 //send reset password email to the user
-router.get("/resetPass", (req, res) => {
+router.get("/sendResetEmail", async (req, res) => {
   let email = req.header("x-api-key");
-  let rand = random(0, 999999);
-  req.session.resetCode = rand;
-  if (resetPassEmail(email, rand)) {
-    return res.status(200).json({
-      msg: "Reset code has been sent to yout email",
-      emailSent: true,
-    });
-  } else {
-    return res.status(500).json({ err: "something went wrong", emailSent: false });
+  let rnd = random(0, 999999);
+  try {
+    let data = await UserModel.findOneAndUpdate({ email: email }, { reset_code: rnd });
+    if (!data) {
+      return res.status(404).json("user not found");
+    }
+
+    if (resetPassEmail(email, rnd)) {
+      return res.status(200).json({
+        msg: "Reset code has been sent to yout email",
+        emailSent: true,
+      });
+    } else {
+      return res.status(500).json({ err: "something went wrong", emailSent: false });
+    }
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
 //checks the recived code
-router.get("/checkResetCode", async (res, req) => {
-  let code = req.query.code;
-  if (code === req.session.resetCode) {
-    try {
-      let data = await UserModel.updateOne({ _id: req.session.user._id }, { password: null });
-      res.status(200).json(data);
-    } catch (error) {
-      res.status(500).json(error);
+router.get("/checkResetCode", async (req, res) => {
+  let code = req.header("x-api-key");
+  try {
+    let data = await UserModel.findOneAndUpdate(
+      { reset_code: code },
+      { reset_code: code, password: null }
+    );
+    if (!data) {
+      return res.status(401).json("wrong code");
     }
-  } else {
-    res.status(401).json({ err: "code is not correct" });
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 });
 //change the user password
-router.patch("/resetCode", async (res, req) => {
+router.get("/resetCode", async (req, res) => {
   let encryptedPass = req.header("x-api-key");
+  let email = req.header("user-email");
   let decryptedPass = decrypt(encryptedPass);
   let hashPass = await bcrypt.hash(decryptedPass, 10);
   //becrypt
   try {
-    let data = await UserModel.updateOne(
-      { _id: req.session.user._id, password: null },
-      { password: hashPass }
-    );
+    let data = await UserModel.updateOne({ email: email, password: null }, { password: hashPass });
     res.status(200).json(data);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 });
 
 router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
@@ -181,7 +191,10 @@ router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
   try {
     // prevent from user to changch himself or the first admin
     if (userId != req.session.user._id) {
-      let data = await UserModel.updateOne({ _id: userId }, { role: role });
+      let data = await UserModel.findOneAndUpdate({ _id: userId }, { role: role });
+      if (!data) {
+        return res.status(404).json({ err: "user not found" });
+      }
       res.json(data);
     } else {
       res.status(401).json({ err: "You cant change your self" });
@@ -191,7 +204,6 @@ router.patch("/changeRole/:userId/:role", authAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-
 router.delete("/", auth, async (req, res) => {
   let password = req.header("x-api-key");
   let decryptPass = decrypt(password);

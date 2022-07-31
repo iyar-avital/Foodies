@@ -10,7 +10,6 @@ import { API_URL } from "../services/apiService";
 import "./css/Login.css";
 import { encrypt } from "../utils/encryption";
 import ResetPass from "../comps/general/resetPass";
-
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +17,6 @@ function Login() {
   const [show, setShow] = useState(true);
   const nav = useNavigate();
   const handleToggle = () => setShow(!show);
-
   const handleLogin = async (e) => {
     e.preventDefault();
     let encryptPass = encrypt(password);
@@ -81,10 +79,14 @@ function Login() {
                 {error?.status === 401 ? ( //403 - unauthorized
                   <p className="text-center">
                     Forgot your password?
-                    <a className="text-decoration-none" onClick={handleToggle}>
+                    <span
+                      className="text-primary"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleToggle}
+                    >
                       {" "}
                       resst password
-                    </a>
+                    </span>
                   </p>
                 ) : (
                   <p className="text-center ">
