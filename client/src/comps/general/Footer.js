@@ -7,7 +7,7 @@ function Footer(props) {
   const dt = new Date();
   const user = useSelector((state) => state.user);
   return (
-    <div className="footer py-4">
+    <div className="footer">
       <Nav className="justify-content-center mt-4" activeKey="/home">
         {user && (
           <>
