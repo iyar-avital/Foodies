@@ -1,6 +1,7 @@
 {
-    "name": "proj1",
+    "name": "swrver",
     "version": "1.0.0",
+    "description": "",
     "main": "index.js",
     "scripts": {
         "start": "nodemon app.js",
@@ -28,6 +29,5 @@
         "nodemon": "^2.0.19",
         "socket.io": "^4.5.1",
         "validator": "^13.7.0"
-    },
-    "description": ""
+    }
 }
