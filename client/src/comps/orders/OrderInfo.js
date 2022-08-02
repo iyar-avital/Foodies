@@ -10,6 +10,7 @@ function OrderInfo(props) {
     let show = props.show;
     let handleToggle = props.handleToggle;
     let item = props.item;
+    const [loading, setLoading] = useState(false);
     let [productsAr, setProductsAr] = useState([]);
     let [orderInfo, setOrderInfo] = useState({});
 

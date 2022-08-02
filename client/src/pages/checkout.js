@@ -7,15 +7,9 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-<<<<<<< HEAD:client/src/pages/checkout.js
 import "./css/checkout.css";
-import { resetCart } from "../comps/redux/cartSlice";
-import AuthClientComp from "../comps/auth/authClientComp";
-=======
-import "./checkout.css";
 import { resetCart } from "../redux/cartSlice";
-import AuthClientComp from "../auth/authClientComp";
->>>>>>> 96bc1546244f69a5157c4fbe5c85f0ee752e586a:client/src/comps/orders/checkout.js
+import AuthClientComp from "../comps/auth/authClientComp";
 
 function Checkout(props) {
   const { cart_ar, totalPrice, store_short_id } = useSelector((state) => state.cart);

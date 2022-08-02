@@ -5,8 +5,8 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import "./css/product.css";
 import { toast } from "react-toastify";
-import { useAddRemoveFavsMutation } from "../redux/appApi";
-import { addCart } from "../redux/cartSlice";
+import { useAddRemoveFavsMutation } from "../../redux/appApi";
+import { addCart } from "../../redux/cartSlice";
 
 function Product(props) {
   let item = props.item;

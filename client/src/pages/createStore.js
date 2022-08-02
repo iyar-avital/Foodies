@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { API_URL, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
 
-import StoreForm from "../comps/utils/forms/StoreForm";
+import StoreForm from "../comps/forms/StoreForm";
 
 function CreateStore(props) {
   const [isLoading, setIsLoading] = useState(false);

@@ -5,6 +5,7 @@ const { genShortId } = require("../utils/genShortId");
 const { ProductModel } = require("../models/productModel");
 const { StoreModel } = require("../models/storeModel");
 const router = express.Router();
+
 //?cat=
 router.get("/", async (req, res) => {
   let perPage = req.query.perPage || 5;
@@ -16,6 +17,7 @@ router.get("/", async (req, res) => {
     // if find ?cat , do filter and get product of the category only
     // if not get all products
     objFind = cat ? { cat_short_id: cat } : {};
+
     let data = await ProductModel.find(objFind)
       .limit(perPage)
       .skip(page * perPage)
@@ -26,6 +28,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 //?s=
 router.get("/search", async (req, res) => {
   let perPage = req.query.perPage || 5;
@@ -51,6 +54,7 @@ router.get("/search", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.get("/amount", async (req, res) => {
   try {
     let cat = req.query.cat || null;
@@ -63,6 +67,7 @@ router.get("/amount", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 // get all the Products that belong to the store
 router.get("/storeProducts/:id", async (req, res) => {
   let sort = req.query.sort || "_id";
@@ -74,7 +79,22 @@ router.get("/storeProducts/:id", async (req, res) => {
     }).sort({ [sort]: reverse });
     res.json(data);
   } catch (err) {
-	@@ -98,7 +98,7 @@ router.get("/single/:id", async (req, res) => {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/single/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    let data = await ProductModel.findOne({ _id: id });
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.post("/:id", authStoreAdmin, async (req, res) => {
   try {
     let product = new ProductModel(req.body);
@@ -88,6 +108,7 @@ router.post("/:id", authStoreAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
+
 router.put("/:idEdit", authStoreAdmin, async (req, res) => {
   try {
     let idEdit = req.params.idEdit;
@@ -98,6 +119,7 @@ router.put("/:idEdit", authStoreAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
+
 router.delete("/:idDel", authStoreAdmin, async (req, res) => {
   try {
     let idDel = req.params.idDel;
@@ -108,4 +130,5 @@ router.delete("/:idDel", authStoreAdmin, async (req, res) => {
     return res.status(500).json(err);
   }
 });
+
 module.exports = router;

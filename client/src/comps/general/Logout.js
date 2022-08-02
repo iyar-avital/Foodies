@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLogoutUserMutation } from "../redux/appApi";
+import { useLogoutUserMutation } from "../../redux/appApi";
 
 function Logout() {
   const [logoutUser, { isLoading, error }] = useLogoutUserMutation();

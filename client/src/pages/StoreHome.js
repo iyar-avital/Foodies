@@ -5,11 +5,10 @@ import { MdOutlineLocationCity, MdOutlineShoppingCart } from "react-icons/md";
 import { BsInfoCircleFill, BsChevronRight } from "react-icons/bs";
 import { HiTemplate } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-
 import "./css/storeHome.css";
 import Product from "../comps/store/product";
 import LottieAnimation from "../comps/misc/lottieAnimation";
-import { resetCart, toggleCart } from "../comps/redux/cartSlice";
+import { resetCart, toggleCart } from "../redux/cartSlice";
 
 function StoreHome(props) {
   const [shop, setShop] = useState({});

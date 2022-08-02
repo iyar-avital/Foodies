@@ -4,8 +4,8 @@ import { BsPen, BsEraser, BsInfoCircle } from "react-icons/bs";
 import { MdAddShoppingCart } from "react-icons/md";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
-import PageLinks from "../comps/utils/pageLinks";
-import LottieAnimation from "../comps/utils/lottieAnimation";
+import PageLinks from "../comps/misc/pageLinks";
+import LottieAnimation from "../comps/misc/lottieAnimation";
 
 function ProductsAdmin(props) {
   let [ar, setAr] = useState([]);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./cartItem";
 import { Link } from "react-router-dom";
-import { resetCart, toggleCart } from "../redux/cartSlice";
+import { resetCart, toggleCart } from "../../redux/cartSlice";
 import { Button, Col, Modal, Row } from "react-bootstrap";
 
 function Cart(props) {

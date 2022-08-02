@@ -5,7 +5,7 @@ import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import "../admin/css/formStore.css";
 import { motion } from "framer-motion";
 import { Col, Container, Form, Row, Spinner, Button } from "react-bootstrap";
-import StoreForm from "../comps/utils/forms/StoreForm";
+import StoreForm from "../comps/forms/StoreForm";
 
 function EditStoreAdmin(props) {
   let params = useParams();

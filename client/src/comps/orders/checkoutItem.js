@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addCart, removeItemCart, reduceOneCart } from "../redux/cartSlice";
+import { addCart, removeItemCart, reduceOneCart } from "../../redux/cartSlice";
 import { BsEraser } from "react-icons/bs";
 
 function CheckoutItem(props) {

@@ -4,10 +4,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 //redux packages
 import { Provider } from "react-redux";
-import store from "./comps/redux/store";
+import store from "./redux/store";
 import persistStore from "redux-persist/es/persistStore";
 import { PersistGate } from "redux-persist/integration/react";
-
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
