@@ -7,18 +7,14 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-<<<<<<< HEAD:client/src/pages/checkout.js
 import "./css/checkout.css";
-import { resetCart } from "../comps/redux/cartSlice";
-import AuthClientComp from "../comps/auth/authClientComp";
-=======
-import "./checkout.css";
 import { resetCart } from "../redux/cartSlice";
-import AuthClientComp from "../auth/authClientComp";
->>>>>>> 96bc1546244f69a5157c4fbe5c85f0ee752e586a:client/src/comps/orders/checkout.js
+import AuthClientComp from "../comps/auth/authClientComp";
 
 function Checkout(props) {
-  const { cart_ar, totalPrice, store_short_id } = useSelector((state) => state.cart);
+  const { cart_ar, totalPrice, store_short_id } = useSelector(
+    (state) => state.cart
+  );
   const nav = useNavigate();
   const dispatch = useDispatch();
 
@@ -100,7 +96,8 @@ function Checkout(props) {
                   {/* start product */}
                   {cart_ar.length == 0 ? (
                     <h2 className="text-center mt-5">
-                      Cart is empty <MdOutlineRemoveShoppingCart className="mx-2" />
+                      Cart is empty{" "}
+                      <MdOutlineRemoveShoppingCart className="mx-2" />
                     </h2>
                   ) : (
                     ""
@@ -121,14 +118,20 @@ function Checkout(props) {
                   </div>
                   <div className="summary-item">
                     <span className="text"> Delivery </span>
-                    <span className="price"> ₪{cart_ar.length == 0 ? 0 : 20} </span>
+                    <span className="price">
+                      {" "}
+                      ₪{cart_ar.length == 0 ? 0 : 20}{" "}
+                    </span>
                   </div>
                   <div className="summary-item">
                     <span className="text"> Total </span>
                     <span className="price"> ₪{totalPrice} </span>
                   </div>
                   {cart_ar.length > 0 ? (
-                    <button onClick={dellAll} className="btn btn-outline-danger col-12 my-5">
+                    <button
+                      onClick={dellAll}
+                      className="btn btn-outline-danger col-12 my-5"
+                    >
                       Delete all Products
                     </button>
                   ) : (
@@ -153,7 +156,9 @@ function Checkout(props) {
                         }
                       }}
                       onCancel={(err) => {
-                        toast.error("Process end before payment. Please try again");
+                        toast.error(
+                          "Process end before payment. Please try again"
+                        );
                       }}
                     />
                   </div>
