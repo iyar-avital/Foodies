@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const http = require("http");
 const cors = require("cors");
-require("./connection");
+require("./ustils/connection");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongodb-session")(session);
