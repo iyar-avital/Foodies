@@ -15,7 +15,7 @@ exports.routesInit = (app) => {
 };
 
 exports.corsAccessControl = (app) => {
-  app.all("*", function (req, res, next) {
+  app.all(process.env.CLIENT_URL, function (req, res, next) {
     if (!req.get("Origin")) return next();
 
     res.set("Access-Control-Allow-Origin", process.env.CLIENT_URL);
