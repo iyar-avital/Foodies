@@ -7,6 +7,7 @@ import { BsShop, BsEraser } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import LottieAnimation from "../comps/misc/lottieAnimation";
 import PageLinks from "../comps/misc/pageLinks";
+import AuthAdminComp from "../comps/auth/authAdminComp";
 
 function UsersList(props) {
   const [ar, setAr] = useState([]);
@@ -82,6 +83,7 @@ function UsersList(props) {
 
   return (
     <div className="container">
+      <AuthAdminComp />
       <h1 className="display-4">Users List</h1>
       {/* filter users list by role */}
       <div className="my-5 col-md-3 position-absolute top-0 end-0">

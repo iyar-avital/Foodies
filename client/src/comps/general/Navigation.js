@@ -66,7 +66,6 @@ function Navigation() {
                 >
                   Stores
                 </Nav.Link>
-                <Nav.Link href="./admin">Admin</Nav.Link>
               </Nav>
 
               <Nav>
