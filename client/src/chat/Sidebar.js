@@ -22,7 +22,7 @@ function Sidebar() {
     }
   }, []);
 
-  //switch the evernt off before on to prevert bugs
+  //switch the event off before on to prevert bugs
   socket.off("update-forums").on("update-forums", (payload) => {
     setRooms(payload);
   });

@@ -6,7 +6,6 @@ import { API_URL, doApiGet, doApiMethod } from "../../services/apiService";
 import axios from "axios";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { BsEraser } from "react-icons/bs";
-import { MdAddShoppingCart } from "react-icons/md";
 import Collapse from "react-bootstrap/Collapse";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
@@ -35,7 +34,7 @@ function SideBarAdmin() {
     socket.emit("join-room", rooms[0]?.name);
   }, []);
 
-  //switch the evernt off before on to prevert bugs
+  //switch the event off before on to prevert bugs
   socket.off("update-forums").on("update-forums", (payload) => {
     setRooms(payload);
   });
@@ -59,7 +58,6 @@ function SideBarAdmin() {
     }
     socket.emit("join-room", _room);
     setCurrentRoom(_room);
-
     if (_isPublic) {
       setServiceMsg(false);
     }
@@ -67,7 +65,9 @@ function SideBarAdmin() {
   };
 
   socket.off("notifications").on("notifications", (_room) => {
-    if (currentRoom !== _room?.name) dispatch(addNotifications(_room?.name));
+    if (currentRoom !== _room) {
+      dispatch(addNotifications(_room));
+    }
   });
 
   const handleServiceMgs = (client) => {
@@ -141,10 +141,10 @@ function SideBarAdmin() {
                   justifyContent: "space-between",
                 }}
               >
-                {room?.name}
-                {currentRoom !== room?.name && (
+                {room.name}
+                {currentRoom !== room.name && (
                   <span className="badge rounded-pill bg-primary">
-                    {user.newMessages[room?.name]}
+                    {user.newMessages[room.name]}
                   </span>
                 )}
               </ListGroup.Item>
@@ -162,46 +162,31 @@ function SideBarAdmin() {
         ))}
       </ListGroup>
       <h2 className="display-6 mt-4">Customers Service</h2>
-      {clients.map((client) => (
-        <Row>
-          <Col xs={8}>
-            <ListGroup.Item
-              key={client._id}
-              active={client._id === currentRoom}
-              style={{ cursor: "pointer" }}
-              onClick={() => handleServiceMgs(client)}
-            >
-              <Row className="justify-content-between pe-2 ">
-                <Col xs={2} className="member-status">
-                  <img src={client.picture} className="member-status-img" />
-                  {client.status === "online" ? (
-                    <i className="fas fa-circle sidebar-online-status"></i>
-                  ) : (
-                    <i className="fas fa-circle sidebar-offline-status"></i>
-                  )}
-                </Col>
-                <Col xs={9}>{client.name} </Col>
-                <Col xs={1}>
+      <ListGroup>
+        {clients.map((client, idx) => (
+          <Row>
+            <Col xs={8}>
+              <ListGroup.Item
+                key={idx}
+                onClick={() => handleServiceMgs(client)}
+                active={client._id === currentRoom}
+                style={{
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                {client.name}
+                {currentRoom !== client._id && (
                   <span className="badge rounded-pill bg-primary">
-                    {user.newMessages[user._id]}
+                    {user.newMessages[client._id]}
                   </span>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-          </Col>
-          {/* <Col xs={2}>
-            <button
-              onClick={() => {
-                handelDeleteClientChat(client);
-              }}
-              className="btn btn-outline-danger mx-2"
-              title="Delete"
-            >
-              <BsEraser />
-            </button>
-          </Col> */}
-        </Row>
-      ))}
+                )}
+              </ListGroup.Item>
+            </Col>
+          </Row>
+        ))}
+      </ListGroup>
     </>
   );
 }

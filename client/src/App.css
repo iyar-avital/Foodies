@@ -37,6 +37,10 @@
     width: 100%;
 }
 
+.nav:active {
+    color: yellow;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Quando);
 *:after,
 *:before {

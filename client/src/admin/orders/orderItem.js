@@ -45,7 +45,6 @@ function OrderItem(props) {
       <td>{item.date_created}</td>
       {/* <td>{item.destination.label}</td> */}
       <td>{item.store_short_id}</td>
-      <td> </td>
       <td>₪ {item.total_price}</td>
       <td>{item.products_ar.length}</td>
       <td>

@@ -73,7 +73,7 @@ function HeaderAdmin(props) {
                   nav("./chat");
                 }}
               >
-                Chat
+                Forums & customers services
               </Nav.Link>
             </Nav>
             <Nav>

@@ -45,13 +45,12 @@ function OrdersAdmin(props) {
         <div className="my-5 col-md-3 position-absolute top-0 end-0">
           <select ref={selectRef} onChange={onSelectOption} className="form-select">
             <option value="">All Orders</option>
-            <option value="shipped">Shipped</option>
+            <option value="pending">Pending</option>
             <option value="paid">Paid</option>
-            <option value="complete">Complete</option>
           </select>
         </div>
         {ar.length === 0 && !loading ? (
-          <h2 className="display-4 text-center mt-5">No Orders in the system</h2>
+          <h2 className="display-4 text-center mt-5">No Orders found</h2>
         ) : (
           <table className="table table-striped table-scrollbar mt-5">
             <thead>
@@ -60,7 +59,6 @@ function OrdersAdmin(props) {
                 <th>Status</th>
                 <th>Date & Time</th>
                 <th>Store id</th>
-                <th>Address</th>
                 <th>Total price</th>
                 <th>Products</th>
                 <th>Info / Del</th>

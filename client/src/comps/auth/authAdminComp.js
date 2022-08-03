@@ -28,7 +28,9 @@ function AuthAdminComp(props) {
         toast.error("Unathorized user");
         nav("../");
       } else {
-        props.setAuthorized(true);
+        if (props.setAuthorized) {
+          props.setAuthorized(true);
+        } else return;
       }
     } catch (err) {
       //

@@ -102,7 +102,7 @@ function StoreHome(props) {
                 <p className="animaLink">
                   Address <MdOutlineLocationCity className="mx-2" />
                 </p>
-                <p className="text_info">{shop.address?.label}</p>
+                <p className="text_info">{shop.address}</p>
               </div>
             </div>
           </div>
