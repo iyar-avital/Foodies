@@ -23,7 +23,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     let encryptPass = encrypt(password);
-    let resp = await loginUser({ email, password });
+    let resp = await loginUser({ email, password: encryptPass });
     if (resp.data) {
       toast.success("You are now logged in ");
       nav("/");

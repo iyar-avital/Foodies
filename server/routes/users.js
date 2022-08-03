@@ -100,8 +100,8 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ err: "User not found" });
     }
-    // let decryptPass = decrypt(req.body.password);
-    let decryptPass = req.body.password;
+    let decryptPass = decrypt(req.body.password);
+    // let decryptPass = req.body.password;
     let validPass = await bcrypt.compare(decryptPass, user.password);
     if (!validPass) {
       return res.status(401).json({ err: "Email or password is wrong" });
