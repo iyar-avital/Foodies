@@ -10,7 +10,6 @@ export const doApiGet = async (_url, _idStore = null) => {
       headers: {
         // send header for authentication when it needed
         "id-Store": _idStore,
-        "x-api-key": localStorage["tok"],
         "content-type": "application/json",
       },
       withCredentials: true,
