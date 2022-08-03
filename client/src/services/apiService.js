@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API_URL =
-  process.env.REACT_APP_SERVER_URL || "http://localhost:3002";
+  process.env.REACT_APP_SERVER_URL;
 export const PEXELS_API_KEY = process.env.REACT_APP_PEXELS_API_KEY;
 
 export const doApiGet = async (_url, _idStore = null) => {
