@@ -47,6 +47,7 @@ const appApi = createApi({
         method: "DELETE",
         headers: {
           "x-api-key": password,
+          "content-type": "application/json",
         },
       }),
     }),
