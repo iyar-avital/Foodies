@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import LottieAnimation from "../comps/misc/lottieAnimation";
 import PageLinks from "../comps/misc/pageLinks";
+import AuthAdminComp from "../comps/auth/authAdminComp";
 
 function StoresAdmin(props) {
   const [ar, setAr] = useState([]);
@@ -99,6 +100,7 @@ function StoresAdmin(props) {
 
   return (
     <div className="container">
+      <AuthAdminComp />
       <h1 className="display-4">Stores List</h1>
       <div className="mb-5 col-md-3 position-absolute top-0 end-0">
         <select ref={selectRef} onChange={onSelectOption} className="form-select">
@@ -117,7 +119,7 @@ function StoresAdmin(props) {
             <th>Image</th>
             <th>Short_id</th>
             <th>status</th>
-            <th>Del/Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>

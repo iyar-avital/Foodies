@@ -6,6 +6,7 @@ import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
 import PageLinks from "../comps/misc/pageLinks";
 import LottieAnimation from "../comps/misc/lottieAnimation";
+import AuthAdminComp from "../comps/auth/authAdminComp";
 
 function ProductsAdmin(props) {
   let [ar, setAr] = useState([]);
@@ -50,13 +51,8 @@ function ProductsAdmin(props) {
   };
   return (
     <div className="container">
+      <AuthAdminComp />
       <h1 className="display-4">Products List</h1>
-      <Link
-        className="btn btn-outline-success mt-2 mb-4"
-        to="/admin/addProduct"
-      >
-        Add Product <MdAddShoppingCart />
-      </Link>
       <table className="table table-striped">
         <thead>
           <tr>
