@@ -28,13 +28,16 @@
   min-height: 92vh !important;
 }
 
-
 .footer {
   /* height: 20vh; */
   position: absolute;
   /* height: 2.5rem; */
   /* bottom: 0; */
   width: 100%;
+}
+
+.nav:active {
+  color: yellow;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Quando);
