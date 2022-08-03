@@ -24,7 +24,7 @@ store.on("error", function (error) {
 
 const io = new Server(server, {
   cors: {
-    origin: [process.env.CLIENT_URL],
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
   },
 });
@@ -34,9 +34,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: process.env.CLIENT_URL,
     method: ["GET", "POST", "DELETE", "PATCH", "PUT"],
     credentials: true,
+    optionSuccessStatus: 200,
   })
 );
 app.use(cookieParser());
