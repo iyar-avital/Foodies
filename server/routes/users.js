@@ -102,7 +102,7 @@ router.post("/login", async (req, res) => {
     }
     let decryptPass = decrypt(req.body.password);
     // let decryptPass = req.body.password;
-    let validPass = await bcrypt.compare(decryptPass, user.password);
+    let validPass = await bcrypt.compare(req.body.password, user.password);
     if (!validPass) {
       return res.status(401).json({ err: "Email or password is wrong" });
     }
