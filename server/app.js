@@ -59,7 +59,7 @@ app.use(
 corsAccessControl(app);
 routesInit(app);
 
-let port = process.env.PORT || "3002";
+let port = process.env.PORT;
 server.listen(port, () => {
   console.log("listening on " + port);
 });
