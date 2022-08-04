@@ -34,7 +34,7 @@ const sortRoomMessagesByDate = (messages) => {
 
 io.on("connection", (socket) => {
   //inform the all user about new user
-  console.log("user whit id" + socket.id + " connects");
+  console.log("user with id " + socket.id + " connects");
 
   socket.on("join-room", async (room) => {
     socket.leaveAll();

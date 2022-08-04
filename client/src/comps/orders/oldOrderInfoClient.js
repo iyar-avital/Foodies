@@ -45,7 +45,6 @@ function OldOrderInfoClient(props) {
                   {productsAr.length == 0 ? (
                     <h2 className="text-center mt-5">
                       You have not ordered yet...
-                      {}
                     </h2>
                   ) : (
                     ""
@@ -84,7 +83,6 @@ function OldOrderInfoClient(props) {
                         <span className="text">Total price</span>
                         <span className="price">₪ {orderInfo.total_price}</span>
                       </div>
-                      {}
                     </React.Fragment>
                   ) : (
                     <h2 className="text-center">Loading...</h2>

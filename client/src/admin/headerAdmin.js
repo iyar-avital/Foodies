@@ -105,8 +105,6 @@ function HeaderAdmin(props) {
                   }
                   id="basic-nav-dropdown"
                 >
-                  {}
-
                   <NavDropdown.Item>
                     <Button variant="danger" onClick={handleLogout}>
                       Logout

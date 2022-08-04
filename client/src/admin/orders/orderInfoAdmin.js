@@ -109,7 +109,6 @@ function OrderInfoAdmin(props) {
                             <span className="text">Total price</span>
                             <span className="price">₪ {order.total_price}</span>
                           </div>
-                          {}
                         </React.Fragment>
                       </div>
                     </div>
