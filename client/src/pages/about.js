@@ -12,7 +12,7 @@ function About(props) {
     img: "/images/iyar.jpg",
     Facebook: "https://www.facebook.com/profile.php?id=100053948982001",
     Twitter: "https://twitter.com/Ce64USXJyTyFTvu?t=YmCJK-0DlF7uKfESZ_tObw&s=09",
-    Instagram: "",
+    Instagram: "https://insagram.com/iyar.avi?igshid=YmMyMTA2M2Y",
     Snapchat: "",
   };
 
@@ -23,7 +23,7 @@ function About(props) {
     img: "/images/rivka.jpg",
     Facebook: "https://www.facebook.com/profile.php?id=100078452053799",
     Twitter: "https://mobile.twitter.com/RZizovi",
-    Instagram: "",
+    Instagram: "https://insagram.com/rivka.zi?igshid=YmMyMTA2M2Y",
     Snapchat: "",
   };
 
@@ -32,9 +32,9 @@ function About(props) {
     job: "Property Specialist 2",
     info: "You can relay on our amazing features list and also our customer services will be great experience.",
     img: "/images/efrat.jpg",
-    Facebook: "",
+    Facebook: "https://www.facebook.com/efrat.ankonina",
     Twitter: "https://twitter.com/AnconinaEfrat?t=iESN3v-nAPjygCTS1kBfZw&s=09",
-    Instagram: "",
+    Instagram: "https://insagram.com/efrat_anconina?igshid=YmMyMTA2M2Y",
     Snapchat: "",
   };
 
