@@ -115,7 +115,6 @@ function StoresAdmin(props) {
             <th>Name</th>
             <th>Owner</th>
             <th>Image</th>
-            <th>Short_id</th>
             <th>status</th>
             <th>Delete</th>
           </tr>
@@ -137,7 +136,6 @@ function StoresAdmin(props) {
                     width="90"
                   />
                 </td>
-                <td>{item.short_id}</td>
                 <td>
                   <button
                     onClick={() => updateStatus(item._id, item.name)}
