@@ -7,4 +7,4 @@ start = 200
   # Define which paths this specific [[headers]] block will cover.
   for = "/*"
     [headers.values]
-    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Origin = [process.env.CLIENT_URL, https://storied-muffin-24d9e4.netlify.app]
