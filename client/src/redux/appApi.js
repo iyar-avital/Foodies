@@ -22,9 +22,6 @@ const appApi = createApi({
       query: (user) => ({
         url: "/users/login",
         method: "POST",
-        headers: {
-          'Acsess-Control-Allow-Headers': '*',
-      },
         body: user,
       }),
     }),
