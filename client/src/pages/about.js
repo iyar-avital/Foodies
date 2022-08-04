@@ -7,8 +7,8 @@ import Developers from "../comps/general/developers";
 function About(props) {
   let dev1Info = {
     name: "Iyar Avital",
-    job: "Property Specialist",
-    info: "You can relay on our amazing features list and also our customer services will be great experience.",
+    job: "Software Developer",
+    info: "",
     img: "/images/iyar.jpg",
     Facebook: "https://www.facebook.com/profile.php?id=100053948982001",
     Twitter: "https://twitter.com/Ce64USXJyTyFTvu?t=YmCJK-0DlF7uKfESZ_tObw&s=09",
@@ -18,8 +18,8 @@ function About(props) {
 
   let dev2Info = {
     name: "Rivka Zizovi",
-    job: "Property Specialist 2",
-    info: "You can relay on our amazing features list and also our customer services will be great experience.",
+    job: "Software Developer",
+    info: "",
     img: "/images/rivka.jpg",
     Facebook: "https://www.facebook.com/profile.php?id=100078452053799",
     Twitter: "https://mobile.twitter.com/RZizovi",
@@ -29,8 +29,8 @@ function About(props) {
 
   let dev3Info = {
     name: "Efrat Anconina",
-    job: "Property Specialist 2",
-    info: "You can relay on our amazing features list and also our customer services will be great experience.",
+    job: "Software Developer",
+    info: "",
     img: "/images/efrat.jpg",
     Facebook: "https://www.facebook.com/efrat.ankonina",
     Twitter: "https://twitter.com/AnconinaEfrat?t=iESN3v-nAPjygCTS1kBfZw&s=09",

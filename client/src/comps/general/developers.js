@@ -16,7 +16,7 @@ function Developers(props) {
           <img
             src={devInfo.img}
             alt="wrapkit"
-            className="img-fluid rounded-circle mx-auto d-block"
+            className="img-fluid rounded-circle mx-auto d-block mh-100 mw-100"
           />
         </div>
         <div className="col-md-12 text-center">
