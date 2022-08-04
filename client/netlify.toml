@@ -1,7 +1,8 @@
 [[redirects]]
 from = "/*"
-to = "/index.html"
+to = "https://test5556789.herokuapp.com /:splat"
 start = 200
+
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
