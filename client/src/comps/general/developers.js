@@ -29,7 +29,7 @@ function Developers(props) {
                 " "
               ) : (
                 <li className="list-inline-item">
-                  <a href="#" className="text-decoration-none d-block px-1">
+                  <a href={devInfo.Facebook} className="text-decoration-none d-block px-1">
                     <BsFacebook />
                   </a>
                 </li>
@@ -38,7 +38,7 @@ function Developers(props) {
                 ""
               ) : (
                 <li className="list-inline-item">
-                  <a href="#" className="text-decoration-none d-block px-1">
+                  <a href={devInfo.Twitter} className="text-decoration-none d-block px-1">
                     <BsTwitter />
                   </a>
                 </li>
@@ -47,7 +47,7 @@ function Developers(props) {
                 ""
               ) : (
                 <li className="list-inline-item">
-                  <a href="#" className="text-decoration-none d-block px-1">
+                  <a href={devInfo.Instagram} className="text-decoration-none d-block px-1">
                     <BsInstagram />
                   </a>
                 </li>

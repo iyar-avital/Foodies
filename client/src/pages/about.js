@@ -10,8 +10,8 @@ function About(props) {
     job: "Property Specialist",
     info: "You can relay on our amazing features list and also our customer services will be great experience.",
     img: "/images/iyar.jpg",
-    Facebook: "",
-    Twitter: "",
+    Facebook: "https://www.facebook.com/profile.php?id=100053948982001",
+    Twitter: "https://twitter.com/Ce64USXJyTyFTvu?t=YmCJK-0DlF7uKfESZ_tObw&s=09",
     Instagram: "",
     Snapchat: "",
   };
@@ -21,8 +21,8 @@ function About(props) {
     job: "Property Specialist 2",
     info: "You can relay on our amazing features list and also our customer services will be great experience.",
     img: "/images/rivka.jpg",
-    Facebook: "",
-    Twitter: "",
+    Facebook: "https://www.facebook.com/profile.php?id=100078452053799",
+    Twitter: "https://mobile.twitter.com/RZizovi",
     Instagram: "",
     Snapchat: "",
   };
@@ -33,7 +33,7 @@ function About(props) {
     info: "You can relay on our amazing features list and also our customer services will be great experience.",
     img: "/images/efrat.jpg",
     Facebook: "",
-    Twitter: "",
+    Twitter: "https://twitter.com/AnconinaEfrat?t=iESN3v-nAPjygCTS1kBfZw&s=09",
     Instagram: "",
     Snapchat: "",
   };
