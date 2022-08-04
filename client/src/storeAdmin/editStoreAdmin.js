@@ -28,7 +28,6 @@ function EditStoreAdmin(props) {
     let url = API_URL + "/stores/" + store._id;
     try {
       let resp = await doApiMethod(url, "PUT", formData, params.id);
-      // console.log(resp.data);
       if (resp.data.modifiedCount) {
         toast.success("Store Updated");
         // back to the list of stores

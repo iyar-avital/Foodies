@@ -105,7 +105,7 @@ function HeaderAdmin(props) {
                   }
                   id="basic-nav-dropdown"
                 >
-                  {/* <NavDropdown.Item href="#action/3.1">Favorites</NavDropdown.Item> */}
+                  {}
 
                   <NavDropdown.Item>
                     <Button variant="danger" onClick={handleLogout}>

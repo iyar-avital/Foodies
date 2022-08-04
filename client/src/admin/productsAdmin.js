@@ -24,7 +24,6 @@ function ProductsAdmin(props) {
     let url = API_URL + "/products?page=" + pageQuery;
     try {
       let resp = await doApiGet(url);
-      // console.log(resp.data);
       setAr(resp.data);
     } catch (err) {
       if (err.response) {
@@ -37,7 +36,6 @@ function ProductsAdmin(props) {
       try {
         let url = API_URL + "/products/" + _idDel;
         let resp = await doApiMethod(url, "DELETE", {});
-        // console.log(resp.data);
         if (resp.data.deletedCount) {
           toast.info("Product deleted");
         }

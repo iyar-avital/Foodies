@@ -19,7 +19,6 @@ function OrderInfoAdmin(props) {
     let url = API_URL + "/orders/productsInfo/" + params.id;
     try {
       let resp = await doApiGet(url);
-      // console.log(resp.data);
       setOrder(resp.data);
     } catch (err) {
       console.log(err);
@@ -110,10 +109,7 @@ function OrderInfoAdmin(props) {
                             <span className="text">Total price</span>
                             <span className="price">₪ {order.total_price}</span>
                           </div>
-                          {/* <div className="summary-item">
-                            <span className="text">Address</span>
-                            <span className="price"> {order.destination.label}</span>
-                          </div> */}
+                          {}
                         </React.Fragment>
                       </div>
                     </div>

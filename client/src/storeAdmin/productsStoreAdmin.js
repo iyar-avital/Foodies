@@ -19,8 +19,6 @@ function ProductsStoreAdmin(props) {
   let nav = useNavigate();
 
   useEffect(() => {
-    // get the store info from the link state by location
-    // setStoreInfo(location.state.item);
     doApi();
   }, []);
 
@@ -28,7 +26,6 @@ function ProductsStoreAdmin(props) {
     let url = API_URL + "/products/storeProducts/" + params.id;
     try {
       let resp = await doApiGet(url);
-      // console.log(resp.data);
       setProducts(resp.data);
       setLoading(false);
     } catch (err) {
@@ -43,7 +40,6 @@ function ProductsStoreAdmin(props) {
       try {
         let url = API_URL + "/products/" + _idDel;
         let resp = await doApiMethod(url, "DELETE", {}, params.id);
-        // console.log(resp.data);
         if (resp.data.deletedCount) {
           toast.info("Product deleted successfully");
         }

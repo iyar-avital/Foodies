@@ -46,9 +46,6 @@ function Product(props) {
               />
             </div>
             <div className="p-4 blog-container">
-              {/* <small className="font_bold blog-category text-uppercase py-1 px-2 float-left rounded">
-                Food
-              </small> */}
               {user && (
                 <button
                   onClick={toggleFavs}

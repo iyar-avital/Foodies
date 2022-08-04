@@ -37,7 +37,6 @@ function StoreForm(props) {
     <Form
       style={{ width: "80%", maxWidth: 500 }}
       onSubmit={handleSubmit}
-      // className="shadow"
     >
       <h1 className="text-center display-4 mb-5">Store Details</h1>
 

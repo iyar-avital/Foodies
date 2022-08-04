@@ -42,30 +42,10 @@ function MyStoreItem(props) {
           />
         </div>
         <div className="payment-card__info p-4">
-          <h4>{item.name}</h4>
-          {/* <p className="text-muted">address : {item.address}</p> */}
+          <h4>{item.name}</h4>     
           <hr />
           <div className="d-flex justify-content-between">
-            {/* <button
-              onClick={() => {
-                nav("/storeAdmin/more/" + item.short_id);
-              }}
-              className="mx-2"
-              style={{ background: "none" }}
-              title="Info"
-            >
-              Info <BsFillInfoCircleFill size="1.5em" color="#34495E" />
-            </button>*/}
             <div>
-              {/* <Link
-                to={"/storeAdmin/editStore/" + item.short_id}
-                className="mx-2"
-                state={{ item }}
-                style={{ background: "none" }}
-                title="Edit"
-              >
-                <MdEdit size="1.5em" color="#3498DB" />
-              </Link> */}
               <button
                 onClick={() => {
                   props.delStore(item._id, item.short_id);

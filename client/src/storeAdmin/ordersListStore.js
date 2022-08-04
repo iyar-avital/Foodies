@@ -28,7 +28,6 @@ function OrdersListStore() {
         let url = API_URL + "/orders/sotreOrders/" + params.id;
         try {
             let resp = await doApiGet(url);
-            // console.log(resp.data);
             setOrders(resp.data);
             setLoading(false);
             console.log(resp.data);
@@ -44,7 +43,6 @@ function OrdersListStore() {
             try {
                 let url = API_URL + "/products/" + _idDel;
                 let resp = await doApiMethod(url, "DELETE", {}, params.id);
-                // console.log(resp.data);
                 if (resp.data.deletedCount) {
                     toast.info("Product deleted successfully");
                 }

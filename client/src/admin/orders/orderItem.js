@@ -13,7 +13,6 @@ function OrderItem(props) {
       try {
         let url = API_URL + "/orders/" + _idDel;
         let resp = await doApiMethod(url, "DELETE", {});
-        // console.log(resp.data);
         if (resp.data.deletedCount) {
           toast.info("Order deleted");
         }
@@ -43,7 +42,7 @@ function OrderItem(props) {
         </span>
       </td>
       <td>{item.date_created}</td>
-      {/* <td>{item.destination.label}</td> */}
+      {}
       <td>{item.store_short_id}</td>
       <td>₪ {item.total_price}</td>
       <td>{item.products_ar.length}</td>

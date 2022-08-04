@@ -52,7 +52,6 @@ function StoresAdmin(props) {
         return { _id: item._id, name: item.name, email: item.email };
       });
       setOwnerAr(temp_ar);
-      // console.log(temp_ar);
     } catch (err) {
       alert("there problem come back later");
       if (err.response) {
@@ -66,7 +65,6 @@ function StoresAdmin(props) {
       try {
         let url = API_URL + "/stores/" + _idDel;
         let resp = await doApiMethod(url, "DELETE", {});
-        // console.log(resp.data);
         if (resp.data.deletedCount) {
           toast.info("Stores deleted !");
         }

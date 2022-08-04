@@ -67,7 +67,6 @@ function HeaderStore(props) {
               >
                 Edit Store details
               </Nav.Link>
-              {/* <Nav.Link href={baseUrl + "/products"}>Delete store</Nav.Link> */}
             </Nav>
             <Nav>
               {!user && (
@@ -95,7 +94,6 @@ function HeaderStore(props) {
                   }
                   id="basic-nav-dropdown"
                 >
-                  {/* <NavDropdown.Item href="#action/3.1">Favorites</NavDropdown.Item> */}
                   <NavDropdown.Item>
                     <Button variant="danger" onClick={handleLogout}>
                       Logout

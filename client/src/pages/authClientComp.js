@@ -22,11 +22,9 @@ function AuthClientComp(props) {
     let url = API_URL + "/users/checkUserToken";
     try {
       let data = await doApiGet(url);
-      // console.log(data);
     } catch (err) {
       toast.warning("You need to log in again.");
       nav("/logout");
-      // console.log(err.response);
     }
   };
   return <React.Fragment></React.Fragment>;

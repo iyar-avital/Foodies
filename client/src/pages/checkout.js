@@ -39,8 +39,6 @@ function Checkout(props) {
   const doApiAddToCheckout = async () => {
     // add to checkout
     let url = API_URL + "/orders";
-    // console.log(cart_ar);
-    // console.log(totalPrice);
     let body = {
       total_price: totalPrice,
       products_ar: cart_ar,
@@ -136,12 +134,7 @@ function Checkout(props) {
                           "ATRPIUvU2B6lrdeCovo7c4NzauAsSjlElL4xi_BaxHyCrrcmAO_fjdCddURxRhRPcq9W9hBQpnxjBzMD",
                         currency: "ILS",
                       }}
-                      onSuccess={(details, data) => {
-                        // data - have info of pay token to check in nodejs
-                        // console.log("data", data);
-                        // details have info about the buyer
-                        // console.log("details", details);
-                        // if payment success ,
+                      onSuccess={(details, data) => {                   
                         if (data.orderID) {
                           onCommit(data);
                         }
