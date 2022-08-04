@@ -24,7 +24,6 @@ exports.authAdmin = (req, res, next) => {
 
 exports.authStoreAdmin = async (req, res, next) => {
   if (!req.session.user) {
-    // return res.status(401).json({ err: "please log in first" });
     return res.status(401).json({ err: "please log in first" });
   }
   let role = req.session.user.role;

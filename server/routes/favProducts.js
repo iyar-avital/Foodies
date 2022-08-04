@@ -27,8 +27,6 @@ router.get("/productsInfo", auth, async (req, res) => {
 router.patch("/add_remove/:prodId", auth, async (req, res) => {
   try {
     let prodId = req.params.prodId;
-    //get current favs_ar from user
-    // let user = await UserModel.findOne({ _id: req.session.user._id });
     let favs_ar = req.session.user.favs_ar;
 
     if (favs_ar.includes(prodId)) {

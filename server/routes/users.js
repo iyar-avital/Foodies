@@ -31,7 +31,6 @@ router.get("/amount", async (req, res) => {
   try {
     let cat = req.query.cat || null;
     objFind = cat ? { cat_short_id: cat } : {};
-    // countDocuments -> return just the amount of documents in the collections
     let data = await UserModel.countDocuments(objFind);
     res.json({ amount: data });
   } catch (err) {
@@ -100,7 +99,6 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ err: "User not found" });
     }
     let decryptPass = decrypt(req.body.password);
-    // let decryptPass = req.body.password;
     let validPass = await bcrypt.compare(decryptPass, user.password);
     if (!validPass) {
       return res.status(401).json({ err: "Email or password is wrong" });

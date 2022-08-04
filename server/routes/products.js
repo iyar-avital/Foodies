@@ -6,7 +6,6 @@ const { ProductModel } = require("../models/productModel");
 const { StoreModel } = require("../models/storeModel");
 const router = express.Router();
 
-//?cat=
 router.get("/", async (req, res) => {
   let perPage = req.query.perPage || 5;
   let page = req.query.page >= 1 ? req.query.page - 1 : 0;
@@ -14,8 +13,6 @@ router.get("/", async (req, res) => {
   let reverse = req.query.reverse == "yes" ? 1 : -1;
   let cat = req.query.cat || null;
   try {
-    // if find ?cat , do filter and get product of the category only
-    // if not get all products
     objFind = cat ? { cat_short_id: cat } : {};
 
     let data = await ProductModel.find(objFind)
@@ -45,9 +42,6 @@ router.get("/search", async (req, res) => {
       .limit(perPage)
       .skip(page * perPage)
       .sort({ [sort]: reverse });
-    // if(data=""){
-    //   data = "not found"
-    // }
     res.json(data);
   } catch (err) {
     console.log(err);
@@ -59,7 +53,6 @@ router.get("/amount", async (req, res) => {
   try {
     let cat = req.query.cat || null;
     objFind = cat ? { cat_short_id: cat } : {};
-    // countDocuments -> return just the amount of documents in the collections
     let data = await ProductModel.countDocuments(objFind);
     res.json({ amount: data });
   } catch (err) {

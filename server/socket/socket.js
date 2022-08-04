@@ -22,7 +22,6 @@ const getLastMessagesFromRoom = async (room) => {
 
 const sortRoomMessagesByDate = (messages) => {
   return messages.sort((a, b) => {
-    // console.log(a);
     let date1 = a._id.split("/");
     let date2 = b._id.split("/");
 
