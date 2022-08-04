@@ -57,8 +57,7 @@ function OrdersAdmin(props) {
               <tr>
                 <th>#</th>
                 <th>Status</th>
-                <th>Date & Time</th>
-                <th>Store id</th>
+                <th>Date Time</th>
                 <th>Total price</th>
                 <th>Products</th>
                 <th>Info / Del</th>
