@@ -30,11 +30,10 @@ const io = new Server(server, {
 });
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: '*',
     method: ["GET", "POST", "DELETE", "PATCH", "PUT"],
     credentials: true,
   })
