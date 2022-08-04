@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
-    origin: '*',
+    origin: [process.env.CLIENT_URL, "https://storied-muffin-24d9e4.netlify.app"],
     method: ["GET", "POST", "DELETE", "PATCH", "PUT"],
     credentials: true,
   })
