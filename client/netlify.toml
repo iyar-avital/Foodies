@@ -1,10 +1,5 @@
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  start = 200
-
-[[redirects]]
-  from = "/api/*"
   to = "https://test5556789.herokuapp.com /:splat"
   start = 200
    
