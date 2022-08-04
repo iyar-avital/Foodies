@@ -6,10 +6,10 @@ import Developers from "../comps/general/developers";
 
 function About(props) {
   let dev1Info = {
-    name: "Michael Doe",
+    name: "Iyar Avital",
     job: "Property Specialist",
     info: "You can relay on our amazing features list and also our customer services will be great experience.",
-    img: "https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t2.jpg",
+    img: "/images/iyar.jpg",
     Facebook: "",
     Twitter: "",
     Instagram: "",
@@ -17,15 +17,27 @@ function About(props) {
   };
 
   let dev2Info = {
-    name: "Michael Doe 2",
+    name: "Rivka Zizovi",
     job: "Property Specialist 2",
     info: "You can relay on our amazing features list and also our customer services will be great experience.",
-    img: "https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t2.jpg",
-    Facebook: "1",
-    Twitter: "c",
-    Instagram: "c",
-    Snapchat: "c",
+    img: "/images/rivka.jpg",
+    Facebook: "",
+    Twitter: "",
+    Instagram: "",
+    Snapchat: "",
   };
+
+  let dev3Info = {
+    name: "Efrat Anconina",
+    job: "Property Specialist 2",
+    info: "You can relay on our amazing features list and also our customer services will be great experience.",
+    img: "/images/efrat.jpg",
+    Facebook: "",
+    Twitter: "",
+    Instagram: "",
+    Snapchat: "",
+  };
+
 
   return (
     <div className="container">
@@ -48,6 +60,7 @@ function About(props) {
           <div className="row">
             <Developers devInfo={dev1Info} />
             <Developers devInfo={dev2Info} />
+            <Developers devInfo={dev3Info} />
           </div>
         </div>
       </div>

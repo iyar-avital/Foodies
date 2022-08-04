@@ -9,7 +9,7 @@ function Developers(props) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.7 }}
-      className="col-lg-6 mb-4"
+      className="col-lg-4 mb-4"
     >
       <div className="row">
         <div className="col-md-12">
