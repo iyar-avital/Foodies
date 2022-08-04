@@ -1,8 +1,10 @@
 [[redirects]]
-from = "/*"
-to = "https://test5556789.herokuapp.com /:splat"
-start = 200
-
+  from = "/*"
+  to = "https://test5556789.herokuapp.com /:splat"
+  start = 200
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
