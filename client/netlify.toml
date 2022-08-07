@@ -1,9 +1,10 @@
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  start = 200
+  to = "https://foodiesira.herokuapp.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
   
-
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
   for = "/*"
