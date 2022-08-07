@@ -5,7 +5,11 @@ const appApi = createApi({
   reducerPath: "appApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SERVER_URL,
-
+    prepareHeaders: (headers, { getState }) => {
+      headers.set('content-type', `application/json`)
+      headers.set('cache-control', `no-cache`)
+      return headers
+    },
     credentials: "include",
   }),
   //creating new user
@@ -50,7 +54,7 @@ const appApi = createApi({
         },
       }),
     }),
-    
+
     //favs
     fetchFavs: builder.mutation({
       query: () => ({
