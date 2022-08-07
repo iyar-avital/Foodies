@@ -1,10 +1,5 @@
 [[redirects]]
   from = "/*"
-  to = "https://test5556789.herokuapp.com /:splat"
+  to = "/index.html"
   start = 200
    
-[[headers]]
-  # Define which paths this specific [[headers]] block will cover.
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "https://storied-muffin-24d9e4.netlify.app"

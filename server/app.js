@@ -22,9 +22,17 @@ store.on("error", function (error) {
   console.log(error);
 });
 
+// [[headers]]
+//   # Define which paths this specific [[headers]] block will cover.
+//   for = "/*"
+//     [headers.values]
+//     Access-Control-Allow-Origin = "https://foodiesira.netlify.app"
+
+
+
 const io = new Server(server, {
   cors: {
-    origin: [process.env.CLIENT_URL],
+    origin: [process.env.CLIENT_URL, "https://foodiesira.netlify.app"],
     methods: ["GET", "POST"],
   },
 });
@@ -33,7 +41,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL, "https://storied-muffin-24d9e4.netlify.app"],
+    origin: [process.env.CLIENT_URL, "https://foodiesira.netlify.app"],
     method: ["GET", "POST", "DELETE", "PATCH", "PUT"],
     credentials: true,
   })
