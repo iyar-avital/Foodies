@@ -22,18 +22,11 @@ store.on("error", function (error) {
   console.log(error);
 });
 
-// [[headers]]
-//   # Define which paths this specific [[headers]] block will cover.
-//   for = "/*"
-//     [headers.values]
-//     Access-Control-Allow-Origin = "https://foodiesira.netlify.app"
-
-
-
 const io = new Server(server, {
   cors: {
     origin: [process.env.CLIENT_URL, "https://foodiesira.netlify.app"],
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
@@ -75,6 +68,3 @@ module.exports = { app, io };
 
 require("./socket/socket");
 
-// app.use((req, res) => {
-//   res.status(404).json({ msg_error: "Url not found , 404!" });
-// });
