@@ -6,7 +6,6 @@ const appApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_SERVER_URL,
     credentials: "include",
-    mode: "no-cors",
   }),
   //creating new user
   endpoints: (builder) => ({
