@@ -15,7 +15,7 @@ const server = http.createServer(app);
 
 //the defualt is to sotre in memory sotre
 const store = new MongoDBStore({
-  uri: "mongodb://localhost:27017/foodzone",
+  uri: "mongodb+srv://nati_10:2468xvxv@cluster0.ff0so.mongodb.net/foodzone",
   collection: "sessions",
 });
 store.on("error", function (error) {
