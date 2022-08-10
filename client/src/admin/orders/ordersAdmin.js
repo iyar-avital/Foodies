@@ -23,7 +23,7 @@ function OrdersAdmin(props) {
     let ordersUrl = API_URL + `/orders/allOrders?perPage=9999&status=${status}`;
     try {
       let respOrders = await doApiGet(ordersUrl);
-      let filterPending = respOrders.data.filter((order) => order.status !== "pending");
+      let filterPending = respOrders.data;
       setAr(filterPending);
       setLoading(false);
     } catch (err) {

@@ -37,7 +37,7 @@ router.get("/sotreOrders/:store_id", authStoreAdmin, async (req, res) => {
 router.get("/userOrder", async (req, res) => {
   try {
     let data = await OrderModel.find({
-      user_id: req.session.user._id,
+      client_short_id: req.session.user.short_id,
     })
       .limit(20)
       .sort({
